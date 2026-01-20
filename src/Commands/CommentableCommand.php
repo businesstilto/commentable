@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Tilto\Commentable\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class CommentableCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'commentable';
 
     public $description = 'My command';
 
