@@ -8,11 +8,11 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('commentable_table', function (Blueprint $table) {
+        Schema::create('comments'), function (Blueprint $table) {
             $table->id();
-
-            // add fields
-
+            $table->morphs('author');
+            $table->morphs('commentable');
+            $table->text('body');
             $table->timestamps();
         });
     }

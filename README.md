@@ -1,4 +1,19 @@
-# Filament Commentable
+<div align="left">
+    <a href="https://tilto.nl">
+      <picture>
+        <img alt="Cover" src="/cover.webp">
+      </picture>
+    </a>
+
+<br />
+<br />
+
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/businesstilto/commentable.svg?style=for-the-badge)](https://packagist.org/packages/businesstilto/commentable)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=for-the-badge)](LICENSE.md)
+[![Quality Score](https://img.shields.io/scrutinizer/g/businesstilto/commentable.svg?style=for-the-badge)](https://scrutinizer-ci.com/g/businesstilto/commentable)
+[![Total Downloads](https://img.shields.io/packagist/dt/businesstilto/commentable.svg?style=for-the-badge)](https://packagist.org/packages/businesstilto/commentable)
+    
+</div>
 
 A lightweight and easy to use package that adds commenting in Filament v4.5 and newer.
 
@@ -7,9 +22,7 @@ A lightweight and easy to use package that adds commenting in Filament v4.5 and 
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/businesstilto/commentable/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/businesstilto/commentable/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/businesstilto/commentable.svg?style=flat-square)](https://packagist.org/packages/businesstilto/commentable)
 
-
-
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+Inspired by and built upon code from the [Kirschbaum Commentions package](https://github.com/kirschbaum-development/commentions), but takes a different approach to commenting in Filament.
 
 ## Installation
 
