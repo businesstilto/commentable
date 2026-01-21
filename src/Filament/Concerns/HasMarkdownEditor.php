@@ -2,7 +2,8 @@
 
 namespace Tilto\Commentable\Filament\Concerns;
 
-trait HasMarkdownEditor {
+trait HasMarkdownEditor
+{
     protected bool $isMarkdownEditor = false;
 
     public function markdownEditor(bool $condition = true): static

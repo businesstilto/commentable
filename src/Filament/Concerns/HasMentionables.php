@@ -7,9 +7,9 @@ use Illuminate\Support\Collection;
 
 trait HasMentionables
 {
-    protected array|Collection|Closure|null $mentionables = null;
+    protected array | Collection | Closure | null $mentionables = null;
 
-    public function mentionables(array|Collection|Closure $mentionables): static
+    public function mentionables(array | Collection | Closure $mentionables): static
     {
         $this->mentionables = $mentionables;
 

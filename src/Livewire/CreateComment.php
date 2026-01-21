@@ -6,9 +6,9 @@ use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Notifications\Notification;
 use Filament\Schemas\Schema;
 use Livewire\Component;
-use Filament\Notifications\Notification;
 use Tilto\Commentable\Contracts\CommentableContract as Commentable;
 
 class CreateComment extends Component implements HasForms
