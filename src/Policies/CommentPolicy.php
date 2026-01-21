@@ -22,4 +22,3 @@ class CommentPolicy
         return $comment->isAuthor($user);
     }
 }
-

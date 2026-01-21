@@ -17,14 +17,14 @@ trait IsCommenter
             $avatar = $this->author->getFilamentAvatarUrl();
         }
 
-        if (!is_null($avatar)) {
+        if (! is_null($avatar)) {
             return $avatar;
         }
 
         $name = str($this->getCommenterName())
             ->trim()
             ->explode(' ')
-            ->map(fn(string $segment): string => filled($segment) ? mb_substr($segment, 0, 1) : '')
+            ->map(fn (string $segment): string => filled($segment) ? mb_substr($segment, 0, 1) : '')
             ->join(' ');
 
         return 'https://ui-avatars.com/api/?name=' . urlencode($name) . '&color=FFFFFF&background=71717b';
