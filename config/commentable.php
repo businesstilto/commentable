@@ -16,7 +16,7 @@ return [
     |--------------------------------------------------------------------------
     */
     'comment' => [
-        'model' => '',
-        'policy' => '',
+        'model' => Tilto\Commentable\Models\Comment::class,
+        'policy' => Tilto\Commentable\Policies\CommentPolicy::class,
     ],
 ];
