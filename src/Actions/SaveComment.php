@@ -39,6 +39,6 @@ class SaveComment
 
     public static function run(...$args)
     {
-        return (new static())(...$args);
+        return (new static)(...$args);
     }
 }
