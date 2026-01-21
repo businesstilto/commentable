@@ -4,7 +4,6 @@ namespace Tilto\Commentable;
 
 use Filament\Support\Assets\Asset;
 use Filament\Support\Assets\Css;
-use Filament\Support\Assets\Js;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Filesystem\Filesystem;
@@ -91,9 +90,7 @@ class CommentableServiceProvider extends PackageServiceProvider
     protected function getAssets(): array
     {
         return [
-            // AlpineComponent::make('commentable', __DIR__ . '/../resources/dist/components/commentable.js'),
             Css::make('commentable-styles', __DIR__ . '/../resources/dist/commentable.css'),
-            Js::make('commentable-scripts', __DIR__ . '/../resources/dist/commentable.js'),
         ];
     }
 
