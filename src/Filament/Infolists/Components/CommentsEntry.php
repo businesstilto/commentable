@@ -8,6 +8,7 @@ use Tilto\Commentable\Filament\Concerns\HasButtonPosition;
 use Tilto\Commentable\Filament\Concerns\HasEditor;
 use Tilto\Commentable\Filament\Concerns\HasMarkdownEditor;
 use Tilto\Commentable\Filament\Concerns\HasMentionables;
+use Tilto\Commentable\Filament\Concerns\HasReplies;
 
 class CommentsEntry extends Entry
 {
@@ -16,6 +17,7 @@ class CommentsEntry extends Entry
     use HasEditor;
     use HasMarkdownEditor;
     use HasMentionables;
+    use HasReplies;
 
     protected string $view = 'commentable::filament.infolists.components.comments-entry';
 }

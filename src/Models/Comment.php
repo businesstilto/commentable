@@ -2,6 +2,7 @@
 
 namespace Tilto\Commentable\Models;
 
+use Filament\Models\Contracts\HasName;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Tilto\Commentable\Contracts\CommenterContract as Commenter;
