@@ -7,9 +7,11 @@ use Filament\Support\Assets\Css;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Filesystem\Filesystem;
+use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Tilto\Commentable\Livewire\CreateComment;
 
 class CommentableServiceProvider extends PackageServiceProvider
 {
@@ -55,6 +57,9 @@ class CommentableServiceProvider extends PackageServiceProvider
 
     public function packageBooted(): void
     {
+        // Register Livewire Components
+        Livewire::component('commentable::livewire.create-comment', CreateComment::class);
+
         // Asset Registration
         FilamentAsset::register(
             $this->getAssets(),

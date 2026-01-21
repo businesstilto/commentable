@@ -1,14 +1,6 @@
 {
     "private": true,
     "type": "module",
-    "scripts": {
-        "dev:styles": "npx @tailwindcss/cli -i resources/css/index.css -o resources/dist/commentable.css --watch",
-        "dev:scripts": "node bin/build.js --dev",
-        "build:styles": "npx @tailwindcss/cli -i resources/css/index.css -o resources/dist/commentable.css --minify",
-        "build:scripts": "node bin/build.js",
-        "dev": "npm-run-all --parallel dev:*",
-        "build": "npm-run-all build:*"
-    },
     "devDependencies": {
         "@awcodes/filament-plugin-purge": "^1.1.1",
         "@tailwindcss/cli": "^4.1.18",
