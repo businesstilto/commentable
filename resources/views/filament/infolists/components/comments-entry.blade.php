@@ -31,26 +31,47 @@
                                 <span
                                     class="text-gray-500 dark:text-gray-400 text-xs ml-2">{{ $comment->created_at->diffForHumans() }}</span>
                             </div>
-                            <div class="flex gap-2">
-                                <x-filament::icon-button icon="heroicon-o-pencil-square" size="s"
-                                    color="gray"
+                            <div class="flex gap-1">
+                                <x-filament::icon-button icon="heroicon-o-pencil-square" size="xs"
+                                    tooltip="Bewerken" color="gray"
                                     class="!p-0 !m-0 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200" />
 
-                                <x-filament::icon-button icon="heroicon-o-trash" size="s"
-                                    color="gray"
-                                    class="!p-0 !m-0 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200" />
+                                @can('delete', $comment)
+                                    <x-filament::modal icon="heroicon-s-trash" icon-color="danger" alignment="center"
+                                        width="md">
+                                        <x-slot name="trigger">
+                                            <x-filament::icon-button icon="heroicon-o-trash" size="xs"
+                                                tooltip="Verwijderen" color="gray"
+                                                class="!p-0 !m-0 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200" />
+                                        </x-slot>
+
+                                        <x-slot name="heading">
+                                            Comment verwijderen
+                                        </x-slot>
+
+                                        <x-slot name="description">
+                                            Weet je zeker dat je dit wilt doen?
+                                        </x-slot>
+
+                                        <x-slot name="footerActions">
+                                            <div class="flex w-full gap-3">
+                                                <x-filament::button color="gray" class="basis-1/2">
+                                                    Annuleren
+                                                </x-filament::button>
+                                                <x-filament::button wire:click="delete" color="danger"
+                                                    class="basis-1/2">
+                                                    Verwijderen
+                                                </x-filament::button>
+                                            </div>
+                                        </x-slot>
+                                    </x-filament::modal>
+                                @endcan
                             </div>
                         </div>
 
                         <p class="text-sm text-gray-700">{!! $comment->body !!}</p>
 
                         <div class="flex items-center gap-4 text-sm">
-                            <span class="flex items-center gap-1 text-gray-600 dark:text-gray-400">
-                                <x-filament::icon-button icon="heroicon-o-chat-bubble-left-ellipsis" size="xs"
-                                    color="gray"
-                                    class="!p-0 !m-0 text-gray-600 dark:text-gray-400 pointer-events-none" />
-                                <span>2 replies</span>
-                            </span>
                             <button
                                 class="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200">Reply</button>
                         </div>

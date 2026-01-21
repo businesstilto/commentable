@@ -18,6 +18,5 @@ class CommentsEntry extends Entry
     use HasMarkdownEditor;
     use HasMentionables;
     use HasReplies;
-
     protected string $view = 'commentable::filament.infolists.components.comments-entry';
 }
