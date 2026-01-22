@@ -181,9 +181,9 @@ CommentsEntry::make('comments')
 
 By default, comments use Filament’s built-in rich text editor. Switching to the Markdown editor allows users to write and preview comments using Markdown syntax.
 
-#### Mentionables
+#### Mentions
 
-From Filament 4.5+, mentionables are supported. You can add mentionables to the `CommentsEntry` just as you would with Filament's RichTextEditor:
+From Filament 4.5+, mentions are supported. You can add mentions to the `CommentsEntry` just as you would with Filament's RichTextEditor:
 
 ```php
 CommentsEntry::make('comments')
