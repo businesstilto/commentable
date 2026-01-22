@@ -2,7 +2,7 @@
 
 namespace Tilto\Commentable\Contracts;
 
-interface CommenterContract
+interface Commenter
 {
     /**
      * Get the identifier key for the object. Usually the primary key.

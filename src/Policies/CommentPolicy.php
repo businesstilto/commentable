@@ -2,22 +2,22 @@
 
 namespace Tilto\Commentable\Policies;
 
-use Tilto\Commentable\Contracts\CommenterContract;
+use Tilto\Commentable\Contracts\Commenter;
 use Tilto\Commentable\Models\Comment;
 
 class CommentPolicy
 {
-    public function create(CommenterContract $user): bool
+    public function create(Commenter $user): bool
     {
         return true;
     }
 
-    public function update(CommenterContract $user, Comment $comment): bool
+    public function update(Commenter $user, Comment $comment): bool
     {
         return $comment->isAuthor($user);
     }
 
-    public function delete(CommenterContract $user, Comment $comment): bool
+    public function delete(Commenter $user, Comment $comment): bool
     {
         return $comment->isAuthor($user);
     }

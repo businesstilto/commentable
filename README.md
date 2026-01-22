@@ -135,14 +135,7 @@ CommentsEntry::make('comments')
     ])
 ```
 
-The default toolbar buttons are:
-
-```php
-[
-    ['bold', 'italic', 'strike'],
-    ['attachFiles'],
-]
-```
+The default toolbar buttons are `bold`, `italic`, `strike`, and `attachFiles`.
 
 ### Markdown Editor
 

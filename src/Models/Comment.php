@@ -4,7 +4,7 @@ namespace Tilto\Commentable\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Tilto\Commentable\Contracts\CommenterContract as Commenter;
+use Tilto\Commentable\Contracts\Commenter;
 
 class Comment extends Model
 {

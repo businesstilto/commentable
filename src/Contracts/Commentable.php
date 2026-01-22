@@ -4,7 +4,7 @@ namespace Tilto\Commentable\Contracts;
 
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
-interface CommentableContract
+interface Commentable
 {
     public function comments(): MorphMany;
 

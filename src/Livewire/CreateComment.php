@@ -9,7 +9,7 @@ use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Notification;
 use Filament\Schemas\Schema;
 use Livewire\Component;
-use Tilto\Commentable\Contracts\CommentableContract as Commentable;
+use Tilto\Commentable\Contracts\Commentable;
 
 class CreateComment extends Component implements HasForms
 {

@@ -5,7 +5,7 @@ namespace Tilto\Commentable\Events;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use Tilto\Commentable\Contracts\CommenterContract as Commenter;
+use Tilto\Commentable\Contracts\Commenter;
 use Tilto\Commentable\Models\Comment;
 
 class UserMentionedEvent

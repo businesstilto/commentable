@@ -4,7 +4,7 @@ namespace Tilto\Commentable\Traits;
 
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Tilto\Commentable\Actions\SaveComment;
-use Tilto\Commentable\Contracts\CommenterContract as Commenter;
+use Tilto\Commentable\Contracts\Commenter;
 use Tilto\Commentable\Models\Comment;
 
 trait HasComments

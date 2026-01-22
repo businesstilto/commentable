@@ -4,7 +4,7 @@ namespace Tilto\Commentable\Actions;
 
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Model;
-use Tilto\Commentable\Contracts\CommenterContract as Commenter;
+use Tilto\Commentable\Contracts\Commenter;
 use Tilto\Commentable\Events\CommentCreatedEvent;
 use Tilto\Commentable\Models\Comment;
 
