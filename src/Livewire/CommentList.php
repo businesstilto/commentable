@@ -10,7 +10,7 @@ class CommentList extends Component
 
     protected $listeners = [
         'comment-deleted' => '$refresh',
-        'comment-created' => '$refresh'
+        'comment-created' => '$refresh',
     ];
 
     public function render()
