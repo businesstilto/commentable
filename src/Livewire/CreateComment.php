@@ -8,6 +8,7 @@ use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Notification;
 use Filament\Schemas\Schema;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Tilto\Commentable\Contracts\CommentableContract as Commentable;
 
@@ -27,12 +28,7 @@ class CreateComment extends Component implements HasForms
         ['bold', 'italic', 'strike'],
         ['attachFiles'],
     ];
-
-    public function mount(): void
-    {
-        $this->form->fill();
-    }
-
+    
     public function form(Schema $schema): Schema
     {
         if ($this->isMarkdownEditor) {
@@ -65,26 +61,26 @@ class CreateComment extends Component implements HasForms
     {
         $data = $this->form->getState();
 
-        $data['author_type'] = get_class(auth()->user());
-        $data['author_id'] = auth()->id();
-
-        $data['commentable_type'] = get_class($this->record);
-        $data['commentable_id'] = $this->record->getKey();
-
-        $this->record->comments()->create($data);
-
-        $this->form->fill();
+        $this->record->comment($data['body'], auth()->user());
 
         Notification::make()
             ->title('Reactie toegevoegd')
             ->success()
             ->send();
 
-        $this->dispatch('comment-created');
+        $this->dispatch('comment:created');
     }
 
     public function render()
     {
         return view('commentable::livewire.create-comment');
+    }
+
+    #[On('comment:created')]
+    #[On('comment:updated')]
+    #[On('comment:deleted')]
+    public function reload(): void
+    {
+        unset($this->comments);
     }
 }
