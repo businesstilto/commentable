@@ -23,6 +23,14 @@ class CreateComment extends Component implements HasForms
 
     public bool $isMarkdownEditor = false;
 
+    public ?string $fileAttachmentsDisk = null;
+
+    public ?string $fileAttachmentsDirectory = null;
+
+    public ?array $fileAttachmentsAcceptedFileTypes = null;
+
+    public ?int $fileAttachmentsMaxSize = null;
+
     public array $toolbarButtons = [
         ['bold', 'italic', 'strike'],
         ['attachFiles'],
@@ -46,7 +54,11 @@ class CreateComment extends Component implements HasForms
                         ->toolbarButtons($this->toolbarButtons)
                         ->maxHeight(200)
                         ->required()
-                        ->maxLength(65535),
+                        ->maxLength(65535)
+                        ->fileAttachmentsDisk($this->fileAttachmentsDisk)
+                        ->fileAttachmentsDirectory($this->fileAttachmentsDirectory)
+                        ->fileAttachmentsAcceptedFileTypes($this->fileAttachmentsAcceptedFileTypes)
+                        ->fileAttachmentsMaxSize($this->fileAttachmentsMaxSize),
                 ])
                 ->statePath('data');
         } else {
@@ -57,7 +69,11 @@ class CreateComment extends Component implements HasForms
                         ->placeholder(__('commentable::translations.input_placeholder'))
                         ->toolbarButtons($this->toolbarButtons)
                         ->required()
-                        ->maxLength(65535),
+                        ->maxLength(65535)
+                        ->fileAttachmentsDisk($this->fileAttachmentsDisk)
+                        ->fileAttachmentsDirectory($this->fileAttachmentsDirectory)
+                        ->fileAttachmentsAcceptedFileTypes($this->fileAttachmentsAcceptedFileTypes)
+                        ->fileAttachmentsMaxSize($this->fileAttachmentsMaxSize),
                 ])
                 ->statePath('data');
         }

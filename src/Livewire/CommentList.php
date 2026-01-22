@@ -8,6 +8,10 @@ class CommentList extends Component
 {
     public $record;
 
+    public bool $shouldPoll = false;
+
+    public ?string $pollingInterval = null;
+
     protected $listeners = [
         'comment-deleted' => '$refresh',
         'comment-created' => '$refresh'

@@ -5,8 +5,20 @@
             'toolbarButtons' => $getToolbarButtons(),
             'buttonPosition' => $getButtonPosition(),
             'isMarkdownEditor' => $isMarkdownEditor(),
+            'fileAttachmentsDisk' => $getFileAttachmentsDisk(),
+            'fileAttachmentsDirectory' => $getFileAttachmentsDirectory(),
+            'fileAttachmentsAcceptedFileTypes' => $getFileAttachmentsAcceptedFileTypes(),
+            'fileAttachmentsMaxSize' => $getFileAttachmentsMaxSize(),
         ])
     </div>
 
-    @livewire('commentable::livewire.comment-list', ['record' => $record], key('comment-list-' . $record->id))
+    @livewire(
+        'commentable::livewire.comment-list',
+        [
+            'record' => $record,
+            'shouldPoll' => $shouldPoll(),
+            'pollingInterval' => $getPollingInterval(),
+        ],
+        key('comment-list-' . $record->id)
+    )
 </x-dynamic-component>
