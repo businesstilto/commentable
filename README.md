@@ -40,6 +40,12 @@ You can publish the config file with:
 php artisan vendor:publish --tag="commentable-config"
 ```
 
+You can publish the translation files with:
+
+```bash
+php artisan vendor:publish --tag="commentable-translations"
+```
+
 Optionally, you can publish the views using
 
 ```bash
