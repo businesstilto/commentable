@@ -25,16 +25,9 @@ class SaveComment
             'author_type' => $author->getMorphClass(),
         ]);
 
-        $this->dispatchEvents($comment);
+        event(new CommentCreatedEvent($comment));
 
         return $comment;
-    }
-
-    protected function dispatchEvents(Comment $comment): void
-    {
-        if ($comment->wasRecentlyCreated) {
-            CommentCreatedEvent::dispatch($comment);
-        }
     }
 
     public static function run(...$args)

@@ -14,6 +14,7 @@ use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Tilto\Commentable\Events\CommentCreatedEvent;
 use Tilto\Commentable\Listeners\HandleCommentCreated;
+use Tilto\Commentable\Livewire\Comment;
 use Tilto\Commentable\Livewire\CreateComment;
 
 class CommentableServiceProvider extends PackageServiceProvider
@@ -62,6 +63,7 @@ class CommentableServiceProvider extends PackageServiceProvider
     {
         // Register Livewire Components
         Livewire::component('commentable::livewire.create-comment', CreateComment::class);
+        Livewire::component('commentable::livewire.comment', Comment::class);
 
         // Asset Registration
         FilamentAsset::register(
