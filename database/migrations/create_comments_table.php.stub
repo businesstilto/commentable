@@ -8,8 +8,10 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('comments'), function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->foreign('parent_id')->references('id')->on('comments')->onDelete('cascade');
             $table->morphs('author');
             $table->morphs('commentable');
             $table->text('body');
