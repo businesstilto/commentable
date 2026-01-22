@@ -9,14 +9,28 @@
     </div>
 
     <div class="pt-4 space-y-6">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="text-base font-semibold">{{ $record->comments->count() }} @if ($record->comments->count() == 1)
-                    comment
-                @else
-                    comments
-                @endif
-            </h3>
-        </div>
+        @if (!$record->comments->isEmpty())
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-base font-semibold">{{ $record->comments->count() }} @if ($record->comments->count() == 1)
+                        {{ __('commentable::translations.comment_singular') }}
+                    @else
+                        {{ __('commentable::translations.comment_plural') }}
+                    @endif
+                </h3>
+            </div>
+        @endif
+
+        @if ($record->comments->isEmpty())
+            <x-filament::empty-state icon="heroicon-o-chat-bubble-left-ellipsis" icon-color="gray" class="mt-4">
+                <x-slot name="heading">
+                    {{ __('commentable::translations.empty_state.heading') }}
+                </x-slot>
+
+                <x-slot name="description">
+                    {{ __('commentable::translations.empty_state.description') }}
+                </x-slot>
+            </x-filament::empty-state>
+        @endif
 
         @foreach ($record->comments as $comment)
             <div class="space-y-3">
@@ -46,21 +60,21 @@
                                         </x-slot>
 
                                         <x-slot name="heading">
-                                            Comment verwijderen
+                                            {{ __('commentable::translations.delete_confirmation.heading') }}
                                         </x-slot>
 
                                         <x-slot name="description">
-                                            Weet je zeker dat je dit wilt doen?
+                                            {{ __('commentable::translations.delete_confirmation.description') }}
                                         </x-slot>
 
                                         <x-slot name="footerActions">
                                             <div class="flex w-full gap-3">
                                                 <x-filament::button color="gray" class="basis-1/2">
-                                                    Annuleren
+                                                    {{ __('commentable::translations.delete_confirmation.cancel') }}
                                                 </x-filament::button>
-                                                <x-filament::button wire:click="delete" color="danger"
+                                                <x-filament::button wire:click="delete({{ $comment->id }})" color="danger"
                                                     class="basis-1/2">
-                                                    Verwijderen
+                                                    {{ __('commentable::translations.delete_confirmation.delete') }}
                                                 </x-filament::button>
                                             </div>
                                         </x-slot>
@@ -73,7 +87,7 @@
 
                         <div class="flex items-center gap-4 text-sm">
                             <button
-                                class="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200">Reply</button>
+                                class="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200">{{ __('commentable::translations.reply') }}</button>
                         </div>
                     </div>
                 </div>

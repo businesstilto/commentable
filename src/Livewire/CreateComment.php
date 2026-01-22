@@ -28,7 +28,7 @@ class CreateComment extends Component implements HasForms
         ['bold', 'italic', 'strike'],
         ['attachFiles'],
     ];
-    
+
     public function form(Schema $schema): Schema
     {
         if ($this->isMarkdownEditor) {
@@ -36,7 +36,7 @@ class CreateComment extends Component implements HasForms
                 ->schema([
                     MarkdownEditor::make('body')
                         ->hiddenLabel()
-                        ->placeholder('Schrijf je reactie...')
+                        ->placeholder(__('commentable::translations.input_placeholder'))
                         ->toolbarButtons($this->toolbarButtons)
                         ->maxHeight(200)
                         ->required()
@@ -48,7 +48,7 @@ class CreateComment extends Component implements HasForms
                 ->schema([
                     RichEditor::make('body')
                         ->hiddenLabel()
-                        ->placeholder('Schrijf je reactie...')
+                        ->placeholder(__('commentable::translations.input_placeholder'))
                         ->toolbarButtons($this->toolbarButtons)
                         ->required()
                         ->maxLength(65535),
