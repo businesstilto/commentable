@@ -37,7 +37,7 @@ class HandleCommentCreated implements ShouldQueue
         }
 
         $notification = app($notificationClass, [
-            'comment'  => $event->comment,
+            'comment' => $event->comment,
             'channels' => $channels,
         ]);
 
