@@ -72,16 +72,17 @@ class CreateComment extends Component implements HasForms
         if (method_exists($this->record, 'comment') && $user && !empty($data['body'])) {
             $this->record->comment($data['body'], $user);
 
+            $this->dispatch('comment-created');
+
+            $this->form->fill(['body' => '']);
+
             Notification::make()
-                ->title('Reactie toegevoegd')
+                ->title(__('commentable::translations.notifications.created'))
                 ->success()
                 ->send();
-
-            $this->dispatch('$refresh');
-            $this->form->fill(['body' => '']);
         } else {
             Notification::make()
-                ->title('Er is een fout opgetreden bij het toevoegen van de reactie.')
+                ->title(__('commentable::translations.notifications.something_went_wrong'))
                 ->danger()
                 ->send();
         }

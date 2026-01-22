@@ -38,7 +38,7 @@
                                     <x-filament::button color="gray" class="basis-1/2">
                                         {{ __('commentable::translations.delete_confirmation.cancel') }}
                                     </x-filament::button>
-                                    <x-filament::button wire:click="delete({{ $comment->id }})" color="danger"
+                                    <x-filament::button wire:click="delete" color="danger"
                                         class="basis-1/2">
                                         {{ __('commentable::translations.delete_confirmation.confirm') }}
                                     </x-filament::button>

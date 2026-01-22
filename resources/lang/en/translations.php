@@ -15,5 +15,9 @@ return [
         'cancel' => 'Cancel',
         'confirm' => 'Delete',
     ],
+    'notifications' => [
+        'deleted' => 'Comment deleted successfully.',
+        'something_went_wrong' => 'Something went wrong. Please try again later.',
+    ],
     'reply' => 'Reply',
 ];

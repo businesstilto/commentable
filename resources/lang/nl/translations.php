@@ -15,5 +15,9 @@ return [
         'cancel' => 'Annuleren',
         'confirm' => 'Verwijderen',
     ],
+    'notifications' => [
+        'deleted' => 'Reactie succesvol verwijderd.',
+        'something_went_wrong' => 'Er is iets misgegaan. Probeer het later opnieuw.',
+    ],
     'reply' => 'Beantwoorden',
 ];
