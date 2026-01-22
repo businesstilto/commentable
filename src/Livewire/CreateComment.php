@@ -69,7 +69,7 @@ class CreateComment extends Component implements HasForms
 
         $user = auth()->check() ? auth()->user() : null;
 
-        if (method_exists($this->record, 'comment') && $user && !empty($data['body'])) {
+        if (method_exists($this->record, 'comment') && $user && ! empty($data['body'])) {
             $this->record->comment($data['body'], $user);
 
             $this->dispatch('comment-created');
