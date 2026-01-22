@@ -7,10 +7,13 @@ use Filament\Support\Assets\Css;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Event;
 use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Tilto\Commentable\Events\CommentCreatedEvent;
+use Tilto\Commentable\Listeners\HandleCommentCreated;
 use Tilto\Commentable\Livewire\CreateComment;
 
 class CommentableServiceProvider extends PackageServiceProvider
@@ -81,6 +84,11 @@ class CommentableServiceProvider extends PackageServiceProvider
                     $file->getRealPath() => base_path("stubs/commentable/{$file->getFilename()}"),
                 ], 'commentable-stubs');
             }
+        }
+
+        if(config('commentable.events.comment_created_enabled', true)) {
+            $listener = (string) config('commentable.listeners.comment_created', HandleCommentCreated::class);
+            Event::listen(CommentCreatedEvent::class, $listener);
         }
     }
 

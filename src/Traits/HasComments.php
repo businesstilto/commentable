@@ -3,6 +3,8 @@
 namespace Tilto\Commentable\Traits;
 
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Tilto\Commentable\Actions\SaveComment;
+use Tilto\Commentable\Contracts\CommenterContract as Commenter;
 use Tilto\Commentable\Models\Comment;
 
 trait HasComments
@@ -12,5 +14,10 @@ trait HasComments
         return $this->morphMany(Comment::class, 'commentable')
             ->latest()
             ->with('author');
+    }
+
+    public function comment(string $body, ?Commenter $author): Comment
+    {
+        return SaveComment::run($this, $author, $body);
     }
 }
