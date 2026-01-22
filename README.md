@@ -106,6 +106,39 @@ return [
 
 ## Usage
 
+## Setting Up Your Models
+
+To enable commenting functionality, you need to update your models as follows:
+
+#### 1. Implement the Commenter contract
+
+In your **User** model, implement the `Commenter` contract:
+
+```php
+use Tilto\Commentable\Contracts\Commenter;
+
+class User extends Model implements Commenter
+{
+    // ...
+}
+```
+
+#### 2. Implement the Commentable contract
+
+In the model you want to make commentable (for example, `Post`), implement the `Commentable` contract and use the `HasComments` trait:
+
+```php
+use Tilto\Commentable\Traits\HasComments;
+use Tilto\Commentable\Contracts\Commentable;
+
+class Post extends Model implements Commentable
+{
+    use HasComments;
+}
+```
+
+### Comment Component
+
 You can add a comments section to your Filament Infolist using the `CommentsEntry` component:
 
 ```php
@@ -114,7 +147,7 @@ use Tilto\Commentable\Filament\Infolists\Components\CommentsEntry;
 CommentsEntry::make('comments')
 ```
 
-### Button position
+#### Button position
 
 You can set the position of the "Add Comment" button using the `buttonPosition` method:
 
@@ -123,7 +156,7 @@ CommentsEntry::make('comments')
     ->buttonPosition('right') // Options: 'left', 'right'
 ```
 
-### Toolbar buttons
+#### Toolbar buttons
 
 You can customize the toolbar buttons using the `toolbarButtons` method, which uses Filament's built-in toolbar button options:
 
@@ -137,7 +170,7 @@ CommentsEntry::make('comments')
 
 The default toolbar buttons are `bold`, `italic`, `strike`, and `attachFiles`.
 
-### Markdown Editor
+#### Markdown Editor
 
 Prefer writing comments in Markdown? Enable the Markdown editor with the `markdownEditor` method:
 
@@ -148,7 +181,7 @@ CommentsEntry::make('comments')
 
 By default, comments use Filament’s built-in rich text editor. Switching to the Markdown editor allows users to write and preview comments using Markdown syntax.
 
-## Mentionables
+#### Mentionables
 
 From Filament 4.5+, mentionables are supported. You can add mentionables to the `CommentsEntry` just as you would with Filament's RichTextEditor:
 
@@ -162,10 +195,11 @@ CommentsEntry::make('comments')
             ]),
     ])
 ```
+
 > [!NOTE]
 > Mentionables are only supported when using the rich text editor. They are not available in the Markdown editor.
 
-### File Attachments
+#### File Attachments
 
 You can customize the file attachment behavior by chaining the following methods:
 
@@ -177,7 +211,7 @@ CommentsEntry::make('comments')
     ->fileAttachmentsMaxSize(5120) // Set max file size in kilobytes
 ```
 
-### Polling
+#### Polling
 
 You can enable polling to automatically refresh the comments list at a specified interval:
 
@@ -193,7 +227,7 @@ CommentsEntry::make('comments')
     ->enablePolling() // Refresh using the default interval
 ```
 
-### Replies
+#### Replies
 
 You can enable replies to comments using the `nestable` method:
 
