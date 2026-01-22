@@ -86,7 +86,7 @@ class CommentableServiceProvider extends PackageServiceProvider
             }
         }
 
-        if(config('commentable.events.comment_created_enabled', true)) {
+        if (config('commentable.events.comment_created_enabled', true)) {
             $listener = (string) config('commentable.listeners.comment_created', HandleCommentCreated::class);
             Event::listen(CommentCreatedEvent::class, $listener);
         }
