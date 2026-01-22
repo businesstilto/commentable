@@ -28,7 +28,7 @@ class CreateComment extends Component implements HasForms
         ['bold', 'italic', 'strike'],
         ['attachFiles'],
     ];
-    
+
     public function form(Schema $schema): Schema
     {
         if ($this->isMarkdownEditor) {
