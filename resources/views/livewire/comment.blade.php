@@ -11,9 +11,8 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <span class="font-semibold text-sm">{{ $comment->author->getCommenterName() }}</span>
-                        <span
-                            class="text-gray-500 dark:text-gray-400 text-xs ml-2">
-                            @if($comment->created_at->eq($comment->updated_at))
+                        <span class="text-gray-500 dark:text-gray-400 text-xs ml-2">
+                            @if ($comment->created_at->eq($comment->updated_at))
                                 {{ $comment->created_at->diffForHumans() }}
                             @else
                                 {{ $comment->created_at->diffForHumans() }} {{ __('commentable::translations.edited') }}
@@ -72,19 +71,23 @@
                 </div>
 
                 @if (!$isEditing)
-                    <p class="text-sm text-gray-700 prose dark:prose-invert">
+                    <div
+                        class="prose max-w-none dark:prose-invert prose-p:text-gray-700 dark:prose-p:text-gray-300 text-sm">
                         @if ($isMarkdownEditor)
                             {!! str($comment->body)->markdown()->sanitizeHtml() !!}
                         @else
                             {!! RichContentRenderer::make($comment->body)->toHtml() !!}
                         @endif
-                    </p>
+                    </div>
                 @else
                     <form wire:submit="edit">
                         {{ $this->form }}
 
-                        <div @if ($buttonPosition === 'right') class="flex justify-end" @endif>
-                            <x-filament::button type="submit" class="mt-4">
+                        <div @if ($buttonPosition === 'right') class="flex justify-end gap-3 mt-4" @endif>
+                            <x-filament::button wire:click="cancel" color="gray" type="button">
+                                {{ __('commentable::translations.buttons.cancel') }}
+                            </x-filament::button>
+                            <x-filament::button type="submit">
                                 {{ __('commentable::translations.buttons.edit') }}
                             </x-filament::button>
                         </div>

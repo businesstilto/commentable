@@ -6,6 +6,7 @@ return [
         'post' => 'Post',
         'edit' => 'Save changes',
         'reply' => 'Reply',
+        'cancel' => 'Cancel',
     ],
     'comment_singular' => 'comment',
     'comment_plural' => 'comments',

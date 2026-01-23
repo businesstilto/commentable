@@ -83,6 +83,14 @@ class Comment extends Component implements HasForms
         }
     }
 
+    public function cancel()
+    {
+        $this->isEditing = false;
+
+        $this->form->fill([
+            'body' => '',
+        ]);
+    }
 
     public function openEdit()
     {
@@ -95,6 +103,8 @@ class Comment extends Component implements HasForms
         ]);
 
         $this->isEditing = true;
+
+        $this->js('document.body.click()');
     }
 
     public function edit()

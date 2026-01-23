@@ -6,6 +6,7 @@ return [
         'post' => 'Plaats reactie',
         'edit' => 'Wijzigingen opslaan',
         'reply' => 'Beantwoorden',
+        'cancel' => 'Annuleren',
     ],
     'comment_singular' => 'reactie',
     'comment_plural' => 'reacties',
