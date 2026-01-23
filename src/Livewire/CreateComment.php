@@ -2,18 +2,21 @@
 
 namespace Tilto\Commentable\Livewire;
 
-use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
+use Filament\Actions\Concerns\InteractsWithActions;
+use Filament\Actions\Contracts\HasActions;
+use Filament\Schemas\Concerns\InteractsWithSchemas;
+use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Notifications\Notification;
 use Filament\Schemas\Schema;
 use Livewire\Component;
 use Tilto\Commentable\Contracts\Commentable;
+use Filament\Forms\Components\MarkdownEditor;
 
-class CreateComment extends Component implements HasForms
+class CreateComment extends Component implements HasActions, HasSchemas
 {
-    use InteractsWithForms;
+    use InteractsWithActions;
+    use InteractsWithSchemas;
 
     public Commentable $record;
 
@@ -42,46 +45,50 @@ class CreateComment extends Component implements HasForms
     {
         $this->mentions = $mentions;
 
-        $this->form->fill([
-            'body' => '',
-        ]);
+        $this->form->fill();
     }
 
     public function form(Schema $schema): Schema
     {
-        if ($this->isMarkdownEditor) {
-            return $schema
-                ->schema([
-                    MarkdownEditor::make('body')
-                        ->hiddenLabel()
-                        ->placeholder(__('commentable::translations.input_placeholder'))
-                        ->toolbarButtons($this->toolbarButtons)
-                        ->required()
-                        ->minHeight(200)
-                        ->maxLength(65535)
-                        ->fileAttachmentsDisk($this->fileAttachmentsDisk)
-                        ->fileAttachmentsDirectory($this->fileAttachmentsDirectory)
-                        ->fileAttachmentsAcceptedFileTypes($this->fileAttachmentsAcceptedFileTypes)
-                        ->fileAttachmentsMaxSize($this->fileAttachmentsMaxSize),
-                ])
-                ->statePath('data');
-        } else {
-            return $schema
-                ->schema([
-                    RichEditor::make('body')
-                        ->hiddenLabel()
-                        ->placeholder(__('commentable::translations.input_placeholder'))
-                        ->toolbarButtons($this->toolbarButtons)
-                        ->required()
-                        ->maxLength(65535)
-                        ->mentions(fn () => $this->mentions ?? [])
-                        ->fileAttachmentsDisk($this->fileAttachmentsDisk)
-                        ->fileAttachmentsDirectory($this->fileAttachmentsDirectory)
-                        ->fileAttachmentsAcceptedFileTypes($this->fileAttachmentsAcceptedFileTypes)
-                        ->fileAttachmentsMaxSize($this->fileAttachmentsMaxSize),
-                ])
-                ->statePath('data');
+        $editor = $this->isMarkdownEditor
+            ? MarkdownEditor::make('body')->minHeight(200)
+            : RichEditor::make('body');
+
+        $editor
+            ->hiddenLabel()
+            ->placeholder(__('commentable::translations.input_placeholder'))
+            ->required()
+            ->maxLength(65535);
+
+        if ($this->toolbarButtons ?? null) {
+            $editor->toolbarButtons($this->toolbarButtons);
         }
+
+        if ($this->fileAttachmentsDisk) {
+            $editor->fileAttachmentsDisk($this->fileAttachmentsDisk);
+        }
+
+        if ($this->fileAttachmentsDirectory) {
+            $editor->fileAttachmentsDirectory($this->fileAttachmentsDirectory);
+        }
+
+        if ($this->fileAttachmentsAcceptedFileTypes) {
+            $editor->fileAttachmentsAcceptedFileTypes($this->fileAttachmentsAcceptedFileTypes);
+        }
+
+        if ($this->fileAttachmentsMaxSize) {
+            $editor->fileAttachmentsMaxSize($this->fileAttachmentsMaxSize);
+        }
+
+        if (property_exists($this, 'mentions') && $this->mentions) {
+            $editor->mentions($this->mentions);
+        }
+
+        return $schema
+            ->schema([
+                $editor,
+            ])
+            ->statePath('data');
     }
 
     public function create(): void
@@ -95,7 +102,7 @@ class CreateComment extends Component implements HasForms
 
             $this->dispatch('comment-created');
 
-            $this->form->fill(['body' => '']);
+            $this->form->fill();
         } else {
             Notification::make()
                 ->title(__('commentable::translations.notifications.something_went_wrong'))

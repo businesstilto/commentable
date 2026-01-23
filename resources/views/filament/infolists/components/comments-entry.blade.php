@@ -1,4 +1,4 @@
-<x-dynamic-component :component="$getEntryWrapperView()" :entry="$entry">
+<x-dynamic-component :component="$getEntryWrapperView()" :entry="$entry" class="fi-commentable">
     <div wire:key="create-comment-{{ $record->id }}">
         @livewire('commentable::livewire.create-comment', [
             'record' => $record,

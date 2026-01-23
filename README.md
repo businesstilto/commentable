@@ -15,7 +15,7 @@
 
 </div>
 
-A lightweight and easy to use package that adds commenting in Filament v4.5 and newer.
+An extensive and very customizable package that adds commenting in Filament v4.5 and newer.
 
 Inspired by and built upon code from the [Kirschbaum Commentions package](https://github.com/kirschbaum-development/commentions), but takes a different approach to commenting in Filament.
 

@@ -27,9 +27,7 @@ trait Edit
     {
         $this->isEditing = false;
 
-        $this->form->fill([
-            'body' => '',
-        ]);
+        $this->form->fill();
     }
 
     public function edit()
@@ -43,7 +41,7 @@ trait Edit
                 'body' => $data['body'],
             ]);
 
-            $this->form->fill(['body' => '']);
+            $this->form->fill();
 
             $this->isEditing = false;
 

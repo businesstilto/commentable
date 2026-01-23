@@ -1,3 +1,104 @@
 @source "../js/";
 @source "../views/";
 @source "../../src";
+
+.fi-commentable .fi-comment-list {
+    @apply pt-4;
+}
+
+.fi-commentable .fi-comment-list-header {
+    @apply flex items-center justify-between;
+}
+
+.fi-commentable .fi-comment-list-title {
+    @apply text-base font-semibold;
+}
+
+.fi-commentable .fi-comment-list-empty {
+    @apply mt-4;
+}
+
+.fi-commentable .fi-comment-list-items {
+    @apply space-y-6 mt-6;
+}
+
+.fi-commentable .fi-create-comment-actions {
+    @apply flex justify-end;
+}
+
+.fi-commentable .fi-create-comment-submit {
+    @apply mt-4;
+}
+
+.fi-commentable .fi-comment-replies {
+    @apply ml-8 sm:ml-12 md:ml-14 space-y-4 border-l border-gray-200 dark:border-gray-800 pl-3 sm:pl-4 md:pl-5;
+}
+
+.fi-comment-avatar {
+    @apply w-8 h-8 sm:w-10 sm:h-10 rounded-full shrink-0;
+}
+
+.fi-comment-header {
+    @apply flex gap-3 sm:gap-4;
+}
+
+.fi-comment-content {
+    @apply flex-1 min-w-0;
+}
+
+.fi-comment-meta {
+    @apply flex items-center justify-between gap-2;
+}
+
+.fi-comment-meta-author {
+    @apply min-w-0 flex-1;
+}
+
+.fi-comment-meta-author-inner {
+    @apply font-semibold text-sm;
+}
+
+.fi-comment-date {
+    @apply text-gray-500 dark:text-gray-400 text-xs ml-2;
+}
+
+.fi-comment-actions {
+    @apply flex gap-1 shrink-0;
+}
+
+.fi-comment-action-reply {
+    @apply !p-0 !m-0 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-500;
+}
+
+.fi-comment-action-menu {
+    @apply !p-0 !m-0 text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-200;
+}
+
+.fi-comment-delete-actions {
+    @apply flex w-full gap-3;
+}
+
+.fi-comment-delete-cancel {
+    @apply basis-1/2;
+}
+
+.fi-comment-delete-confirm {
+    @apply basis-1/2;
+}
+
+.fi-comment-body {
+    @apply prose-img:rounded max-w-none dark:prose-invert prose-p:text-gray-700 dark:prose-p:text-gray-300 text-sm break-words;
+}
+
+.fi-comment-edit-actions-right {
+    @apply flex justify-end gap-3 mt-4;
+}
+
+.fi-comment-edit-actions {
+    @apply mt-4;
+}
+
+.fi-comment-replies {
+    @apply ml-8 sm:ml-12 md:ml-14 space-y-4 border-l border-gray-200 dark:border-gray-800 pl-3 sm:pl-4 md:pl-5;
+}
+

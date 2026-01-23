@@ -16,18 +16,14 @@ trait Reply
 
         $this->isReplying = true;
 
-        $this->form->fill([
-            'body' => '',
-        ]);
+        $this->form->fill();
     }
 
     public function cancelReply()
     {
         $this->isReplying = false;
 
-        $this->form->fill([
-            'body' => '',
-        ]);
+        $this->form->fill();
     }
 
     public function reply(): void
@@ -41,7 +37,7 @@ trait Reply
 
             $this->dispatch('comment-replied');
 
-            $this->form->fill(['body' => '']);
+            $this->form->fill();
 
             $this->isReplying = false;
         } else {

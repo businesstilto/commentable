@@ -2,23 +2,26 @@
 
 namespace Tilto\Commentable\Livewire;
 
-use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
+use Filament\Actions\Concerns\InteractsWithActions;
+use Filament\Actions\Contracts\HasActions;
+use Filament\Schemas\Concerns\InteractsWithSchemas;
+use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Schemas\Schema;
 use Livewire\Component;
 use Tilto\Commentable\Contracts\Commentable;
 use Tilto\Commentable\Livewire\Actions\Delete;
 use Tilto\Commentable\Livewire\Actions\Edit;
 use Tilto\Commentable\Livewire\Actions\Reply;
+use Filament\Forms\Components\MarkdownEditor;
 
-class Comment extends Component implements HasForms
+class Comment extends Component implements HasActions, HasSchemas
 {
     use Delete;
     use Edit;
-    use InteractsWithForms;
     use Reply;
+    use InteractsWithActions;
+    use InteractsWithSchemas;
 
     public Commentable $record;
 
@@ -49,6 +52,7 @@ class Comment extends Component implements HasForms
 
     protected $listeners = [
         'comment-replied' => '$refresh',
+        'comment-deleted' => '$refresh',
     ];
 
     public function render()
@@ -60,39 +64,51 @@ class Comment extends Component implements HasForms
         return view('commentable::livewire.comment');
     }
 
+    public function cancel()
+    {
+        $this->dispatch('close-modal', id: 'delete-comment');
+    }
+
     public function form(Schema $schema): Schema
     {
-        if ($this->isMarkdownEditor) {
-            return $schema
-                ->schema([
-                    MarkdownEditor::make('body')
-                        ->hiddenLabel()
-                        ->placeholder(__('commentable::translations.input_placeholder'))
-                        ->toolbarButtons($this->toolbarButtons)
-                        ->required()
-                        ->minHeight(200)
-                        ->maxLength(65535)
-                        ->fileAttachmentsDisk($this->fileAttachmentsDisk)
-                        ->fileAttachmentsDirectory($this->fileAttachmentsDirectory)
-                        ->fileAttachmentsAcceptedFileTypes($this->fileAttachmentsAcceptedFileTypes)
-                        ->fileAttachmentsMaxSize($this->fileAttachmentsMaxSize),
-                ])
-                ->statePath('data');
-        } else {
-            return $schema
-                ->schema([
-                    RichEditor::make('body')
-                        ->hiddenLabel()
-                        ->placeholder(__('commentable::translations.input_placeholder'))
-                        ->toolbarButtons($this->toolbarButtons)
-                        ->required()
-                        ->maxLength(65535)
-                        ->fileAttachmentsDisk($this->fileAttachmentsDisk)
-                        ->fileAttachmentsDirectory($this->fileAttachmentsDirectory)
-                        ->fileAttachmentsAcceptedFileTypes($this->fileAttachmentsAcceptedFileTypes)
-                        ->fileAttachmentsMaxSize($this->fileAttachmentsMaxSize),
-                ])
-                ->statePath('data');
+        $editor = $this->isMarkdownEditor
+            ? MarkdownEditor::make('body')->minHeight(200)
+            : RichEditor::make('body');
+
+        $editor
+            ->hiddenLabel()
+            ->placeholder(__('commentable::translations.input_placeholder'))
+            ->required()
+            ->maxLength(65535);
+
+        if ($this->toolbarButtons ?? null) {
+            $editor->toolbarButtons($this->toolbarButtons);
         }
+
+        if ($this->fileAttachmentsDisk) {
+            $editor->fileAttachmentsDisk($this->fileAttachmentsDisk);
+        }
+
+        if ($this->fileAttachmentsDirectory) {
+            $editor->fileAttachmentsDirectory($this->fileAttachmentsDirectory);
+        }
+
+        if ($this->fileAttachmentsAcceptedFileTypes) {
+            $editor->fileAttachmentsAcceptedFileTypes($this->fileAttachmentsAcceptedFileTypes);
+        }
+
+        if ($this->fileAttachmentsMaxSize) {
+            $editor->fileAttachmentsMaxSize($this->fileAttachmentsMaxSize);
+        }
+
+        if (property_exists($this, 'mentions') && $this->mentions) {
+            $editor->mentions($this->mentions);
+        }
+
+        return $schema
+            ->schema([
+                $editor,
+            ])
+            ->statePath('data');
     }
 }
