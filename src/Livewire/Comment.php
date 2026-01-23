@@ -14,10 +14,10 @@ use Tilto\Commentable\Livewire\Actions\Reply;
 
 class Comment extends Component implements HasForms
 {
-    use Edit;
-    use Reply;
     use Delete;
+    use Edit;
     use InteractsWithForms;
+    use Reply;
 
     public $comment;
 
