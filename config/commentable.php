@@ -3,13 +3,9 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | Models
+    | Comment model
     |--------------------------------------------------------------------------
     */
-    'commenter' => [
-        'model' => '',
-    ],
-
     'comment' => [
         'model' => Tilto\Commentable\Models\Comment::class,
         'policy' => Tilto\Commentable\Policies\CommentPolicy::class,
@@ -21,7 +17,11 @@ return [
     |--------------------------------------------------------------------------
     */
     'events' => [
-        'comment_created_enabled' => true,
+        'comment_created' => [
+            'enabled' => true,
+            'event' => Tilto\Commentable\Events\CommentCreatedEvent::class,
+            'listener' => Tilto\Commentable\Listeners\HandleCommentCreated::class,
+        ]
     ],
 
     /*
@@ -38,15 +38,5 @@ return [
             'enabled' => true,
             'channels' => ['database'],
         ],
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Event Listeners
-    |--------------------------------------------------------------------------
-    */
-    'listeners' => [
-        'comment_created' => Tilto\Commentable\Listeners\HandleCommentCreated::class,
-        'comment_mentioned' => Tilto\Commentable\Listeners\HandleCommentMentioned::class,
     ],
 ];

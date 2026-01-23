@@ -15,7 +15,9 @@ class SaveComment
      */
     public function __invoke(Model $commentable, Commenter $author, string $body, ?int $parent_id = null): Comment
     {
-        if ($author->cannot('create', Comment::class)) {
+        $commentModel = config('commentable.comment.model');
+        
+        if ($author->cannot('create', $commentModel)) {
             throw new AuthorizationException('Cannot create comment');
         }
 

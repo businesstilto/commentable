@@ -29,12 +29,12 @@ class Comment extends Model
 
     public function parent(): BelongsTo
     {
-        return $this->belongsTo(Comment::class, 'parent_id');
+        return $this->belongsTo(config('commentable.comment.model'), 'parent_id');
     }
 
     public function replies(): HasMany
     {
-        return $this->hasMany(Comment::class, 'parent_id')
+        return $this->hasMany(config('commentable.comment.model'), 'parent_id')
             ->with(['replies', 'author'])
             ->orderBy('created_at', 'asc');
     }

@@ -93,9 +93,11 @@ class CommentableServiceProvider extends PackageServiceProvider
 
         Gate::policy(Comment::class, config('commentable.comment.policy'));
 
-        if (config('commentable.events.comment_created_enabled', true)) {
-            $listener = (string) config('commentable.listeners.comment_created', HandleCommentCreated::class);
-            Event::listen(CommentCreatedEvent::class, $listener);
+        if (config('commentable.events.comment_created.enabled', true)) {
+            $event = (string) config('commentable.events.comment_created.event', CommentCreatedEvent::class);
+            $listener = (string) config('commentable.events.comment_created.listener', HandleCommentCreated::class);
+
+            Event::listen($event, $listener);
         }
     }
 

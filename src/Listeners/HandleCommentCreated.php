@@ -15,7 +15,7 @@ class HandleCommentCreated implements ShouldQueue
     {
         $user = $event->comment->user;
 
-        if (! config('commentable.events.comment_created_enabled', true)) {
+        if (! config('commentable.events.comment_created.enabled', true)) {
             return;
         }
 

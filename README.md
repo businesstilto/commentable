@@ -19,11 +19,14 @@ An extensive and very customizable package that adds commenting in Filament v4.5
 
 Inspired by and built upon code from the [Kirschbaum Commentions package](https://github.com/kirschbaum-development/commentions), but takes a different approach to commenting in Filament.
 
+> [!CAUTION]
+> This plugin is currently in beta and may contain bugs or incomplete features. It is not recommended for use in production environments until a stable release is available.
+
 ## Requirements
 
--   Laravel 11.x/12.x
--   PHP 8.2+
--   Filament 4.5+
+- Laravel 11.x/12.x
+- PHP 8.2+
+- Filament 4.5+
 
 ## Table of contents
 
@@ -76,7 +79,7 @@ You can publish the translation files with:
 php artisan vendor:publish --tag="commentable-translations"
 ```
 
-Optionally, you can publish the views using
+Optionally, you can publish the views using:
 
 ```bash
 php artisan vendor:publish --tag="commentable-views"
@@ -86,11 +89,11 @@ This is the contents of the published config file:
 
 ```php
 return [
-
-    'commenter' => [
-        'model' => '',
-    ],
-
+    /*
+    |--------------------------------------------------------------------------
+    | Comment model
+    |--------------------------------------------------------------------------
+    */
     'comment' => [
         'model' => Tilto\Commentable\Models\Comment::class,
         'policy' => Tilto\Commentable\Policies\CommentPolicy::class,
@@ -102,7 +105,11 @@ return [
     |--------------------------------------------------------------------------
     */
     'events' => [
-        'comment_created_enabled' => true,
+        'comment_created' => [
+            'enabled' => true,
+            'event' => Tilto\Commentable\Events\CommentCreatedEvent::class,
+            'listener' => Tilto\Commentable\Listeners\HandleCommentCreated::class,
+        ]
     ],
 
     /*
@@ -120,18 +127,7 @@ return [
             'channels' => ['database'],
         ],
     ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Event Listeners
-    |--------------------------------------------------------------------------
-    */
-    'listeners' => [
-        'comment_created' => Tilto\Commentable\Listeners\HandleCommentCreated::class,
-        'comment_mentioned' => Tilto\Commentable\Listeners\HandleCommentMentioned::class,
-    ],
 ];
-
 ```
 
 ## Usage
@@ -275,7 +271,7 @@ CommentsEntry::make('comments')
 To ensure mentions match Filament's default appearance, add the following CSS to your theme or `app.css` file:
 
 ```css
-span[data-type="mention"] {
+span[data-type='mention'] {
     @apply bg-primary-50 text-primary-600 dark:bg-primary-400/10 dark:text-primary-400 my-0 inline-block rounded px-1 font-medium whitespace-nowrap;
 }
 ```
@@ -327,16 +323,16 @@ CommentsEntry::make('comments')
 Once you have a custom theme set up, add the plugin's views and CSS to your theme's CSS file:
 
 ```css
-@import "../../../../vendor/businesstilto/commentable/resources/css/plugin.css";
+@import '../../../../vendor/businesstilto/commentable/resources/css/plugin.css';
 @source "../../../../vendor/businesstilto/commentable/resources/views/**/*.blade.php";
 ```
 
 ### Behavior
 
-* This package **uses the styling of your Filament panel** by default.
-* It automatically **loads your configured avatar provider** from Filament.
-* If no avatar provider is found, a **UI-based fallback avatar** is shown instead.
-* You may fully override all `fi-*` classes by **not including** the `plugin.css` file and providing your own styles.
+- This package **uses the styling of your Filament panel** by default.
+- It automatically **loads your configured avatar provider** from Filament.
+- If no avatar provider is found, a **UI-based fallback avatar** is shown instead.
+- You may fully override all `fi-*` classes by **not including** the `plugin.css` file and providing your own styles.
 
 This allows you to either use the default styling out of the box or completely customize the appearance to match your application.
 
@@ -350,10 +346,10 @@ composer test
 
 If this package doesn't fully meet your needs, you might find these alternatives helpful:
 
--   [Kirschbaum Commentions](https://github.com/kirschbaum-development/commentions/tree/main/src)
--   [Laravel Comments by Spatie](https://laravel-comments.com)
--   [Beyondcode Comments](https://github.com/beyondcode/laravel-comments)
--   [Lakshan-Madushanka Laravel Comments](https://github.com/Lakshan-Madushanka/laravel-comments)
+- [Kirschbaum Commentions](https://github.com/kirschbaum-development/commentions/tree/main/src)
+- [Laravel Comments by Spatie](https://laravel-comments.com)
+- [Beyondcode Comments](https://github.com/beyondcode/laravel-comments)
+- [Lakshan-Madushanka Laravel Comments](https://github.com/Lakshan-Madushanka/laravel-comments)
 
 Each package provides unique features and approaches to commenting in Laravel. If this package is almost what you need but is missing some functionality, you can open a discussion or check out the alternatives listed above. One of them might have exactly what you're looking for.
 
@@ -363,7 +359,7 @@ Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
 
 ## Credits
 
--   [Matilda Smets](https://github.com/matildasmets)
+- [Matilda Smets](https://github.com/matildasmets)
 
 ## License
 
