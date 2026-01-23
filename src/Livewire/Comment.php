@@ -73,7 +73,7 @@ class Comment extends Component implements HasForms
                         ->toolbarButtons($this->toolbarButtons)
                         ->required()
                         ->maxLength(65535)
-                        ->mentions(fn() => $this->mentions ?? [])
+                        ->mentions(fn () => $this->mentions ?? [])
                         ->fileAttachmentsDisk($this->fileAttachmentsDisk)
                         ->fileAttachmentsDirectory($this->fileAttachmentsDirectory)
                         ->fileAttachmentsAcceptedFileTypes($this->fileAttachmentsAcceptedFileTypes)
