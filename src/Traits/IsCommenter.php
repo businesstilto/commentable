@@ -2,6 +2,10 @@
 
 namespace Tilto\Commentable\Traits;
 
+use Filament\Facades\Filament;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\Authenticatable;
+
 trait IsCommenter
 {
     public function getCommenterName(): string
@@ -9,22 +13,16 @@ trait IsCommenter
         return $this->name;
     }
 
-    public function getCommenterAvatar(): string
+    public function getCommenterAvatar(): ?string
     {
-        $avatar = null;
-
-        if ($this->author instanceof HasAvatar) {
-            $avatar = $this->author->getFilamentAvatarUrl();
-        }
-
-        if (! is_null($avatar)) {
-            return $avatar;
+        if ($this instanceof Model && $this instanceof Authenticatable) {
+            return Filament::getUserAvatarUrl($this);
         }
 
         $name = str($this->getCommenterName())
             ->trim()
             ->explode(' ')
-            ->map(fn (string $segment): string => filled($segment) ? mb_substr($segment, 0, 1) : '')
+            ->map(fn(string $segment): string => filled($segment) ? mb_substr($segment, 0, 1) : '')
             ->join(' ');
 
         return 'https://ui-avatars.com/api/?name=' . urlencode($name) . '&color=FFFFFF&background=71717b';
