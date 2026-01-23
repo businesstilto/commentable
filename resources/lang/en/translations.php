@@ -9,6 +9,10 @@ return [
         'heading' => 'No comments yet',
         'description' => 'Be the first to comment.',
     ],
+    'dropdown' => [
+        'edit' => 'Edit',
+        'delete' => 'Delete',
+    ],
     'delete_confirmation' => [
         'heading' => 'Delete comment',
         'description' => 'Are you sure you want to delete this comment? This action cannot be undone.',

@@ -3,15 +3,14 @@
 namespace Tilto\Commentable\Filament\Concerns;
 
 use Closure;
-use Illuminate\Support\Collection;
 
 trait HasMentions
 {
-    protected array | Collection | Closure | null $mentions = null;
+    protected array | Closure | null $mentions = null;
 
-    public function mentions(array | Collection | Closure $mentions): static
+    public function mentions(array | Closure | null $providers): static
     {
-        $this->mentions = $mentions;
+        $this->mentions = $providers;
 
         return $this;
     }

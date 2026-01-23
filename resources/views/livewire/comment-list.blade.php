@@ -25,7 +25,7 @@
     <div wire:key="comments-list-{{ $record->id }}" class="space-y-6"
         @if ($shouldPoll) wire:poll @elseif ($pollingInterval) wire:poll.{{ $pollingInterval }} @endif>
         @foreach ($record->comments as $comment)
-            @livewire('commentable::livewire.comment', ['comment' => $comment], key('comment-' . $comment->id))
+            @livewire('commentable::livewire.comment', ['comment' => $comment, 'isMarkdownEditor' => $isMarkdownEditor], key('comment-' . $comment->id))
         @endforeach
     </div>
 </div>

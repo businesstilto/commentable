@@ -9,6 +9,8 @@ class Comment extends Component
 {
     public $comment;
 
+    public bool $isMarkdownEditor = false;
+
     public function render()
     {
         return view('commentable::livewire.comment');

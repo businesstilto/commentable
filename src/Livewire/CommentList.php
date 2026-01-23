@@ -8,6 +8,8 @@ class CommentList extends Component
 {
     public $record;
 
+    public bool $isMarkdownEditor = false;
+
     public bool $shouldPoll = false;
 
     public ?string $pollingInterval = null;

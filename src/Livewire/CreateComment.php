@@ -8,6 +8,7 @@ use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Notification;
 use Filament\Schemas\Schema;
+use Livewire\Attributes\Locked;
 use Livewire\Component;
 use Tilto\Commentable\Contracts\Commentable;
 
@@ -23,6 +24,8 @@ class CreateComment extends Component implements HasForms
 
     public bool $isMarkdownEditor = false;
 
+    protected $mentions = null;
+
     public ?string $fileAttachmentsDisk = null;
 
     public ?string $fileAttachmentsDirectory = null;
@@ -36,8 +39,10 @@ class CreateComment extends Component implements HasForms
         ['attachFiles'],
     ];
 
-    public function mount()
+    public function mount($mentions = null): void
     {
+        $this->mentions = $mentions;
+        
         $this->form->fill([
             'body' => '',
         ]);
@@ -70,6 +75,7 @@ class CreateComment extends Component implements HasForms
                         ->toolbarButtons($this->toolbarButtons)
                         ->required()
                         ->maxLength(65535)
+                        ->mentions(fn () => $this->mentions ?? [])
                         ->fileAttachmentsDisk($this->fileAttachmentsDisk)
                         ->fileAttachmentsDirectory($this->fileAttachmentsDirectory)
                         ->fileAttachmentsAcceptedFileTypes($this->fileAttachmentsAcceptedFileTypes)

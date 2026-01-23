@@ -5,6 +5,7 @@
             'toolbarButtons' => $getToolbarButtons(),
             'buttonPosition' => $getButtonPosition(),
             'isMarkdownEditor' => $isMarkdownEditor(),
+            'mentions' => $getMentions(),
             'fileAttachmentsDisk' => $getFileAttachmentsDisk(),
             'fileAttachmentsDirectory' => $getFileAttachmentsDirectory(),
             'fileAttachmentsAcceptedFileTypes' => $getFileAttachmentsAcceptedFileTypes(),
@@ -16,6 +17,7 @@
         'commentable::livewire.comment-list',
         [
             'record' => $record,
+            'isMarkdownEditor' => $isMarkdownEditor(),
             'shouldPoll' => $shouldPoll(),
             'pollingInterval' => $getPollingInterval(),
         ],

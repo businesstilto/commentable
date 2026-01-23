@@ -196,6 +196,14 @@ CommentsEntry::make('comments')
     ])
 ```
 
+You are responsible for styling mentions. To match Filament's default mention appearance, add the following to your theme:
+
+```css
+span[data-type="mention"] {
+    @apply bg-primary-50 text-primary-600 dark:bg-primary-400/10 dark:text-primary-400 my-0 inline-block rounded px-1 font-medium whitespace-nowrap;
+}
+```
+
 > [!NOTE]
 > Mentionables are only supported when using the rich text editor. They are not available in the Markdown editor.
 
