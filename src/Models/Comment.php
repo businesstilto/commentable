@@ -9,6 +9,7 @@ use Tilto\Commentable\Contracts\Commenter;
 class Comment extends Model
 {
     protected $fillable = [
+        'parent_id',
         'body',
         'author_type',
         'author_id',

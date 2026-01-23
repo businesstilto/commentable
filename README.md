@@ -166,6 +166,11 @@ class CommentPolicy extends CommentablePolicy
         // ...
     }
 
+    public function reply(Commenter $user, Comment $comment): bool
+    {
+        // ...
+    }
+
     public function delete(Commenter $user, Comment $comment): bool
     {
         // ...

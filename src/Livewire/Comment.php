@@ -8,6 +8,7 @@ use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Schemas\Schema;
 use Livewire\Component;
+use Tilto\Commentable\Contracts\Commentable;
 use Tilto\Commentable\Livewire\Actions\Delete;
 use Tilto\Commentable\Livewire\Actions\Edit;
 use Tilto\Commentable\Livewire\Actions\Reply;
@@ -18,6 +19,8 @@ class Comment extends Component implements HasForms
     use Reply;
     use Delete;
     use InteractsWithForms;
+
+    public Commentable $record;
 
     public $comment;
 

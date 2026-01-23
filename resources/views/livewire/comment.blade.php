@@ -3,11 +3,11 @@
 
 <div class="space-y-4">
     <div class="space-y-3">
-        <div class="flex gap-3">
+        <div class="flex gap-4">
             <img src="{{ $comment->author->getCommenterAvatar() }}" alt="{{ $comment->author->getCommenterName() }}"
                 class="w-10 h-10 rounded-full shrink-0">
 
-            <div class="flex-1 space-y-2">
+            <div class="flex-1 space-y-1">
                 <div class="flex items-center justify-between">
                     <div>
                         <span class="font-semibold text-sm">{{ $comment->author->getCommenterName() }}</span>
@@ -20,12 +20,25 @@
                         </span>
                     </div>
                     <div class="flex gap-1">
+                        @if ($isNestable && !$isReplying)
+                            @if (auth()->check() &&
+                                    (auth()->id() !== $comment->author->getKey() ||
+                                        get_class(auth()->user()) !== $comment->author->getMorphClass()) &&
+                                    auth()->user()->can('reply', $comment))
+                                <x-filament::icon-button icon="bi-reply" size="xs" wire:click="openReply"
+                                    tooltip="{{ __('commentable::translations.reply') }}" color="gray"
+                                    class="!p-0 !m-0 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-500" />
+                            @endif
+                        @endif
+
                         @canany(['update', 'delete'], $comment)
                             <x-filament::dropdown>
                                 <x-slot name="trigger">
-                                    <x-filament::icon-button icon="heroicon-o-ellipsis-vertical" size="xs"
-                                        color="gray"
-                                        class="!p-0 !m-0 text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-200" />
+                                    @if (!$isEditing)
+                                        <x-filament::icon-button icon="heroicon-o-ellipsis-vertical" size="xs"
+                                            color="gray"
+                                            class="!p-0 !m-0 text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-200" />
+                                    @endif
                                 </x-slot>
 
                                 <x-filament::dropdown.list>
@@ -84,7 +97,7 @@
                         {{ $this->form }}
 
                         <div @if ($buttonPosition === 'right') class="flex justify-end gap-3 mt-4" @endif>
-                            <x-filament::button wire:click="cancelEdit" color="gray" type="button">
+                            <x-filament::button type="button" color="gray" wire:click="cancelEdit">
                                 {{ __('commentable::translations.buttons.cancel') }}
                             </x-filament::button>
                             <x-filament::button type="submit">
@@ -94,10 +107,20 @@
                     </form>
                 @endif
 
-                @if ($isNestable)
-                    <div class="flex items-center gap-4 text-sm">
-                        <button wire:click="openReply"
-                            class="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200">{{ __('commentable::translations.reply') }}</button>
+                @if ($isNestable && $isReplying)
+                    <div class="mt-4">
+                        <form wire:submit="reply">
+                            {{ $this->form }}
+
+                            <div @if ($buttonPosition === 'right') class="flex justify-end gap-3 mt-4" @endif>
+                                <x-filament::button wire:click="cancelReply" color="gray" type="button">
+                                    {{ __('commentable::translations.buttons.cancel') }}
+                                </x-filament::button>
+                                <x-filament::button type="submit">
+                                    {{ __('commentable::translations.buttons.reply') }}
+                                </x-filament::button>
+                            </div>
+                        </form>
                     </div>
                 @endif
             </div>

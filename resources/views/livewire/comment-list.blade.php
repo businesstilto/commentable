@@ -28,6 +28,7 @@
             @livewire(
                 'commentable::livewire.comment',
                 [
+                    'record' => $record,
                     'comment' => $comment,
                     'buttonPosition' => $buttonPosition,
                     'isMarkdownEditor' => $isMarkdownEditor,

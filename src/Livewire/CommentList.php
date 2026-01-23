@@ -3,10 +3,11 @@
 namespace Tilto\Commentable\Livewire;
 
 use Livewire\Component;
+use Tilto\Commentable\Contracts\Commentable;
 
 class CommentList extends Component
 {
-    public $record;
+    public Commentable $record;
 
     public string $buttonPosition = 'left';
 

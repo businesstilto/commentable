@@ -14,13 +14,11 @@ trait Reply
             return;
         }
 
-        $this->form->fill([
-            'body' => $this->comment->body,
-        ]);
-
         $this->isReplying = true;
 
-        $this->js('document.body.click()');
+        $this->form->fill([
+            'body' => '',
+        ]);
     }
 
     public function cancelReply()
@@ -32,14 +30,14 @@ trait Reply
         ]);
     }
 
-    public function create(): void
+    public function reply(): void
     {
         $data = $this->form->getState();
 
         $user = auth()->check() ? auth()->user() : null;
 
         if (method_exists($this->record, 'comment') && $user && ! empty($data['body'])) {
-            $this->record->comment(parent_id: $this->comment->id, body: $data['body'], user: $user);
+            $this->record->comment(parent_id: $this->comment->id, body: $data['body'], author: $user);
 
             $this->dispatch('comment-created');
 

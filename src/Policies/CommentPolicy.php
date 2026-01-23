@@ -17,6 +17,11 @@ class CommentPolicy
         return $comment->isAuthor($user);
     }
 
+    public function reply(Commenter $user, Comment $comment): bool
+    {
+        return true;
+    }
+
     public function delete(Commenter $user, Comment $comment): bool
     {
         return $comment->isAuthor($user);
