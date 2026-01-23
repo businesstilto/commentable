@@ -47,15 +47,16 @@ class Comment extends Component implements HasForms
         ['attachFiles'],
     ];
 
-    public function mount()
-    {
-        if ($this->isNestable && $this->depth < 2) {
-            $this->comment->load('replies.replies');
-        }
-    }
+    protected $listeners = [
+        'comment-replied' => '$refresh',
+    ];
 
     public function render()
     {
+        if ($this->isNestable && $this->depth < 2) {
+            $this->comment->loadMissing('replies.replies');
+        }
+
         return view('commentable::livewire.comment');
     }
 

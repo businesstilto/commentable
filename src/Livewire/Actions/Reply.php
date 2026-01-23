@@ -39,7 +39,7 @@ trait Reply
         if (method_exists($this->record, 'comment') && $user && ! empty($data['body'])) {
             $this->record->comment(parent_id: $this->comment->id, body: $data['body'], author: $user);
 
-            $this->dispatch('comment-created');
+            $this->dispatch('comment-replied');
 
             $this->form->fill(['body' => '']);
 
