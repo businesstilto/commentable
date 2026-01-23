@@ -26,7 +26,7 @@
                                 <x-filament::dropdown.list>
                                     @can('update', $comment)
                                         <x-filament::dropdown.list.item icon="heroicon-o-pencil-square">
-                                            Bewerken
+                                            {{ __('commentable::translations.dropdown.edit') }}
                                         </x-filament::dropdown.list.item>
                                     @endcan
 
@@ -35,7 +35,7 @@
                                             width="md">
                                             <x-slot name="trigger">
                                                 <x-filament::dropdown.list.item icon="heroicon-o-trash" color="danger">
-                                                    Verwijderen
+                                                    {{ __('commentable::translations.dropdown.delete') }}
                                                 </x-filament::dropdown.list.item>
                                             </x-slot>
 
