@@ -67,7 +67,7 @@
 
                 <p class="text-sm text-gray-700 prose dark:prose-invert">
                     @if ($isMarkdownEditor)
-                        {!! \Illuminate\Support\Str::markdown(e($comment->content)) !!}
+                        {!! str($comment->body)->markdown()->sanitizeHtml() !!}
                     @else
                         {!! RichContentRenderer::make($comment->body)->toHtml() !!}
                     @endif
