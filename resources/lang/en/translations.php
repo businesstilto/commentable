@@ -2,9 +2,14 @@
 
 return [
     'input_placeholder' => 'Write your comment...',
-    'post_button' => 'Post comment',
+    'buttons' => [
+        'post' => 'Post',
+        'edit' => 'Save changes',
+        'reply' => 'Reply',
+    ],
     'comment_singular' => 'comment',
     'comment_plural' => 'comments',
+    'edited' => '(edited)',
     'empty_state' => [
         'heading' => 'No comments yet',
         'description' => 'Be the first to comment.',

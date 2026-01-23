@@ -96,11 +96,6 @@ class CreateComment extends Component implements HasForms
             $this->dispatch('comment-created');
 
             $this->form->fill(['body' => '']);
-
-            Notification::make()
-                ->title(__('commentable::translations.notifications.created'))
-                ->success()
-                ->send();
         } else {
             Notification::make()
                 ->title(__('commentable::translations.notifications.something_went_wrong'))

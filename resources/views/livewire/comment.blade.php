@@ -1,7 +1,7 @@
 @props(['comment'])
 @use('\Filament\Forms\Components\RichEditor\RichContentRenderer')
 
-<div>
+<div class="space-y-4">
     <div class="space-y-3">
         <div class="flex gap-3">
             <img src="{{ $comment->author->getCommenterAvatar() }}" alt="{{ $comment->author->getCommenterName() }}"
@@ -12,7 +12,13 @@
                     <div>
                         <span class="font-semibold text-sm">{{ $comment->author->getCommenterName() }}</span>
                         <span
-                            class="text-gray-500 dark:text-gray-400 text-xs ml-2">{{ $comment->created_at->diffForHumans() }}</span>
+                            class="text-gray-500 dark:text-gray-400 text-xs ml-2">
+                            @if($comment->created_at->eq($comment->updated_at))
+                                {{ $comment->created_at->diffForHumans() }}
+                            @else
+                                {{ $comment->created_at->diffForHumans() }} {{ __('commentable::translations.edited') }}
+                            @endif
+                        </span>
                     </div>
                     <div class="flex gap-1">
                         @canany(['update', 'delete'], $comment)
@@ -25,7 +31,7 @@
 
                                 <x-filament::dropdown.list>
                                     @can('update', $comment)
-                                        <x-filament::dropdown.list.item icon="heroicon-o-pencil-square">
+                                        <x-filament::dropdown.list.item icon="heroicon-o-pencil-square" wire:click="openEdit">
                                             {{ __('commentable::translations.dropdown.edit') }}
                                         </x-filament::dropdown.list.item>
                                     @endcan
@@ -65,13 +71,25 @@
                     </div>
                 </div>
 
-                <p class="text-sm text-gray-700 prose dark:prose-invert">
-                    @if ($isMarkdownEditor)
-                        {!! str($comment->body)->markdown()->sanitizeHtml() !!}
-                    @else
-                        {!! RichContentRenderer::make($comment->body)->toHtml() !!}
-                    @endif
-                </p>
+                @if (!$isEditing)
+                    <p class="text-sm text-gray-700 prose dark:prose-invert">
+                        @if ($isMarkdownEditor)
+                            {!! str($comment->body)->markdown()->sanitizeHtml() !!}
+                        @else
+                            {!! RichContentRenderer::make($comment->body)->toHtml() !!}
+                        @endif
+                    </p>
+                @else
+                    <form wire:submit="edit">
+                        {{ $this->form }}
+
+                        <div @if ($buttonPosition === 'right') class="flex justify-end" @endif>
+                            <x-filament::button type="submit" class="mt-4">
+                                {{ __('commentable::translations.buttons.edit') }}
+                            </x-filament::button>
+                        </div>
+                    </form>
+                @endif
 
                 @if ($isNestable)
                     <div class="flex items-center gap-4 text-sm">

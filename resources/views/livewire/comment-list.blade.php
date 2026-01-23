@@ -29,7 +29,16 @@
                 'commentable::livewire.comment',
                 [
                     'comment' => $comment,
+                    'buttonPosition' => $buttonPosition,
                     'isMarkdownEditor' => $isMarkdownEditor,
+                    'toolbarButtons' => $toolbarButtons,
+                    'buttonPosition' => $buttonPosition,
+                    'isMarkdownEditor' => $isMarkdownEditor,
+                    'mentions' => $mentions,
+                    'fileAttachmentsDisk' => $fileAttachmentsDisk,
+                    'fileAttachmentsDirectory' => $fileAttachmentsDirectory,
+                    'fileAttachmentsAcceptedFileTypes' => $fileAttachmentsAcceptedFileTypes,
+                    'fileAttachmentsMaxSize' => $fileAttachmentsMaxSize,
                     'isNestable' => $isNestable,
                 ],
                 key('comment-' . $comment->id)

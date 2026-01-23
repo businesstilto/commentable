@@ -2,9 +2,14 @@
 
 return [
     'input_placeholder' => 'Schrijf je reactie...',
-    'post_button' => 'Plaats reactie',
+    'buttons' => [
+        'post' => 'Plaats reactie',
+        'edit' => 'Wijzigingen opslaan',
+        'reply' => 'Beantwoorden',
+    ],
     'comment_singular' => 'reactie',
     'comment_plural' => 'reacties',
+    'edited' => '(bewerkt)',
     'empty_state' => [
         'heading' => 'Nog geen reacties',
         'description' => 'Wees de eerste om te reageren.',

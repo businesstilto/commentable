@@ -8,7 +8,19 @@ class CommentList extends Component
 {
     public $record;
 
+    public string $buttonPosition = 'left';
+
     public bool $isMarkdownEditor = false;
+
+    protected $mentions = null;
+
+    public ?string $fileAttachmentsDisk = null;
+
+    public ?string $fileAttachmentsDirectory = null;
+
+    public ?array $fileAttachmentsAcceptedFileTypes = null;
+
+    public ?int $fileAttachmentsMaxSize = null;
 
     public bool $shouldPoll = false;
 
@@ -16,13 +28,21 @@ class CommentList extends Component
 
     public bool $isNestable = false;
 
+    public array $toolbarButtons = [
+        ['bold', 'italic', 'strike'],
+        ['attachFiles'],
+    ];
+
     protected $listeners = [
-        'comment-deleted' => '$refresh',
         'comment-created' => '$refresh',
+        'comment-updated' => '$refresh',
+        'comment-deleted' => '$refresh',
     ];
 
     public function render()
     {
-        return view('commentable::livewire.comment-list');
+        return view('commentable::livewire.comment-list', [
+            'mentions' => $this->mentions,
+        ]);
     }
 }
