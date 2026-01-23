@@ -8,6 +8,7 @@ use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
@@ -89,6 +90,8 @@ class CommentableServiceProvider extends PackageServiceProvider
                 ], 'commentable-stubs');
             }
         }
+
+        Gate::policy(Comment::class, config('commentable.comment.policy'));
 
         if (config('commentable.events.comment_created_enabled', true)) {
             $listener = (string) config('commentable.listeners.comment_created', HandleCommentCreated::class);

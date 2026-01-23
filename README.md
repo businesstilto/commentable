@@ -106,7 +106,7 @@ return [
 
 ## Usage
 
-## Setting Up Your Models
+### Setting up your models
 
 To enable commenting functionality, you need to update your models as follows:
 
@@ -136,6 +136,47 @@ class Post extends Model implements Commentable
     use HasComments;
 }
 ```
+
+### Custom policy
+
+You can define a custom policy for the `Comment` model to control who can create, update, or delete comments. First, create a new policy class (for example, `App\Policies\CommentPolicy`) and extend the default policy:
+
+```php
+namespace App\Policies;
+
+use Tilto\Commentable\Contracts\Commenter;
+use Tilto\Commentable\Models\Comment;
+use Tilto\Commentable\Policies\CommentPolicy as CommentablePolicy;
+
+class CommentPolicy extends CommentablePolicy
+{
+    public function create(Commenter $user): bool
+    {
+        // ...
+    }
+
+    public function update(Commenter $user, Comment $comment): bool
+    {
+        // ...
+    }
+
+    public function delete(Commenter $user, Comment $comment): bool
+    {
+        // ...
+    }
+}
+```
+
+Then, update the `comment.policy` value in your `config/commentable.php` file to point to your new policy:
+
+```php
+'comment' => [
+    'model' => Tilto\Commentable\Models\Comment::class,
+    'policy' => App\Policies\CommentPolicy::class,
+],
+```
+
+This allows you to fully customize comment permissions to fit your application's requirements.
 
 ### Comment Component
 
