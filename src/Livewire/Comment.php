@@ -6,12 +6,17 @@ use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Notifications\Notification;
 use Filament\Schemas\Schema;
 use Livewire\Component;
+use Tilto\Commentable\Livewire\Actions\Delete;
+use Tilto\Commentable\Livewire\Actions\Edit;
+use Tilto\Commentable\Livewire\Actions\Reply;
 
 class Comment extends Component implements HasForms
 {
+    use Edit;
+    use Reply;
+    use Delete;
     use InteractsWithForms;
 
     public $comment;
@@ -34,8 +39,6 @@ class Comment extends Component implements HasForms
 
     public bool $isNestable = false;
 
-    public bool $isEditing = false;
-
     public array $toolbarButtons = [
         ['bold', 'italic', 'strike'],
         ['attachFiles'],
@@ -56,6 +59,7 @@ class Comment extends Component implements HasForms
                         ->placeholder(__('commentable::translations.input_placeholder'))
                         ->toolbarButtons($this->toolbarButtons)
                         ->required()
+                        ->minHeight(200)
                         ->maxLength(65535)
                         ->fileAttachmentsDisk($this->fileAttachmentsDisk)
                         ->fileAttachmentsDirectory($this->fileAttachmentsDirectory)
@@ -80,71 +84,5 @@ class Comment extends Component implements HasForms
                 ])
                 ->statePath('data');
         }
-    }
-
-    public function cancel()
-    {
-        $this->isEditing = false;
-
-        $this->form->fill([
-            'body' => '',
-        ]);
-    }
-
-    public function openEdit()
-    {
-        if (! auth()->user()?->can('update', $this->comment)) {
-            return;
-        }
-
-        $this->form->fill([
-            'body' => $this->comment->body,
-        ]);
-
-        $this->isEditing = true;
-
-        $this->js('document.body.click()');
-    }
-
-    public function edit()
-    {
-        $data = $this->form->getState();
-
-        $user = auth()->check() ? auth()->user() : null;
-
-        if ($user && ! empty($data['body'])) {
-            $this->comment->update([
-                'body' => $data['body'],
-            ]);
-
-            $this->form->fill(['body' => '']);
-
-            $this->isEditing = false;
-
-            $this->dispatch('comment-updated');
-        } else {
-            Notification::make()
-                ->title(__('commentable::translations.notifications.something_went_wrong'))
-                ->danger()
-                ->send();
-        }
-
-        $this->isEditing = false;
-    }
-
-    public function delete()
-    {
-        if (! auth()->user()?->can('delete', $this->comment)) {
-            return;
-        }
-
-        $this->comment->delete();
-
-        $this->dispatch('comment-deleted');
-
-        Notification::make()
-            ->title(__('commentable::translations.notifications.deleted'))
-            ->success()
-            ->send();
     }
 }

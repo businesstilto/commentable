@@ -84,7 +84,7 @@
                         {{ $this->form }}
 
                         <div @if ($buttonPosition === 'right') class="flex justify-end gap-3 mt-4" @endif>
-                            <x-filament::button wire:click="cancel" color="gray" type="button">
+                            <x-filament::button wire:click="cancelEdit" color="gray" type="button">
                                 {{ __('commentable::translations.buttons.cancel') }}
                             </x-filament::button>
                             <x-filament::button type="submit">
@@ -96,7 +96,7 @@
 
                 @if ($isNestable)
                     <div class="flex items-center gap-4 text-sm">
-                        <button
+                        <button wire:click="openReply"
                             class="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200">{{ __('commentable::translations.reply') }}</button>
                     </div>
                 @endif

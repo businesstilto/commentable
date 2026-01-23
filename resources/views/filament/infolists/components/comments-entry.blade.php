@@ -21,6 +21,7 @@
             'shouldPoll' => $shouldPoll(),
             'pollingInterval' => $getPollingInterval(),
             'toolbarButtons' => $getToolbarButtons(),
+            'shouldShowCommentCount' => $shouldShowCommentCount(),
             'buttonPosition' => $getButtonPosition(),
             'isMarkdownEditor' => $isMarkdownEditor(),
             'mentions' => $getMentions(),

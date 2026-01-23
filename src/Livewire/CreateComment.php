@@ -57,6 +57,7 @@ class CreateComment extends Component implements HasForms
                         ->placeholder(__('commentable::translations.input_placeholder'))
                         ->toolbarButtons($this->toolbarButtons)
                         ->required()
+                        ->minHeight(200)
                         ->maxLength(65535)
                         ->fileAttachmentsDisk($this->fileAttachmentsDisk)
                         ->fileAttachmentsDirectory($this->fileAttachmentsDirectory)
@@ -90,7 +91,7 @@ class CreateComment extends Component implements HasForms
         $user = auth()->check() ? auth()->user() : null;
 
         if (method_exists($this->record, 'comment') && $user && ! empty($data['body'])) {
-            $this->record->comment($data['body'], $user);
+            $this->record->comment(body: $data['body'], author: $user);
 
             $this->dispatch('comment-created');
 

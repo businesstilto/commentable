@@ -1,6 +1,6 @@
 <div class="pt-4 space-y-6">
-    @if (!$record->comments->isEmpty())
-        <div class="flex items-center justify-between mb-4">
+    @if (!$record->comments->isEmpty() && $shouldShowCommentCount)
+        <div class="flex items-center justify-between">
             <h3 class="text-base font-semibold">{{ $record->comments->count() }} @if ($record->comments->count() == 1)
                     {{ __('commentable::translations.comment_singular') }}
                 @else
@@ -22,7 +22,7 @@
         </x-filament::empty-state>
     @endif
 
-    <div wire:key="comments-list-{{ $record->id }}" class="space-y-6"
+    <div wire:key="comments-list-{{ $record->id }}" class="space-y-6 mt-6"
         @if ($shouldPoll) wire:poll @elseif ($pollingInterval) wire:poll.{{ $pollingInterval }} @endif>
         @foreach ($record->comments as $comment)
             @livewire(
