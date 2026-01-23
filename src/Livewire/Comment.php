@@ -55,7 +55,6 @@ class Comment extends Component implements HasForms
                         ->hiddenLabel()
                         ->placeholder(__('commentable::translations.input_placeholder'))
                         ->toolbarButtons($this->toolbarButtons)
-                        ->maxHeight(200)
                         ->required()
                         ->maxLength(65535)
                         ->fileAttachmentsDisk($this->fileAttachmentsDisk)
