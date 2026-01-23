@@ -13,8 +13,6 @@ class CommentList extends Component
 
     public bool $isMarkdownEditor = false;
 
-    protected $mentions = null;
-
     public bool $shouldShowCommentCount = true;
 
     public ?string $fileAttachmentsDisk = null;
@@ -44,8 +42,6 @@ class CommentList extends Component
 
     public function render()
     {
-        return view('commentable::livewire.comment-list', [
-            'mentions' => $this->mentions,
-        ]);
+        return view('commentable::livewire.comment-list');
     }
 }

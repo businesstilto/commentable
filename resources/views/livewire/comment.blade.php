@@ -1,15 +1,15 @@
-@props(['comment'])
+@props(['comment', 'depth' => 0])
 @use('\Filament\Forms\Components\RichEditor\RichContentRenderer')
 
 <div class="space-y-4">
     <div class="space-y-3">
-        <div class="flex gap-4">
+        <div class="flex gap-3 sm:gap-4">
             <img src="{{ $comment->author->getCommenterAvatar() }}" alt="{{ $comment->author->getCommenterName() }}"
-                class="w-10 h-10 rounded-full shrink-0">
+                class="w-8 h-8 sm:w-10 sm:h-10 rounded-full shrink-0">
 
-            <div class="flex-1 space-y-1">
-                <div class="flex items-center justify-between">
-                    <div>
+            <div class="flex-1 space-y-1 min-w-0">
+                <div class="flex items-center justify-between gap-2">
+                    <div class="min-w-0 flex-1">
                         <span class="font-semibold text-sm">{{ $comment->author->getCommenterName() }}</span>
                         <span class="text-gray-500 dark:text-gray-400 text-xs ml-2">
                             @if ($comment->created_at->eq($comment->updated_at))
@@ -19,8 +19,8 @@
                             @endif
                         </span>
                     </div>
-                    <div class="flex gap-1">
-                        @if ($isNestable && !$isReplying)
+                    <div class="flex gap-1 shrink-0">
+                        @if ($isNestable && !$isReplying && $depth < 2)
                             @if (auth()->check() &&
                                     (auth()->id() !== $comment->author->getKey() ||
                                         get_class(auth()->user()) !== $comment->author->getMorphClass()) &&
@@ -85,7 +85,7 @@
 
                 @if (!$isEditing)
                     <div
-                        class="prose max-w-none dark:prose-invert prose-p:text-gray-700 dark:prose-p:text-gray-300 text-sm">
+                        class="prose max-w-none dark:prose-invert prose-p:text-gray-700 dark:prose-p:text-gray-300 text-sm break-words">
                         @if ($isMarkdownEditor)
                             {!! str($comment->body)->markdown()->sanitizeHtml() !!}
                         @else
@@ -96,7 +96,7 @@
                     <form wire:submit="edit">
                         {{ $this->form }}
 
-                        <div @if ($buttonPosition === 'right') class="flex justify-end gap-3 mt-4" @endif>
+                        <div @if ($buttonPosition === 'right') class="flex justify-end gap-3 mt-4" @else class="mt-4" @endif>
                             <x-filament::button type="button" color="gray" wire:click="cancelEdit">
                                 {{ __('commentable::translations.buttons.cancel') }}
                             </x-filament::button>
@@ -112,7 +112,7 @@
                         <form wire:submit="reply">
                             {{ $this->form }}
 
-                            <div @if ($buttonPosition === 'right') class="flex justify-end gap-3 mt-4" @endif>
+                            <div @if ($buttonPosition === 'right') class="flex justify-end gap-3 mt-4" @else class="mt-4" @endif>
                                 <x-filament::button wire:click="cancelReply" color="gray" type="button">
                                     {{ __('commentable::translations.buttons.cancel') }}
                                 </x-filament::button>
@@ -126,4 +126,28 @@
             </div>
         </div>
     </div>
+
+    @if ($isNestable && $depth < 2 && $comment->relationLoaded('replies') && $comment->replies->isNotEmpty())
+        <div class="ml-8 sm:ml-12 md:ml-14 space-y-4 border-l border-gray-200 dark:border-gray-800 pl-3 sm:pl-4 md:pl-5">
+            @foreach ($comment->replies as $reply)
+                @livewire(
+                    'commentable::livewire.comment',
+                    [
+                        'record' => $record,
+                        'comment' => $reply,
+                        'buttonPosition' => $buttonPosition,
+                        'isMarkdownEditor' => $isMarkdownEditor,
+                        'toolbarButtons' => $toolbarButtons,
+                        'fileAttachmentsDisk' => $fileAttachmentsDisk,
+                        'fileAttachmentsDirectory' => $fileAttachmentsDirectory,
+                        'fileAttachmentsAcceptedFileTypes' => $fileAttachmentsAcceptedFileTypes,
+                        'fileAttachmentsMaxSize' => $fileAttachmentsMaxSize,
+                        'isNestable' => $isNestable,
+                        'depth' => $depth + 1,
+                    ],
+                    key('comment-' . $reply->id)
+                )
+            @endforeach
+        </div>
+    @endif
 </div>

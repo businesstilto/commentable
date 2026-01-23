@@ -24,7 +24,6 @@
             'shouldShowCommentCount' => $shouldShowCommentCount(),
             'buttonPosition' => $getButtonPosition(),
             'isMarkdownEditor' => $isMarkdownEditor(),
-            'mentions' => $getMentions(),
             'fileAttachmentsDisk' => $getFileAttachmentsDisk(),
             'fileAttachmentsDirectory' => $getFileAttachmentsDirectory(),
             'fileAttachmentsAcceptedFileTypes' => $getFileAttachmentsAcceptedFileTypes(),

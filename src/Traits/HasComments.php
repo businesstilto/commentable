@@ -12,7 +12,6 @@ trait HasComments
     public function comments(): MorphMany
     {
         return $this->morphMany(Comment::class, 'commentable')
-            ->latest()
             ->with('author');
     }
 

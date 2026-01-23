@@ -15,10 +15,10 @@ use Tilto\Commentable\Livewire\Actions\Reply;
 
 class Comment extends Component implements HasForms
 {
-    use Delete;
     use Edit;
-    use InteractsWithForms;
     use Reply;
+    use Delete;
+    use InteractsWithForms;
 
     public Commentable $record;
 
@@ -30,8 +30,6 @@ class Comment extends Component implements HasForms
 
     public bool $isMarkdownEditor = false;
 
-    protected $mentions = null;
-
     public ?string $fileAttachmentsDisk = null;
 
     public ?string $fileAttachmentsDirectory = null;
@@ -42,10 +40,19 @@ class Comment extends Component implements HasForms
 
     public bool $isNestable = false;
 
+    public int $depth = 0;
+
     public array $toolbarButtons = [
         ['bold', 'italic', 'strike'],
         ['attachFiles'],
     ];
+
+    public function mount()
+    {
+        if ($this->isNestable && $this->depth < 2) {
+            $this->comment->load('replies.replies');
+        }
+    }
 
     public function render()
     {
@@ -79,7 +86,6 @@ class Comment extends Component implements HasForms
                         ->toolbarButtons($this->toolbarButtons)
                         ->required()
                         ->maxLength(65535)
-                        ->mentions(fn () => $this->mentions ?? [])
                         ->fileAttachmentsDisk($this->fileAttachmentsDisk)
                         ->fileAttachmentsDirectory($this->fileAttachmentsDirectory)
                         ->fileAttachmentsAcceptedFileTypes($this->fileAttachmentsAcceptedFileTypes)

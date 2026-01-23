@@ -4,6 +4,8 @@ namespace Tilto\Commentable\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Tilto\Commentable\Contracts\Commenter;
 
 class Comment extends Model
@@ -25,9 +27,34 @@ class Comment extends Model
         return $this->morphTo();
     }
 
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(Comment::class, 'parent_id');
+    }
+
+    public function replies(): HasMany
+    {
+        return $this->hasMany(Comment::class, 'parent_id')
+            ->with(['replies', 'author'])
+            ->orderBy('created_at', 'asc');
+    }
+
     public function isAuthor(Commenter $author)
     {
         return $this->author_id === $author->getKey()
             && $this->author_type === get_class($author);
+    }
+
+    public function getDepth(): int
+    {
+        $depth = 0;
+        $parent = $this->parent;
+
+        while ($parent) {
+            $depth++;
+            $parent = $parent->parent;
+        }
+
+        return $depth;
     }
 }
