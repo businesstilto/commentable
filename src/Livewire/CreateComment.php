@@ -8,7 +8,6 @@ use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Notification;
 use Filament\Schemas\Schema;
-use Livewire\Attributes\Locked;
 use Livewire\Component;
 use Tilto\Commentable\Contracts\Commentable;
 
@@ -42,7 +41,7 @@ class CreateComment extends Component implements HasForms
     public function mount($mentions = null): void
     {
         $this->mentions = $mentions;
-        
+
         $this->form->fill([
             'body' => '',
         ]);
