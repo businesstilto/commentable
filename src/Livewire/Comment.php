@@ -2,9 +2,10 @@
 
 namespace Tilto\Commentable\Livewire;
 
-use Filament\Forms\Components\RichEditor;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
+use Filament\Forms\Components\MarkdownEditor;
+use Filament\Forms\Components\RichEditor;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Schemas\Schema;
@@ -13,15 +14,14 @@ use Tilto\Commentable\Contracts\Commentable;
 use Tilto\Commentable\Livewire\Actions\Delete;
 use Tilto\Commentable\Livewire\Actions\Edit;
 use Tilto\Commentable\Livewire\Actions\Reply;
-use Filament\Forms\Components\MarkdownEditor;
 
 class Comment extends Component implements HasActions, HasSchemas
 {
     use Delete;
     use Edit;
-    use Reply;
     use InteractsWithActions;
     use InteractsWithSchemas;
+    use Reply;
 
     public Commentable $record;
 
