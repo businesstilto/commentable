@@ -1,12 +1,12 @@
 name: Bug Report
-description: Report an Issue or Bug with the Package
+description: Report an issue or bug with the package
 title: "[Bug]: "
 labels: ["bug"]
 body:
   - type: markdown
     attributes:
       value: |
-        We're sorry to hear you have a problem. Can you help us solve it by providing the following details.
+        I am sorry to hear you have a problem. Can you help me solve it by providing the following details?
   - type: textarea
     id: what-happened
     attributes:
@@ -26,25 +26,33 @@ body:
   - type: input
     id: package-version
     attributes:
-      label: Package Version
-      description: What version of our Package are you running? Please be as specific as possible
+      label: Package version
+      description: What version of the package are you using? Please be as specific as possible.
       placeholder: 2.0.0
     validations:
       required: true
   - type: input
     id: php-version
     attributes:
-      label: PHP Version
-      description: What version of PHP are you running? Please be as specific as possible
+      label: PHP version
+      description: What version of PHP are you using? Please be as specific as possible.
       placeholder: 8.2.0
     validations:
       required: true
   - type: input
     id: laravel-version
     attributes:
-      label: Laravel Version
-      description: What version of Laravel are you running? Please be as specific as possible
+      label: Laravel version
+      description: What version of Laravel are you using? Please be as specific as possible.
       placeholder: 9.0.0
+    validations:
+      required: true
+  - type: input
+    id: livewire-version
+    attributes:
+      label: Livewire version
+      description: What version of Laravel are you using? Please be as specific as possible
+      placeholder: 4.0.0
     validations:
       required: true
   - type: dropdown
