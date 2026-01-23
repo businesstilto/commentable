@@ -19,6 +19,12 @@ A lightweight and easy to use package that adds commenting in Filament v4.5 and 
 
 Inspired by and built upon code from the [Kirschbaum Commentions package](https://github.com/kirschbaum-development/commentions), but takes a different approach to commenting in Filament.
 
+## Requirements
+
+-   Laravel 11.x/12.x
+-   PHP 8.2+
+-   Filament 4.5+
+
 ## Installation
 
 You can install the package via composer:
@@ -220,7 +226,7 @@ CommentsEntry::make('comments')
     ->markdownEditor()
 ```
 
-By default, comments use Filament’s built-in rich text editor. Switching to the Markdown editor allows users to write and preview comments using Markdown syntax.
+By default, comments use Filament's built-in rich text editor. Switching to the Markdown editor allows users to write and preview comments using Markdown syntax.
 
 #### Mentions
 
@@ -237,7 +243,7 @@ CommentsEntry::make('comments')
     ])
 ```
 
-You are responsible for styling mentions. To match Filament's default mention appearance, add the following to your theme:
+To ensure mentions match Filament's default appearance, add the following CSS to your theme or `app.css` file:
 
 ```css
 span[data-type="mention"] {
@@ -290,6 +296,17 @@ CommentsEntry::make('comments')
 ```bash
 composer test
 ```
+
+## Alternatives
+
+If this package doesn't fully meet your needs, you might find these alternatives helpful:
+
+-   [Kirschbaum Commentions](https://github.com/kirschbaum-development/commentions/tree/main/src)
+-   [Laravel Comments by Spatie](https://laravel-comments.com)
+-   [Beyondcode Comments](https://github.com/beyondcode/laravel-comments)
+-   [Lakshan-Madushanka Laravel Comments](https://github.com/Lakshan-Madushanka/laravel-comments)
+
+Each package provides unique features and approaches to commenting in Laravel. If this package is almost what you need but is missing some functionality, you can open a discussion or check out the alternatives listed above. One of them might have exactly what you're looking for.
 
 ## Contributing
 
