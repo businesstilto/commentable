@@ -32,13 +32,14 @@
                     'comment' => $comment,
                     'buttonPosition' => $buttonPosition,
                     'isMarkdownEditor' => $isMarkdownEditor,
-                    'toolbarButtons' => $toolbarButtons,
                     'fileAttachmentsDisk' => $fileAttachmentsDisk,
                     'fileAttachmentsDirectory' => $fileAttachmentsDirectory,
                     'fileAttachmentsAcceptedFileTypes' => $fileAttachmentsAcceptedFileTypes,
                     'fileAttachmentsMaxSize' => $fileAttachmentsMaxSize,
                     'isNestable' => $isNestable,
                     'depth' => 0,
+                    'mentions' => $mentions,
+                    'toolbarButtons' => $toolbarButtons,
                 ],
                 key('comment-' . $comment->id)
             )

@@ -2,14 +2,14 @@
     <div wire:key="create-comment-{{ $record->id }}">
         @livewire('commentable::livewire.create-comment', [
             'record' => $record,
-            'toolbarButtons' => $getToolbarButtons(),
             'buttonPosition' => $getButtonPosition(),
             'isMarkdownEditor' => $isMarkdownEditor(),
-            'mentions' => $getMentions(),
             'fileAttachmentsDisk' => $getFileAttachmentsDisk(),
             'fileAttachmentsDirectory' => $getFileAttachmentsDirectory(),
             'fileAttachmentsAcceptedFileTypes' => $getFileAttachmentsAcceptedFileTypes(),
             'fileAttachmentsMaxSize' => $getFileAttachmentsMaxSize(),
+            'mentions' => $getMentions(),
+            'toolbarButtons' => $getToolbarButtons(),
         ])
     </div>
 
@@ -17,18 +17,18 @@
         'commentable::livewire.comment-list',
         [
             'record' => $record,
-            'isMarkdownEditor' => $isMarkdownEditor(),
-            'shouldPoll' => $shouldPoll(),
-            'pollingInterval' => $getPollingInterval(),
-            'toolbarButtons' => $getToolbarButtons(),
-            'shouldShowCommentCount' => $shouldShowCommentCount(),
             'buttonPosition' => $getButtonPosition(),
             'isMarkdownEditor' => $isMarkdownEditor(),
+            'shouldShowCommentCount' => $shouldShowCommentCount(),
             'fileAttachmentsDisk' => $getFileAttachmentsDisk(),
             'fileAttachmentsDirectory' => $getFileAttachmentsDirectory(),
             'fileAttachmentsAcceptedFileTypes' => $getFileAttachmentsAcceptedFileTypes(),
             'fileAttachmentsMaxSize' => $getFileAttachmentsMaxSize(),
+            'shouldPoll' => $shouldPoll(),
+            'pollingInterval' => $getPollingInterval(),
             'isNestable' => $isNestable(),
+            'mentions' => $getMentions(),
+            'toolbarButtons' => $getToolbarButtons(),
         ],
         key('comment-list-' . $record->id)
     )

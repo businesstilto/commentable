@@ -42,6 +42,8 @@ class Comment extends Component implements HasForms
 
     public int $depth = 0;
 
+    protected $mentions = null;
+
     public array $toolbarButtons = [
         ['bold', 'italic', 'strike'],
         ['attachFiles'],
@@ -50,6 +52,11 @@ class Comment extends Component implements HasForms
     protected $listeners = [
         'comment-replied' => '$refresh',
     ];
+
+    public function mount($mentions = null): void
+    {
+        $this->mentions = $mentions;
+    }
 
     public function render()
     {
