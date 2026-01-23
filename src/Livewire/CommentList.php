@@ -29,8 +29,6 @@ class CommentList extends Component
 
     public bool $isNestable = false;
 
-    protected $mentions = null;
-
     public array $toolbarButtons = [
         ['bold', 'italic', 'strike'],
         ['attachFiles'],
@@ -41,11 +39,6 @@ class CommentList extends Component
         'comment-updated' => '$refresh',
         'comment-deleted' => '$refresh',
     ];
-
-    public function mount($mentions = null): void
-    {
-        $this->mentions = $mentions;
-    }
 
     public function render()
     {

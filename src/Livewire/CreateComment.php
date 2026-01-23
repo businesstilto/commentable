@@ -104,6 +104,23 @@ class CreateComment extends Component implements HasForms
         }
     }
 
+        protected function getMentionProviders()
+    {
+        // Convert arrays back to MentionProvider objects if needed
+        if (!is_array($this->mentions)) {
+            return [];
+        }
+        return array_map(function ($provider) {
+            if (is_array($provider) && isset($provider['trigger'])) {
+                // Rebuild MentionProvider from array (basic, extend as needed)
+                return
+                    \Filament\Forms\Components\RichEditor\MentionProvider::make($provider['trigger'])
+                        ->items($provider['items'] ?? []);
+            }
+            return $provider;
+        }, $this->mentions);
+    }
+
     public function render()
     {
         return view('commentable::livewire.create-comment');

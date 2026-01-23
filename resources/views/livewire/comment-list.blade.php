@@ -38,7 +38,6 @@
                     'fileAttachmentsMaxSize' => $fileAttachmentsMaxSize,
                     'isNestable' => $isNestable,
                     'depth' => 0,
-                    'mentions' => $mentions,
                     'toolbarButtons' => $toolbarButtons,
                 ],
                 key('comment-' . $comment->id)
