@@ -2,16 +2,16 @@
 
 namespace Tilto\Commentable\Livewire;
 
-use Filament\Forms\Components\RichEditor;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
+use Filament\Forms\Components\MarkdownEditor;
+use Filament\Forms\Components\RichEditor;
+use Filament\Notifications\Notification;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
-use Filament\Notifications\Notification;
 use Filament\Schemas\Schema;
 use Livewire\Component;
 use Tilto\Commentable\Contracts\Commentable;
-use Filament\Forms\Components\MarkdownEditor;
 
 class CreateComment extends Component implements HasActions, HasSchemas
 {
