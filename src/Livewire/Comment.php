@@ -11,6 +11,8 @@ class Comment extends Component
 
     public bool $isMarkdownEditor = false;
 
+    public bool $isNestable = false;
+
     public function render()
     {
         return view('commentable::livewire.comment');

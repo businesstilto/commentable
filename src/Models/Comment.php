@@ -26,6 +26,7 @@ class Comment extends Model
 
     public function isAuthor(Commenter $author)
     {
-        return $this->author_id === $author->getKey();
+        return $this->author_id === $author->getKey()
+            && $this->author_type === get_class($author);
     }
 }

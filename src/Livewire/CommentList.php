@@ -14,6 +14,8 @@ class CommentList extends Component
 
     public ?string $pollingInterval = null;
 
+    public bool $isNestable = false;
+
     protected $listeners = [
         'comment-deleted' => '$refresh',
         'comment-created' => '$refresh',

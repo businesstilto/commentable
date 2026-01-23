@@ -20,6 +20,7 @@
             'isMarkdownEditor' => $isMarkdownEditor(),
             'shouldPoll' => $shouldPoll(),
             'pollingInterval' => $getPollingInterval(),
+            'isNestable' => $isNestable(),
         ],
         key('comment-list-' . $record->id)
     )

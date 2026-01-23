@@ -73,10 +73,12 @@
                     @endif
                 </p>
 
-                <div class="flex items-center gap-4 text-sm">
-                    <button
-                        class="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200">{{ __('commentable::translations.reply') }}</button>
-                </div>
+                @if ($isNestable)
+                    <div class="flex items-center gap-4 text-sm">
+                        <button
+                            class="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200">{{ __('commentable::translations.reply') }}</button>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
