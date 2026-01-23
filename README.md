@@ -25,6 +25,30 @@ Inspired by and built upon code from the [Kirschbaum Commentions package](https:
 -   PHP 8.2+
 -   Filament 4.5+
 
+## Table of contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+    - [Setting up your models](#setting-up-your-models)
+        - [Implement the Commenter contract](#1-implement-the-commenter-contract)
+        - [Implement the Commentable contract](#2-implement-the-commentable-contract)
+    - [Custom policy](#custom-policy)
+    - [Comment Component](#comment-component)
+        - [Button position](#button-position)
+        - [Toolbar buttons](#toolbar-buttons)
+        - [Markdown Editor](#markdown-editor)
+        - [Mentions](#mentions)
+        - [File Attachments](#file-attachments)
+        - [Polling](#polling)
+        - [Replies](#replies)
+- [Styling](#styling)
+    - [Behavior](#behavior)
+- [Testing](#testing)
+- [Alternatives](#alternatives)
+- [Contributing](#contributing)
+- [Credits](#credits)
+- [License](#license)
+
 ## Installation
 
 You can install the package via composer:
@@ -295,6 +319,26 @@ You can enable replies to comments using the `nestable` method:
 CommentsEntry::make('comments')
     ->nestable() // Enable replies
 ```
+
+## Styling
+
+> [!IMPORTANT] If you are using **Filament panels without a custom theme**, make sure to first follow the official [Filament documentation](https://filamentphp.com/docs/4.x/styling/overview#creating-a-custom-theme) on creating one.
+
+Once you have a custom theme set up, add the plugin's views and CSS to your theme's CSS file:
+
+```css
+@import "../../../../vendor/businesstilto/commentable/resources/css/plugin.css";
+@source "../../../../vendor/businesstilto/commentable/resources/views/**/*.blade.php";
+```
+
+### Behavior
+
+* This package **uses the styling of your Filament panel** by default.
+* It automatically **loads your configured avatar provider** from Filament.
+* If no avatar provider is found, a **UI-based fallback avatar** is shown instead.
+* You may fully override all `fi-*` classes by **not including** the `plugin.css` file and providing your own styles.
+
+This allows you to either use the default styling out of the box or completely customize the appearance to match your application.
 
 ## Testing
 
