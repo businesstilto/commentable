@@ -2,9 +2,9 @@
 
 namespace Tilto\Commentable\Forms;
 
+use Filament\Forms\Components\Field;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\Field;
 
 class CommentForm
 {
