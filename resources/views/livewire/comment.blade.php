@@ -6,13 +6,13 @@
         <div class="fi-comment-header">
 
             <img src="{{ $comment->author ? $comment->author->getCommenterAvatar() : 'https://ui-avatars.com/api/?name=Unknown&color=FFFFFF&background=71717b' }}"
-                alt="{{ $comment->author ? $comment->author->getCommenterName() : 'Unknown' }}"
-                class="fi-comment-avatar">
+                alt="{{ $comment->author ? $comment->author->getCommenterName() : 'Unknown' }}" class="fi-comment-avatar">
 
             <div class="fi-comment-content space-y-1">
                 <div class="fi-comment-meta">
                     <div class="fi-comment-meta-author">
-                        <span class="fi-comment-meta-author-inner">{{ $comment->author ? $comment->author->getCommenterName() : 'Unknown' }}</span>
+                        <span
+                            class="fi-comment-meta-author-inner">{{ $comment->author ? $comment->author->getCommenterName() : 'Unknown' }}</span>
                         <span class="fi-comment-date">
                             @if ($comment->created_at->eq($comment->updated_at))
                                 {{ $comment->created_at->diffForHumans() }}
@@ -27,20 +27,13 @@
                                     (auth()->id() !== $comment->author->getKey() ||
                                         get_class(auth()->user()) !== $comment->author->getMorphClass()) &&
                                     auth()->user()->can('reply', $comment))
-
                                 {{ $this->replyAction }}
                             @endif
                         @endif
 
                         @canany(['update', 'delete'], $comment)
                             <div>
-                                <x-filament-actions::group
-                                size="xs"
-                                color="gray"
-                                :actions="[
-                                    $this->editAction,
-                                    $this->deleteAction,
-                                ]" />
+                                <x-filament-actions::group size="xs" color="gray" :actions="[$this->editAction, $this->deleteAction]" />
 
                                 <x-filament-actions::modals />
                             </div>
@@ -91,6 +84,8 @@
                                 </x-filament::button>
                             </div>
                         </form>
+
+                        <x-filament-actions::modals />
                     </div>
                 @endif
             </div>
@@ -100,21 +95,9 @@
     @if ($isNestable && $depth < 2 && $comment->relationLoaded('replies') && $comment->replies->isNotEmpty())
         <div class="fi-comment-replies">
             @foreach ($comment->replies as $reply)
-                <livewire:commentable::livewire.comment
-                    :record="$record"
-                    :comment="$reply"
-                    :button-position="$buttonPosition"
-                    :is-markdown-editor="$isMarkdownEditor"
-                    :toolbar-buttons="$toolbarButtons"
-                    :file-attachments-disk="$fileAttachmentsDisk"
-                    :file-attachments-directory="$fileAttachmentsDirectory"
-                    :file-attachments-accepted-file-types="$fileAttachmentsAcceptedFileTypes"
-                    :file-attachments-max-size="$fileAttachmentsMaxSize"
-                    :is-nestable="$isNestable"
-                    :enable-mentions="$enableMentions"
-                    :depth="$depth + 1"
-                    :key="'comment-' . $reply->id"
-                />
+                <livewire:commentable::livewire.comment :record="$record" :comment="$reply" :button-position="$buttonPosition"
+                    :is-markdown-editor="$isMarkdownEditor" :toolbar-buttons="$toolbarButtons" :file-attachments-disk="$fileAttachmentsDisk" :file-attachments-directory="$fileAttachmentsDirectory" :file-attachments-accepted-file-types="$fileAttachmentsAcceptedFileTypes"
+                    :file-attachments-max-size="$fileAttachmentsMaxSize" :is-nestable="$isNestable" :enable-mentions="$enableMentions" :depth="$depth + 1" :key="'comment-' . $reply->id" />
             @endforeach
         </div>
     @endif

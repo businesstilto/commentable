@@ -4,10 +4,11 @@ namespace Tilto\Commentable\Forms;
 
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Field;
 
 class CommentForm
 {
-    public function editor($component): \Filament\Forms\Components\Field
+    public function editor($component): Field
     {
         $editor = $component->isMarkdownEditor
             ? MarkdownEditor::make('body')->minHeight(200)
