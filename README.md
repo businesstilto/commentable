@@ -45,6 +45,7 @@ Inspired by and built upon code from the [Kirschbaum Commentions package](https:
         - [Implement the Commenter contract](#1-implement-the-commenter-contract)
         - [Implement the Commentable contract](#2-implement-the-commentable-contract)
     - [Custom policy](#custom-policy)
+    - [Listening for comment creation events](#listening-for-comment-creation-events)
     - [Comment Component](#comment-component)
         - [Button position](#button-position)
         - [Toolbar buttons](#toolbar-buttons)
