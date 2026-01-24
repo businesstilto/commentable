@@ -4,13 +4,12 @@ namespace Tilto\Commentable\Livewire;
 
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
-use Filament\Forms\Components\MarkdownEditor;
-use Filament\Forms\Components\RichEditor;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Schemas\Schema;
 use Livewire\Component;
 use Tilto\Commentable\Contracts\Commentable;
+use Tilto\Commentable\Facades\CommentForm;
 use Tilto\Commentable\Livewire\Actions\Delete;
 use Tilto\Commentable\Livewire\Actions\Edit;
 use Tilto\Commentable\Livewire\Actions\Reply;
@@ -71,44 +70,8 @@ class Comment extends Component implements HasActions, HasSchemas
 
     public function form(Schema $schema): Schema
     {
-        $editor = $this->isMarkdownEditor
-            ? MarkdownEditor::make('body')->minHeight(200)
-            : RichEditor::make('body');
-
-        $editor
-            ->hiddenLabel()
-            ->placeholder(__('commentable::translations.input_placeholder'))
-            ->required()
-            ->maxLength(65535);
-
-        if ($this->toolbarButtons ?? null) {
-            $editor->toolbarButtons($this->toolbarButtons);
-        }
-
-        if ($this->fileAttachmentsDisk) {
-            $editor->fileAttachmentsDisk($this->fileAttachmentsDisk);
-        }
-
-        if ($this->fileAttachmentsDirectory) {
-            $editor->fileAttachmentsDirectory($this->fileAttachmentsDirectory);
-        }
-
-        if ($this->fileAttachmentsAcceptedFileTypes) {
-            $editor->fileAttachmentsAcceptedFileTypes($this->fileAttachmentsAcceptedFileTypes);
-        }
-
-        if ($this->fileAttachmentsMaxSize) {
-            $editor->fileAttachmentsMaxSize($this->fileAttachmentsMaxSize);
-        }
-
-        if (property_exists($this, 'mentions') && $this->mentions) {
-            $editor->mentions($this->mentions);
-        }
-
         return $schema
-            ->schema([
-                $editor,
-            ])
+            ->schema(CommentForm::make($this))
             ->statePath('data');
     }
 }

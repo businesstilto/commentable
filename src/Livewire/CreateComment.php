@@ -4,14 +4,13 @@ namespace Tilto\Commentable\Livewire;
 
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
-use Filament\Forms\Components\MarkdownEditor;
-use Filament\Forms\Components\RichEditor;
 use Filament\Notifications\Notification;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Schemas\Schema;
 use Livewire\Component;
 use Tilto\Commentable\Contracts\Commentable;
+use Tilto\Commentable\Facades\CommentForm;
 
 class CreateComment extends Component implements HasActions, HasSchemas
 {
@@ -50,44 +49,14 @@ class CreateComment extends Component implements HasActions, HasSchemas
 
     public function form(Schema $schema): Schema
     {
-        $editor = $this->isMarkdownEditor
-            ? MarkdownEditor::make('body')->minHeight(200)
-            : RichEditor::make('body');
+        $editor = CommentForm::editor($this);
 
-        $editor
-            ->hiddenLabel()
-            ->placeholder(__('commentable::translations.input_placeholder'))
-            ->required()
-            ->maxLength(65535);
-
-        if ($this->toolbarButtons ?? null) {
-            $editor->toolbarButtons($this->toolbarButtons);
-        }
-
-        if ($this->fileAttachmentsDisk) {
-            $editor->fileAttachmentsDisk($this->fileAttachmentsDisk);
-        }
-
-        if ($this->fileAttachmentsDirectory) {
-            $editor->fileAttachmentsDirectory($this->fileAttachmentsDirectory);
-        }
-
-        if ($this->fileAttachmentsAcceptedFileTypes) {
-            $editor->fileAttachmentsAcceptedFileTypes($this->fileAttachmentsAcceptedFileTypes);
-        }
-
-        if ($this->fileAttachmentsMaxSize) {
-            $editor->fileAttachmentsMaxSize($this->fileAttachmentsMaxSize);
-        }
-
-        if (property_exists($this, 'mentions') && $this->mentions) {
+        if ($this->mentions) {
             $editor->mentions($this->mentions);
         }
 
         return $schema
-            ->schema([
-                $editor,
-            ])
+            ->schema($editor)
             ->statePath('data');
     }
 
@@ -97,7 +66,7 @@ class CreateComment extends Component implements HasActions, HasSchemas
 
         $user = auth()->check() ? auth()->user() : null;
 
-        if (method_exists($this->record, 'comment') && $user && ! empty($data['body'])) {
+        if (method_exists($this->record, 'comment') && $user && !empty($data['body'])) {
             $this->record->comment(body: $data['body'], author: $user);
 
             $this->dispatch('comment-created');
@@ -109,25 +78,6 @@ class CreateComment extends Component implements HasActions, HasSchemas
                 ->danger()
                 ->send();
         }
-    }
-
-    protected function getMentionProviders()
-    {
-        // Convert arrays back to MentionProvider objects if needed
-        if (! is_array($this->mentions)) {
-            return [];
-        }
-
-        return array_map(function ($provider) {
-            if (is_array($provider) && isset($provider['trigger'])) {
-                // Rebuild MentionProvider from array (basic, extend as needed)
-                return
-                    \Filament\Forms\Components\RichEditor\MentionProvider::make($provider['trigger'])
-                        ->items($provider['items'] ?? []);
-            }
-
-            return $provider;
-        }, $this->mentions);
     }
 
     public function render()
