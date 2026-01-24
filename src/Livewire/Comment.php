@@ -14,6 +14,7 @@ use Tilto\Commentable\Facades\CommentForm;
 use Tilto\Commentable\Livewire\Actions\Delete;
 use Tilto\Commentable\Livewire\Actions\Edit;
 use Tilto\Commentable\Livewire\Actions\Reply;
+use Tilto\Commentable\Support\MentionProviderRegistry;
 
 class Comment extends Component implements HasActions, HasSchemas
 {
@@ -45,6 +46,8 @@ class Comment extends Component implements HasActions, HasSchemas
 
     public int $depth = 0;
 
+    public ?string $mentionsConfig = null;
+
     public array $toolbarButtons = [
         ['bold', 'italic', 'strike'],
         ['attachFiles'],
@@ -54,6 +57,15 @@ class Comment extends Component implements HasActions, HasSchemas
         'comment-replied' => '$refresh',
         'comment-deleted' => '$refresh',
     ];
+
+    protected function reconstructMentions(): ?array
+    {
+        if (!$this->mentionsConfig) {
+            return null;
+        }
+
+        return MentionProviderRegistry::get($this->mentionsConfig);
+    }
 
     public function render()
     {
@@ -86,8 +98,21 @@ class Comment extends Component implements HasActions, HasSchemas
 
     public function form(Schema $schema): Schema
     {
+        $formComponents = CommentForm::make($this);
+
+        $mentions = $this->reconstructMentions();
+
+        if ($mentions && is_array($formComponents)) {
+            foreach ($formComponents as $component) {
+                if (method_exists($component, 'mentions')) {
+                    $component->mentions($mentions);
+                    break;
+                }
+            }
+        }
+
         return $schema
-            ->schema(CommentForm::make($this))
+            ->schema($formComponents)
             ->statePath('data');
     }
 }

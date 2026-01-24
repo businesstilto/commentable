@@ -11,6 +11,7 @@ use Livewire\Component;
 use Tilto\Commentable\Contracts\Commentable;
 use Tilto\Commentable\Facades\CommentForm;
 use Tilto\Commentable\Livewire\Actions\Create;
+use Tilto\Commentable\Support\MentionProviderRegistry;
 
 class CreateComment extends Component implements HasActions, HasSchemas
 {
@@ -26,7 +27,7 @@ class CreateComment extends Component implements HasActions, HasSchemas
 
     public bool $isMarkdownEditor = false;
 
-    protected $mentions = null;
+    public ?string $mentionsConfig = null;
 
     public ?string $fileAttachmentsDisk = null;
 
@@ -41,19 +42,28 @@ class CreateComment extends Component implements HasActions, HasSchemas
         ['attachFiles'],
     ];
 
-    public function mount($mentions = null): void
+    public function mount(): void
     {
-        $this->mentions = $mentions;
-
         $this->form->fill();
+    }
+
+    protected function reconstructMentions(): ?array
+    {
+        if (!$this->mentionsConfig) {
+            return null;
+        }
+
+        return MentionProviderRegistry::get($this->mentionsConfig);
     }
 
     public function form(Schema $schema): Schema
     {
         $editor = CommentForm::editor($this);
 
-        if ($this->mentions) {
-            $editor->mentions($this->mentions);
+        $mentions = $this->reconstructMentions();
+
+        if ($mentions) {
+            $editor->mentions($mentions);
         }
 
         return $schema

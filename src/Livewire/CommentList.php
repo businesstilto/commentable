@@ -29,6 +29,8 @@ class CommentList extends Component
 
     public bool $isNestable = false;
 
+    public ?string $mentionsConfig = null;
+
     public array $toolbarButtons = [
         ['bold', 'italic', 'strike'],
         ['attachFiles'],
