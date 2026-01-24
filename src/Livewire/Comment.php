@@ -18,9 +18,9 @@ class Comment extends Component implements HasActions, HasSchemas
 {
     use Delete;
     use Edit;
+    use Reply;
     use InteractsWithActions;
     use InteractsWithSchemas;
-    use Reply;
 
     public Commentable $record;
 

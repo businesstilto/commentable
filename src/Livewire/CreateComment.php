@@ -4,16 +4,17 @@ namespace Tilto\Commentable\Livewire;
 
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
-use Filament\Notifications\Notification;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Schemas\Schema;
 use Livewire\Component;
 use Tilto\Commentable\Contracts\Commentable;
 use Tilto\Commentable\Facades\CommentForm;
+use Tilto\Commentable\Livewire\Actions\Create;
 
 class CreateComment extends Component implements HasActions, HasSchemas
 {
+    use Create;
     use InteractsWithActions;
     use InteractsWithSchemas;
 
@@ -58,26 +59,6 @@ class CreateComment extends Component implements HasActions, HasSchemas
         return $schema
             ->schema($editor)
             ->statePath('data');
-    }
-
-    public function create(): void
-    {
-        $data = $this->form->getState();
-
-        $user = auth()->check() ? auth()->user() : null;
-
-        if (method_exists($this->record, 'comment') && $user && !empty($data['body'])) {
-            $this->record->comment(body: $data['body'], author: $user);
-
-            $this->dispatch('comment-created');
-
-            $this->form->fill();
-        } else {
-            Notification::make()
-                ->title(__('commentable::translations.notifications.something_went_wrong'))
-                ->danger()
-                ->send();
-        }
     }
 
     public function render()
