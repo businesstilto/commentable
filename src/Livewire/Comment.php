@@ -90,7 +90,6 @@ class Comment extends Component implements HasActions, HasSchemas
     {
         $formComponents = CommentForm::make($this);
 
-        // Fetch mentions directly from model if enabled
         if ($this->enableMentions) {
             $mentions = $this->record->getCommentMentionProviders();
 
