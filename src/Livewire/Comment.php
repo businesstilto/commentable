@@ -13,6 +13,7 @@ use Tilto\Commentable\Facades\CommentForm;
 use Tilto\Commentable\Livewire\Actions\Delete;
 use Tilto\Commentable\Livewire\Actions\Edit;
 use Tilto\Commentable\Livewire\Actions\Reply;
+use Filament\Actions\Action;
 
 class Comment extends Component implements HasActions, HasSchemas
 {
@@ -66,6 +67,21 @@ class Comment extends Component implements HasActions, HasSchemas
     public function cancel()
     {
         $this->dispatch('close-modal', id: 'delete-comment');
+    }
+
+    public function deleteAction(): Action
+    {
+        return $this->deleteButton();
+    }
+
+    public function editAction(): Action
+    {
+        return $this->editButton();
+    }
+
+    public function replyAction(): Action
+    {
+        return $this->replyButton();
     }
 
     public function form(Schema $schema): Schema

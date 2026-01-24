@@ -3,10 +3,23 @@
 namespace Tilto\Commentable\Livewire\Actions;
 
 use Filament\Notifications\Notification;
+use Filament\Actions\Action;
 
 trait Reply
 {
     public bool $isReplying = false;
+
+    public function replyButton(): Action
+    {
+        return Action::make('reply')
+            ->icon('bi-reply')
+            ->size('xs')
+            ->color('gray')
+            ->iconButton()
+            ->label(false)
+            ->tooltip(__('commentable::translations.reply'))
+            ->action('openReply');
+    }
 
     public function openReply()
     {

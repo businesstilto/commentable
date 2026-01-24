@@ -25,61 +25,23 @@
                                     (auth()->id() !== $comment->author->getKey() ||
                                         get_class(auth()->user()) !== $comment->author->getMorphClass()) &&
                                     auth()->user()->can('reply', $comment))
-                                <x-filament::icon-button icon="bi-reply" size="xs" wire:click="openReply"
-                                    tooltip="{{ __('commentable::translations.reply') }}" color="gray"
-                                    class="fi-comment-action-reply" />
+
+                                {{ $this->replyAction }}
                             @endif
                         @endif
 
                         @canany(['update', 'delete'], $comment)
-                            <x-filament::dropdown placement="bottom-start">
-                                <x-slot name="trigger">
-                                    @if (!$isEditing)
-                                        <x-filament::icon-button icon="heroicon-o-ellipsis-vertical" size="xs"
-                                            color="gray" class="fi-comment-action-menu" />
-                                    @endif
-                                </x-slot>
+                            <div>
+                                <x-filament-actions::group
+                                size="xs"
+                                color="gray"
+                                :actions="[
+                                    $this->editAction,
+                                    $this->deleteAction,
+                                ]" />
 
-                                <x-filament::dropdown.list>
-                                    @can('update', $comment)
-                                        <x-filament::dropdown.list.item icon="heroicon-o-pencil-square" wire:click="openEdit">
-                                            {{ __('commentable::translations.dropdown.edit') }}
-                                        </x-filament::dropdown.list.item>
-                                    @endcan
-
-                                    @can('delete', $comment)
-                                        <x-filament::modal id="delete-comment" icon="heroicon-s-trash" icon-color="danger"
-                                            alignment="center" width="md">
-                                            <x-slot name="trigger">
-                                                <x-filament::dropdown.list.item icon="heroicon-o-trash" color="danger">
-                                                    {{ __('commentable::translations.dropdown.delete') }}
-                                                </x-filament::dropdown.list.item>
-                                            </x-slot>
-
-                                            <x-slot name="heading">
-                                                {{ __('commentable::translations.delete_confirmation.heading') }}
-                                            </x-slot>
-
-                                            <x-slot name="description">
-                                                {{ __('commentable::translations.delete_confirmation.description') }}
-                                            </x-slot>
-
-                                            <x-slot name="footerActions">
-                                                <div class="fi-comment-delete-actions">
-                                                    <x-filament::button wire:click="cancel" color="gray"
-                                                        class="fi-comment-delete-cancel">
-                                                        {{ __('commentable::translations.delete_confirmation.cancel') }}
-                                                    </x-filament::button>
-                                                    <x-filament::button wire:click="delete" color="danger"
-                                                        class="fi-comment-delete-confirm">
-                                                        {{ __('commentable::translations.delete_confirmation.confirm') }}
-                                                    </x-filament::button>
-                                                </div>
-                                            </x-slot>
-                                        </x-filament::modal>
-                                    @endcan
-                                </x-filament::dropdown.list>
-                            </x-filament::dropdown>
+                                <x-filament-actions::modals />
+                            </div>
                         @endcanany
                     </div>
                 </div>
@@ -93,7 +55,7 @@
                         @endif
                     </div>
                 @else
-                    <form wire:submit="edit">
+                    <form wire:submit="edit" class="fi-comment-edit-form">
                         {{ $this->form }}
 
                         <div

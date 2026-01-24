@@ -3,20 +3,18 @@
     :entry="$entry"
     class="fi-commentable"
 >
-    <div>
-        <livewire:commentable::livewire.create-comment
-            :record="$record"
-            :button-position="$getButtonPosition()"
-            :is-markdown-editor="$isMarkdownEditor()"
-            :file-attachments-disk="$getFileAttachmentsDisk()"
-            :file-attachments-directory="$getFileAttachmentsDirectory()"
-            :file-attachments-accepted-file-types="$getFileAttachmentsAcceptedFileTypes()"
-            :file-attachments-max-size="$getFileAttachmentsMaxSize()"
-            :mentions="$getMentions()"
-            :toolbar-buttons="$getToolbarButtons()"
-            :key="'create-comment-' . $record->id"
-        />
-    </div>
+    <livewire:commentable::livewire.create-comment
+        :record="$record"
+        :button-position="$getButtonPosition()"
+        :is-markdown-editor="$isMarkdownEditor()"
+        :file-attachments-disk="$getFileAttachmentsDisk()"
+        :file-attachments-directory="$getFileAttachmentsDirectory()"
+        :file-attachments-accepted-file-types="$getFileAttachmentsAcceptedFileTypes()"
+        :file-attachments-max-size="$getFileAttachmentsMaxSize()"
+        :mentions="$getMentions()"
+        :toolbar-buttons="$getToolbarButtons()"
+        :key="'create-comment-' . $record->id"
+    />
 
     <livewire:commentable::livewire.comment-list
         :record="$record"
