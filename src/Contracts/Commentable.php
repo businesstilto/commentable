@@ -22,8 +22,6 @@ interface Commentable
 
     /**
      * Get mention providers for writing comments
-     *
-     * @return array|null
      */
     public function getCommentMentionProviders(): ?array;
 
