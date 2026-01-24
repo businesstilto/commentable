@@ -21,9 +21,14 @@ interface Commentable
     public function getMorphClass();
 
     /**
-     * Get mention providers for comments
+     * Get mention providers for writing comments
      *
      * @return array|null
      */
     public function getCommentMentionProviders(): ?array;
+
+    /**
+     * Get mention providers for rendering the comments
+     */
+    public function getRenderMentionProviders(): ?array;
 }

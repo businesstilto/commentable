@@ -25,4 +25,9 @@ trait HasComments
     {
         return null;
     }
+
+    public function getRenderMentionProviders(): ?array
+    {
+        return null;
+    }
 }

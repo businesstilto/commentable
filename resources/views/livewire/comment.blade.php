@@ -53,7 +53,11 @@
                         @if ($isMarkdownEditor)
                             {!! str($comment->body)->markdown()->sanitizeHtml() !!}
                         @else
-                            {!! RichContentRenderer::make($comment->body)->toHtml() !!}
+                            @if (method_exists($record, 'getRenderMentionProviders'))
+                                {!! RichContentRenderer::make($comment->body)->mentions($record->getRenderMentionProviders())->toHtml() !!}
+                            @else
+                                {!! RichContentRenderer::make($comment->body)->toHtml() !!}
+                            @endif
                         @endif
                     </div>
                 @else

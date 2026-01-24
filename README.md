@@ -293,11 +293,29 @@ CommentsEntry::make('comments')
     ->mentions()
 ```
 
-To ensure mentions match Filament's default appearance, add the following CSS to your theme or `app.css` file:
+For rendering the mentions in the rich content, you can put this in your commentable model (for example):
+
+```php
+public function getRenderMentionProviders(): array|null
+{
+    return [
+        MentionProvider::make('@')
+            ->getLabelsUsing(fn(array $ids): array => User::query()
+                ->whereIn('id', $ids)
+                ->pluck('name', 'id')
+                ->all())
+            ->url(fn(string $id, string $label): string => route('filament.portal.resources.users.view', $id))
+    ];
+}
+```
+
+While not required, adding the following CSS to your theme or `app.css` file ensures that mentions have a consistent appearance across your application:
 
 ```css
-span[data-type='mention'] {
-    @apply bg-primary-50 text-primary-600 dark:bg-primary-400/10 dark:text-primary-400 my-0 inline-block rounded px-1 font-medium whitespace-nowrap;
+span[data-type="mention"],
+a[data-type="mention"] {
+    @apply bg-primary-50 text-primary-600 dark:bg-primary-400/10 dark:text-primary-400 my-0 inline-block rounded px-1 font-medium whitespace-nowrap no-underline;
+    text-decoration: none !important;
 }
 ```
 
