@@ -4,13 +4,15 @@
 <div class="space-y-4">
     <div class="space-y-3">
         <div class="fi-comment-header">
-            <img src="{{ $comment->author->getCommenterAvatar() }}" alt="{{ $comment->author->getCommenterName() }}"
+
+            <img src="{{ $comment->author ? $comment->author->getCommenterAvatar() : 'https://ui-avatars.com/api/?name=Unknown&color=FFFFFF&background=71717b' }}"
+                alt="{{ $comment->author ? $comment->author->getCommenterName() : 'Unknown' }}"
                 class="fi-comment-avatar">
 
             <div class="fi-comment-content space-y-1">
                 <div class="fi-comment-meta">
                     <div class="fi-comment-meta-author">
-                        <span class="fi-comment-meta-author-inner">{{ $comment->author->getCommenterName() }}</span>
+                        <span class="fi-comment-meta-author-inner">{{ $comment->author ? $comment->author->getCommenterName() : 'Unknown' }}</span>
                         <span class="fi-comment-date">
                             @if ($comment->created_at->eq($comment->updated_at))
                                 {{ $comment->created_at->diffForHumans() }}

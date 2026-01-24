@@ -17,7 +17,8 @@ class CommentForm
             ->hiddenLabel()
             ->placeholder(__('commentable::translations.input_placeholder'))
             ->required()
-            ->maxLength(65535);
+            ->maxLength(65535)
+            ->json();
 
         if ($component->toolbarButtons ?? null) {
             $editor->toolbarButtons($component->toolbarButtons);

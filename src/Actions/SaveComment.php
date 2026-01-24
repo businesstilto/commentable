@@ -13,7 +13,7 @@ class SaveComment
     /**
      * @throws AuthorizationException
      */
-    public function __invoke(Model $commentable, Commenter $author, string $body, ?int $parent_id = null): Comment
+    public function __invoke(Model $commentable, Commenter $author, array $body, ?int $parent_id = null): Comment
     {
         $commentModel = config('commentable.comment.model');
 
