@@ -97,6 +97,7 @@ class Comment extends Component implements HasActions, HasSchemas
                 foreach ($formComponents as $component) {
                     if (method_exists($component, 'mentions')) {
                         $component->mentions($mentions);
+
                         break;
                     }
                 }
