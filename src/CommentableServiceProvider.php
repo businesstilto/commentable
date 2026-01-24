@@ -92,13 +92,6 @@ class CommentableServiceProvider extends PackageServiceProvider
         }
 
         Gate::policy(Comment::class, config('commentable.comment.policy'));
-
-        if (config('commentable.events.comment_created.enabled', true)) {
-            $event = (string) config('commentable.events.comment_created.event', CommentCreatedEvent::class);
-            $listener = (string) config('commentable.events.comment_created.listener', HandleCommentCreated::class);
-
-            Event::listen($event, $listener);
-        }
     }
 
     protected function getAssetPackageName(): ?string

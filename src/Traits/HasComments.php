@@ -3,9 +3,11 @@
 namespace Tilto\Commentable\Traits;
 
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Tilto\Commentable\Actions\SaveComment;
 use Tilto\Commentable\Contracts\Commenter;
+use Tilto\Commentable\Events\CommentCreatedEvent;
 use Tilto\Commentable\Models\Comment;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 trait HasComments
 {
@@ -16,9 +18,31 @@ trait HasComments
             ->orderBy('created_at', 'asc');
     }
 
-    public function comment(string $body, ?Commenter $author, ?int $parent_id = null): Comment
+    public function comment(Model $commentable, ?int $parent_id = null, string $body, Commenter $author): Comment
     {
-        return SaveComment::run($this, $author, $body, $parent_id);
+        Log::info('Creating comment', [
+            'commentable_type' => get_class($commentable),
+            'commentable_id' => $commentable->getKey(),
+            'parent_id' => $parent_id,
+            'author_id' => $author->getKey(),
+        ]);
+
+        $commentModel = config('commentable.comment.model');
+
+        if ($author->cannot('create', $commentModel)) {
+            throw new AuthorizationException('Cannot create comment');
+        }
+
+        $comment = $commentable->comments()->create([
+            'parent_id' => $parent_id ? $parent_id : null,
+            'body' => $body,
+            'author_id' => $author->getKey(),
+            'author_type' => $author->getMorphClass(),
+        ]);
+
+        CommentCreatedEvent::dispatch($comment);
+
+        return $comment;
     }
 
     public function getCommentMentionProviders(): ?array

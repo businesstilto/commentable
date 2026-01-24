@@ -98,35 +98,6 @@ return [
         'model' => Tilto\Commentable\Models\Comment::class,
         'policy' => Tilto\Commentable\Policies\CommentPolicy::class,
     ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Events
-    |--------------------------------------------------------------------------
-    */
-    'events' => [
-        'comment_created' => [
-            'enabled' => true,
-            'event' => Tilto\Commentable\Events\CommentCreatedEvent::class,
-            'listener' => Tilto\Commentable\Listeners\HandleCommentCreated::class,
-        ]
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Notifications
-    |--------------------------------------------------------------------------
-    */
-    'notifications' => [
-        'created' => [
-            'enabled' => false,
-            'channels' => ['database'],
-        ],
-        'mentions' => [
-            'enabled' => true,
-            'channels' => ['database'],
-        ],
-    ],
 ];
 ```
 
@@ -209,6 +180,37 @@ Then, update the `comment.policy` value in your `config/commentable.php` file to
 
 This allows you to fully customize comment permissions to fit your application's requirements.
 
+### Listening for comment creation events
+
+To perform actions when a comment is created, listen for the `CommentCreatedEvent` in your event listener. This allows you to trigger notifications, logging, or other custom logic whenever a new comment is added.
+
+Here's an example of how to set up a listener for the event:
+
+```php
+use Tilto\Commentable\Events\CommentCreatedEvent;
+
+class NotifyOnCommentCreated
+{
+    public function handle(CommentCreatedEvent $event): void
+    {
+        // Access the created comment:
+        $comment = $event->comment;
+
+        // Add your custom logic here, e.g., send a notification
+    }
+}
+```
+
+If you don't have [event auto-discovery](https://laravel.com/docs/12.x/events#event-discovery) turned on in Laravel, you will need to manually register your listener within your `EventServiceProvider`:
+
+```php
+protected $listen = [
+    CommentCreatedEvent::class => [
+        NotifyOnCommentCreated::class,
+    ],
+];
+```
+
 ### Comment Component
 
 You can add a comments section to your Filament Infolist using the `CommentsEntry` component:
@@ -241,6 +243,15 @@ CommentsEntry::make('comments')
 ```
 
 The default toolbar buttons are `bold`, `italic`, `strike`, and `attachFiles`.
+
+You can leave the array empty to not show a toolbar at all:
+
+To hide the toolbar completely, simply pass an empty array:
+
+```php
+CommentsEntry::make('comments')
+    ->toolbarButtons([])
+```
 
 #### Markdown Editor
 
@@ -361,7 +372,8 @@ CommentsEntry::make('comments')
 
 ## Styling
 
-> [!IMPORTANT] If you are using **Filament panels without a custom theme**, make sure to first follow the official [Filament documentation](https://filamentphp.com/docs/4.x/styling/overview#creating-a-custom-theme) on creating one.
+> [!IMPORTANT] 
+> If you are using **Filament panels without a custom theme**, make sure to first follow the official [Filament documentation](https://filamentphp.com/docs/4.x/styling/overview#creating-a-custom-theme) on creating one.
 
 Once you have a custom theme set up, add the plugin's views and CSS to your theme's CSS file:
 

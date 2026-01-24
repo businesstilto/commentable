@@ -12,8 +12,13 @@ trait Create
 
         $user = auth()->check() ? auth()->user() : null;
 
-        if (method_exists($this->record, 'comment') && $user && ! empty($data['body'])) {
-            $this->record->comment(body: $data['body'], author: $user);
+        if (method_exists($this->record, 'comment') && $user && !empty($data['body'])) {
+            $this->record->comment(
+                $this->record,
+                null,
+                $data['body'],
+                $user
+            );
 
             $this->dispatch('comment-created');
 

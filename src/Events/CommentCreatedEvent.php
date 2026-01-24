@@ -2,7 +2,7 @@
 
 namespace Tilto\Commentable\Events;
 
-use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
 class CommentCreatedEvent

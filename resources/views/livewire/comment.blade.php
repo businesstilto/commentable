@@ -46,10 +46,20 @@
                         @if ($isMarkdownEditor)
                             {!! str($comment->body)->markdown()->sanitizeHtml() !!}
                         @else
+                            @php
+                                $renderer = RichContentRenderer::make($comment->body);
+                                
+                                if (isset($this->fileAttachmentsDisk)) {
+                                    $renderer = $renderer->fileAttachmentsDisk($this->fileAttachmentsDisk);
+                                }
+                                if (isset($this->fileAttachmentsVisibility)) {
+                                    $renderer = $renderer->fileAttachmentsVisibility($this->fileAttachmentsVisibility);
+                                }
+                            @endphp
                             @if (method_exists($record, 'getRenderMentionProviders'))
-                                {!! RichContentRenderer::make($comment->body)->mentions($record->getRenderMentionProviders())->toHtml() !!}
+                                {!! $renderer->mentions($record->getRenderMentionProviders())->toHtml() !!}
                             @else
-                                {!! RichContentRenderer::make($comment->body)->toHtml() !!}
+                                {!! $renderer->toHtml() !!}
                             @endif
                         @endif
                     </div>
