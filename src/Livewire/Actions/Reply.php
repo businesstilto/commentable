@@ -2,8 +2,8 @@
 
 namespace Tilto\Commentable\Livewire\Actions;
 
-use Filament\Notifications\Notification;
 use Filament\Actions\Action;
+use Filament\Notifications\Notification;
 
 trait Reply
 {

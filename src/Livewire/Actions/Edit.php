@@ -2,8 +2,8 @@
 
 namespace Tilto\Commentable\Livewire\Actions;
 
-use Filament\Notifications\Notification;
 use Filament\Actions\Action;
+use Filament\Notifications\Notification;
 
 trait Edit
 {
@@ -14,14 +14,14 @@ trait Edit
         return Action::make('edit')
             ->label(__('commentable::translations.dropdown.edit'))
             ->icon('heroicon-o-pencil-square')
-            ->visible(fn() => auth()->user()?->can('update', $this->comment))
-            ->authorize(fn() => auth()->user()?->can('update', $this->comment))
+            ->visible(fn () => auth()->user()?->can('update', $this->comment))
+            ->authorize(fn () => auth()->user()?->can('update', $this->comment))
             ->action('openEdit');
     }
 
     public function openEdit()
     {
-        if (!auth()->user()?->can('update', $this->comment)) {
+        if (! auth()->user()?->can('update', $this->comment)) {
             return;
         }
 
@@ -47,7 +47,7 @@ trait Edit
 
         $user = auth()->check() ? auth()->user() : null;
 
-        if ($user && !empty($data['body'])) {
+        if ($user && ! empty($data['body'])) {
             $this->comment->update([
                 'body' => $data['body'],
             ]);
