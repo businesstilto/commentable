@@ -2,6 +2,7 @@
 
 namespace Tilto\Commentable\Livewire;
 
+use Filament\Actions\Action;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
@@ -13,7 +14,6 @@ use Tilto\Commentable\Facades\CommentForm;
 use Tilto\Commentable\Livewire\Actions\Delete;
 use Tilto\Commentable\Livewire\Actions\Edit;
 use Tilto\Commentable\Livewire\Actions\Reply;
-use Filament\Actions\Action;
 
 class Comment extends Component implements HasActions, HasSchemas
 {

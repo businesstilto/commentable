@@ -2,8 +2,8 @@
 
 namespace Tilto\Commentable\Livewire\Actions;
 
-use Filament\Notifications\Notification;
 use Filament\Actions\Action;
+use Filament\Notifications\Notification;
 
 trait Delete
 {
@@ -18,7 +18,7 @@ trait Delete
             ->modalDescription(__('commentable::translations.delete_confirmation.description'))
             ->modalSubmitActionLabel(__('commentable::translations.delete_confirmation.confirm'))
             ->modalCancelActionLabel(__('commentable::translations.delete_confirmation.cancel'))
-            ->visible(fn() => auth()->user()?->can('delete', $this->comment))
+            ->visible(fn () => auth()->user()?->can('delete', $this->comment))
             ->action(function () {
                 $this->comment->delete();
 
