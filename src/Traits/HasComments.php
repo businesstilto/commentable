@@ -16,7 +16,7 @@ trait HasComments
             ->orderBy('created_at', 'asc');
     }
 
-    public function comment(array $body, ?Commenter $author, ?int $parent_id = null): Comment
+    public function comment(string $body, ?Commenter $author, ?int $parent_id = null): Comment
     {
         return SaveComment::run($this, $author, $body, $parent_id);
     }

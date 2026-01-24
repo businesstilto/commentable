@@ -33,6 +33,8 @@ class Comment extends Component implements HasActions, HasSchemas
 
     public bool $isMarkdownEditor = false;
 
+    public bool $resizableImages = false;
+
     public ?string $fileAttachmentsDisk = null;
 
     public ?string $fileAttachmentsDirectory = null;

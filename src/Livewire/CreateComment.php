@@ -26,6 +26,8 @@ class CreateComment extends Component implements HasActions, HasSchemas
 
     public bool $isMarkdownEditor = false;
 
+    public bool $resizableImages = false;
+
     public bool $enableMentions = false;
 
     public ?string $fileAttachmentsDisk = null;

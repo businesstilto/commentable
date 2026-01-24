@@ -17,10 +17,6 @@ class Comment extends Model
         'author_id',
     ];
 
-    protected $casts = [
-        'body' => 'array',
-    ];
-
     public function author(): MorphTo
     {
         return $this->morphTo();

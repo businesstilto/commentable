@@ -13,6 +13,8 @@ class CommentList extends Component
 
     public bool $isMarkdownEditor = false;
 
+    public bool $resizableImages = false;
+
     public bool $shouldShowCommentCount = true;
 
     public ?string $fileAttachmentsDisk = null;

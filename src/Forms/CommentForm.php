@@ -18,11 +18,14 @@ class CommentForm
             ->hiddenLabel()
             ->placeholder(__('commentable::translations.input_placeholder'))
             ->required()
-            ->maxLength(65535)
-            ->json();
+            ->maxLength(65535);
 
         if ($component->toolbarButtons ?? null) {
             $editor->toolbarButtons($component->toolbarButtons);
+        }
+
+        if ($component->resizableImages) {
+            $editor->resizableImages();
         }
 
         if ($component->fileAttachmentsDisk) {

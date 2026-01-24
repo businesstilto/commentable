@@ -30,6 +30,7 @@
                 :comment="$comment"
                 :button-position="$buttonPosition"
                 :is-markdown-editor="$isMarkdownEditor"
+                :resizable-images="$resizableImages"
                 :toolbar-buttons="$toolbarButtons"
                 :file-attachments-disk="$fileAttachmentsDisk"
                 :file-attachments-directory="$fileAttachmentsDirectory"

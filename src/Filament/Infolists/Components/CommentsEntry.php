@@ -11,6 +11,7 @@ use Tilto\Commentable\Filament\Concerns\HasMarkdownEditor;
 use Tilto\Commentable\Filament\Concerns\HasMentions;
 use Tilto\Commentable\Filament\Concerns\HasPolling;
 use Tilto\Commentable\Filament\Concerns\HasReplies;
+use Tilto\Commentable\Filament\Concerns\HasResizableImages;
 
 class CommentsEntry extends Entry
 {
@@ -22,6 +23,7 @@ class CommentsEntry extends Entry
     use HasMentions;
     use HasPolling;
     use HasReplies;
+    use HasResizableImages;
 
     protected string $view = 'commentable::filament.infolists.components.comments-entry';
 }
