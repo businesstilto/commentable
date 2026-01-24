@@ -130,26 +130,22 @@
     </div>
 
     @if ($isNestable && $depth < 2 && $comment->relationLoaded('replies') && $comment->replies->isNotEmpty())
-        <div
-            class="fi-comment-replies">
+        <div class="fi-comment-replies">
             @foreach ($comment->replies as $reply)
-                @livewire(
-                    'commentable::livewire.comment',
-                    [
-                        'record' => $record,
-                        'comment' => $reply,
-                        'buttonPosition' => $buttonPosition,
-                        'isMarkdownEditor' => $isMarkdownEditor,
-                        'toolbarButtons' => $toolbarButtons,
-                        'fileAttachmentsDisk' => $fileAttachmentsDisk,
-                        'fileAttachmentsDirectory' => $fileAttachmentsDirectory,
-                        'fileAttachmentsAcceptedFileTypes' => $fileAttachmentsAcceptedFileTypes,
-                        'fileAttachmentsMaxSize' => $fileAttachmentsMaxSize,
-                        'isNestable' => $isNestable,
-                        'depth' => $depth + 1,
-                    ],
-                    key('comment-' . $reply->id)
-                )
+                <livewire:commentable::livewire.comment
+                    :record="$record"
+                    :comment="$reply"
+                    :button-position="$buttonPosition"
+                    :is-markdown-editor="$isMarkdownEditor"
+                    :toolbar-buttons="$toolbarButtons"
+                    :file-attachments-disk="$fileAttachmentsDisk"
+                    :file-attachments-directory="$fileAttachmentsDirectory"
+                    :file-attachments-accepted-file-types="$fileAttachmentsAcceptedFileTypes"
+                    :file-attachments-max-size="$fileAttachmentsMaxSize"
+                    :is-nestable="$isNestable"
+                    :depth="$depth + 1"
+                    :key="'comment-' . $reply->id"
+                />
             @endforeach
         </div>
     @endif

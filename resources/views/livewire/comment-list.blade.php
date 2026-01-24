@@ -25,23 +25,20 @@
     <div wire:key="comments-list-{{ $record->id }}" class="fi-comment-list-items"
         @if ($shouldPoll) wire:poll @elseif ($pollingInterval) wire:poll.{{ $pollingInterval }} @endif>
         @foreach ($record->comments->whereNull('parent_id') as $comment)
-            @livewire(
-                'commentable::livewire.comment',
-                [
-                    'record' => $record,
-                    'comment' => $comment,
-                    'buttonPosition' => $buttonPosition,
-                    'isMarkdownEditor' => $isMarkdownEditor,
-                    'fileAttachmentsDisk' => $fileAttachmentsDisk,
-                    'fileAttachmentsDirectory' => $fileAttachmentsDirectory,
-                    'fileAttachmentsAcceptedFileTypes' => $fileAttachmentsAcceptedFileTypes,
-                    'fileAttachmentsMaxSize' => $fileAttachmentsMaxSize,
-                    'isNestable' => $isNestable,
-                    'depth' => 0,
-                    'toolbarButtons' => $toolbarButtons,
-                ],
-                key('comment-' . $comment->id)
-            )
+            <livewire:commentable::livewire.comment
+                :record="$record"
+                :comment="$comment"
+                :button-position="$buttonPosition"
+                :is-markdown-editor="$isMarkdownEditor"
+                :toolbar-buttons="$toolbarButtons"
+                :file-attachments-disk="$fileAttachmentsDisk"
+                :file-attachments-directory="$fileAttachmentsDirectory"
+                :file-attachments-accepted-file-types="$fileAttachmentsAcceptedFileTypes"
+                :file-attachments-max-size="$fileAttachmentsMaxSize"
+                :is-nestable="$isNestable"
+                :depth="0"
+                :key="'comment-' . $comment->id"
+            />
         @endforeach
     </div>
 </div>

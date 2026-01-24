@@ -1,35 +1,37 @@
-<x-dynamic-component :component="$getEntryWrapperView()" :entry="$entry" class="fi-commentable">
-    <div wire:key="create-comment-{{ $record->id }}">
-        @livewire('commentable::livewire.create-comment', [
-            'record' => $record,
-            'buttonPosition' => $getButtonPosition(),
-            'isMarkdownEditor' => $isMarkdownEditor(),
-            'fileAttachmentsDisk' => $getFileAttachmentsDisk(),
-            'fileAttachmentsDirectory' => $getFileAttachmentsDirectory(),
-            'fileAttachmentsAcceptedFileTypes' => $getFileAttachmentsAcceptedFileTypes(),
-            'fileAttachmentsMaxSize' => $getFileAttachmentsMaxSize(),
-            'mentions' => $getMentions(),
-            'toolbarButtons' => $getToolbarButtons(),
-        ])
+<x-dynamic-component
+    :component="$getEntryWrapperView()"
+    :entry="$entry"
+    class="fi-commentable"
+>
+    <div>
+        <livewire:commentable::livewire.create-comment
+            :record="$record"
+            :button-position="$getButtonPosition()"
+            :is-markdown-editor="$isMarkdownEditor()"
+            :file-attachments-disk="$getFileAttachmentsDisk()"
+            :file-attachments-directory="$getFileAttachmentsDirectory()"
+            :file-attachments-accepted-file-types="$getFileAttachmentsAcceptedFileTypes()"
+            :file-attachments-max-size="$getFileAttachmentsMaxSize()"
+            :mentions="$getMentions()"
+            :toolbar-buttons="$getToolbarButtons()"
+            :key="'create-comment-' . $record->id"
+        />
     </div>
 
-    @livewire(
-        'commentable::livewire.comment-list',
-        [
-            'record' => $record,
-            'buttonPosition' => $getButtonPosition(),
-            'isMarkdownEditor' => $isMarkdownEditor(),
-            'shouldShowCommentCount' => $shouldShowCommentCount(),
-            'fileAttachmentsDisk' => $getFileAttachmentsDisk(),
-            'fileAttachmentsDirectory' => $getFileAttachmentsDirectory(),
-            'fileAttachmentsAcceptedFileTypes' => $getFileAttachmentsAcceptedFileTypes(),
-            'fileAttachmentsMaxSize' => $getFileAttachmentsMaxSize(),
-            'shouldPoll' => $shouldPoll(),
-            'pollingInterval' => $getPollingInterval(),
-            'isNestable' => $isNestable(),
-            'mentions' => $getMentions(),
-            'toolbarButtons' => $getToolbarButtons(),
-        ],
-        key('comment-list-' . $record->id)
-    )
+    <livewire:commentable::livewire.comment-list
+        :record="$record"
+        :button-position="$getButtonPosition()"
+        :is-markdown-editor="$isMarkdownEditor()"
+        :should-show-comment-count="$shouldShowCommentCount()"
+        :file-attachments-disk="$getFileAttachmentsDisk()"
+        :file-attachments-directory="$getFileAttachmentsDirectory()"
+        :file-attachments-accepted-file-types="$getFileAttachmentsAcceptedFileTypes()"
+        :file-attachments-max-size="$getFileAttachmentsMaxSize()"
+        :should-poll="$shouldPoll()"
+        :polling-interval="$getPollingInterval()"
+        :is-nestable="$isNestable()"
+        :mentions="$getMentions()"
+        :toolbar-buttons="$getToolbarButtons()"
+        :key="'comment-list-' . $record->id"
+    />
 </x-dynamic-component>
