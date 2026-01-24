@@ -11,7 +11,7 @@
         :file-attachments-directory="$getFileAttachmentsDirectory()"
         :file-attachments-accepted-file-types="$getFileAttachmentsAcceptedFileTypes()"
         :file-attachments-max-size="$getFileAttachmentsMaxSize()"
-        :mentions-config="$getMentionsConfig()"
+        :enable-mentions="$getMentionsEnabled()"
         :toolbar-buttons="$getToolbarButtons()"
         :key="'create-comment-' . $record->id"
     />
@@ -28,7 +28,7 @@
         :should-poll="$shouldPoll()"
         :polling-interval="$getPollingInterval()"
         :is-nestable="$isNestable()"
-        :mentions-config="$getMentionsConfig()"
+        :enable-mentions="$getMentionsEnabled()"
         :toolbar-buttons="$getToolbarButtons()"
         :key="'comment-list-' . $record->id"
     />

@@ -2,41 +2,19 @@
 
 namespace Tilto\Commentable\Filament\Concerns;
 
-use Closure;
-use Tilto\Commentable\Support\MentionProviderRegistry;
-
 trait HasMentions
 {
-    protected array | Closure | null $mentions = null;
+    protected bool $enableMentions = false;
 
-    public function mentions(array | Closure | null $providers): static
+    public function mentions(bool $enable = true): static
     {
-        $this->mentions = $providers;
+        $this->enableMentions = $enable;
 
         return $this;
     }
 
-    public function getMentions()
+    public function getMentionsEnabled(): bool
     {
-        return $this->evaluate($this->mentions);
-    }
-
-    public function getMentionsConfig(): ?string
-    {
-        $mentions = $this->mentions;
-
-        if (!$mentions) {
-            return null;
-        }
-
-        if ($mentions instanceof Closure) {
-            $mentions = $this->evaluate($mentions);
-        }
-
-        $key = 'mentions_' . static::class;
-
-        MentionProviderRegistry::register($key, $mentions);
-
-        return $key;
+        return $this->enableMentions;
     }
 }

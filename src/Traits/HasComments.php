@@ -20,4 +20,9 @@ trait HasComments
     {
         return SaveComment::run($this, $author, $body, $parent_id);
     }
+
+    public function getCommentMentionProviders(): ?array
+    {
+        return null;
+    }
 }

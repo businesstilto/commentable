@@ -255,17 +255,42 @@ By default, comments use Filament's built-in rich text editor. Switching to the 
 
 #### Mentions
 
-From Filament 4.5+, mentions are supported. You can add mentions to the `CommentsEntry` just as you would with Filament's RichTextEditor:
+
+From Filament 4.5+, mentions are supported. You now define mention providers directly on your commentable model by implementing a `getCommentMentionProviders()` method. Enable mentions for the comment entry using `->mentions()`:
 
 ```php
-CommentsEntry::make('comments')
-    ->mentions([
+// In your Commentable model (e.g., Post):
+use Filament\Forms\Components\RichEditor\MentionProvider;
+
+public function getCommentMentionProviders(): array|null
+{
+    return [
         MentionProvider::make('@')
+            ->getSearchResultsUsing(fn(string $search): array => User::query()
+                ->where('name', 'like', "%{$search}%")
+                ->orderBy('name')
+                ->limit(10)
+                ->pluck('name', 'id')
+                ->all())
+            ->getLabelsUsing(fn(array $ids): array => User::query()
+                ->whereIn('id', $ids)
+                ->pluck('name', 'id')
+                ->all()),
+        MentionProvider::make('#')
             ->items([
-                1 => 'Jane Doe',
-                2 => 'John Smith',
+                1 => 'How to Bake Bread',
+                2 => 'Laravel Tips & Tricks',
+                3 => 'The Future of PHP',
+                4 => '10 Best Coding Practices',
+                5 => 'Debugging 101',
+                6 => 'Deploying with Docker',
             ]),
-    ])
+    ];
+}
+
+// In your CommentsEntry component:
+CommentsEntry::make('comments')
+    ->mentions()
 ```
 
 To ensure mentions match Filament's default appearance, add the following CSS to your theme or `app.css` file:

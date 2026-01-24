@@ -14,7 +14,6 @@ use Tilto\Commentable\Facades\CommentForm;
 use Tilto\Commentable\Livewire\Actions\Delete;
 use Tilto\Commentable\Livewire\Actions\Edit;
 use Tilto\Commentable\Livewire\Actions\Reply;
-use Tilto\Commentable\Support\MentionProviderRegistry;
 
 class Comment extends Component implements HasActions, HasSchemas
 {
@@ -46,7 +45,7 @@ class Comment extends Component implements HasActions, HasSchemas
 
     public int $depth = 0;
 
-    public ?string $mentionsConfig = null;
+    public bool $enableMentions = false;
 
     public array $toolbarButtons = [
         ['bold', 'italic', 'strike'],
@@ -57,15 +56,6 @@ class Comment extends Component implements HasActions, HasSchemas
         'comment-replied' => '$refresh',
         'comment-deleted' => '$refresh',
     ];
-
-    protected function reconstructMentions(): ?array
-    {
-        if (!$this->mentionsConfig) {
-            return null;
-        }
-
-        return MentionProviderRegistry::get($this->mentionsConfig);
-    }
 
     public function render()
     {
@@ -100,13 +90,16 @@ class Comment extends Component implements HasActions, HasSchemas
     {
         $formComponents = CommentForm::make($this);
 
-        $mentions = $this->reconstructMentions();
+        // Fetch mentions directly from model if enabled
+        if ($this->enableMentions) {
+            $mentions = $this->record->getCommentMentionProviders();
 
-        if ($mentions && is_array($formComponents)) {
-            foreach ($formComponents as $component) {
-                if (method_exists($component, 'mentions')) {
-                    $component->mentions($mentions);
-                    break;
+            if ($mentions && is_array($formComponents)) {
+                foreach ($formComponents as $component) {
+                    if (method_exists($component, 'mentions')) {
+                        $component->mentions($mentions);
+                        break;
+                    }
                 }
             }
         }

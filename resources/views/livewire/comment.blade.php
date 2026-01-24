@@ -107,7 +107,7 @@
                     :file-attachments-accepted-file-types="$fileAttachmentsAcceptedFileTypes"
                     :file-attachments-max-size="$fileAttachmentsMaxSize"
                     :is-nestable="$isNestable"
-                    :mentions-config="$mentionsConfig"
+                    :enable-mentions="$enableMentions"
                     :depth="$depth + 1"
                     :key="'comment-' . $reply->id"
                 />

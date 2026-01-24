@@ -19,4 +19,11 @@ interface Commentable
      * @return string
      */
     public function getMorphClass();
+
+    /**
+     * Get mention providers for comments
+     *
+     * @return array|null
+     */
+    public function getCommentMentionProviders(): ?array;
 }

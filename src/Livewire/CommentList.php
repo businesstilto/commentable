@@ -29,7 +29,7 @@ class CommentList extends Component
 
     public bool $isNestable = false;
 
-    public ?string $mentionsConfig = null;
+    public bool $enableMentions = false;
 
     public array $toolbarButtons = [
         ['bold', 'italic', 'strike'],
