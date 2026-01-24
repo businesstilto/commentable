@@ -60,7 +60,7 @@ class Comment extends Component implements HasActions, HasSchemas
 
     protected function reconstructMentions(): ?array
     {
-        if (!$this->mentionsConfig) {
+        if (! $this->mentionsConfig) {
             return null;
         }
 
@@ -106,6 +106,7 @@ class Comment extends Component implements HasActions, HasSchemas
             foreach ($formComponents as $component) {
                 if (method_exists($component, 'mentions')) {
                     $component->mentions($mentions);
+
                     break;
                 }
             }

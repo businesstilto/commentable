@@ -16,6 +16,7 @@ class MentionProviderRegistry
     public static function get(string $key): ?array
     {
         $all = session()->get(static::$sessionKey, []);
+
         return $all[$key] ?? null;
     }
 

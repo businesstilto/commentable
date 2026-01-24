@@ -49,7 +49,7 @@ class CreateComment extends Component implements HasActions, HasSchemas
 
     protected function reconstructMentions(): ?array
     {
-        if (!$this->mentionsConfig) {
+        if (! $this->mentionsConfig) {
             return null;
         }
 

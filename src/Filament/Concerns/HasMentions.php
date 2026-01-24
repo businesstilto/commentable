@@ -25,7 +25,7 @@ trait HasMentions
     {
         $mentions = $this->mentions;
 
-        if (!$mentions) {
+        if (! $mentions) {
             return null;
         }
 
