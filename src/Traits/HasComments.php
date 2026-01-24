@@ -2,12 +2,12 @@
 
 namespace Tilto\Commentable\Traits;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Facades\Log;
 use Tilto\Commentable\Contracts\Commenter;
 use Tilto\Commentable\Events\CommentCreatedEvent;
 use Tilto\Commentable\Models\Comment;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Log;
 
 trait HasComments
 {
@@ -18,7 +18,7 @@ trait HasComments
             ->orderBy('created_at', 'asc');
     }
 
-    public function comment(Model $commentable, ?int $parent_id = null, string $body, Commenter $author): Comment
+    public function comment(Model $commentable, ?int $parent_id, string $body, Commenter $author): Comment
     {
         Log::info('Creating comment', [
             'commentable_type' => get_class($commentable),

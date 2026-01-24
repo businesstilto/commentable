@@ -23,7 +23,7 @@ trait Reply
 
     public function openReply()
     {
-        if (!auth()->user()?->can('reply', $this->comment)) {
+        if (! auth()->user()?->can('reply', $this->comment)) {
             return;
         }
 
@@ -45,7 +45,7 @@ trait Reply
 
         $user = auth()->check() ? auth()->user() : null;
 
-        if (method_exists($this->record, 'comment') && $user && !empty($data['body'])) {
+        if (method_exists($this->record, 'comment') && $user && ! empty($data['body'])) {
             $this->record->comment(
                 $this->record,
                 $this->comment->id,
