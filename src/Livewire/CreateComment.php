@@ -66,7 +66,7 @@ class CreateComment extends Component implements HasActions, HasSchemas
 
         $user = auth()->check() ? auth()->user() : null;
 
-        if (method_exists($this->record, 'comment') && $user && !empty($data['body'])) {
+        if (method_exists($this->record, 'comment') && $user && ! empty($data['body'])) {
             $this->record->comment(body: $data['body'], author: $user);
 
             $this->dispatch('comment-created');
