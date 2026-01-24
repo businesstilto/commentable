@@ -1,7 +1,7 @@
 <div align="left">
     <a href="https://tilto.nl">
       <picture>
-        <img alt="Cover" src="/cover.webp">
+        <img alt="cover" src="/cover.webp">
       </picture>
     </a>
 
@@ -22,6 +22,15 @@ Inspired by and built upon code from the [Kirschbaum Commentions package](https:
 > [!CAUTION]
 > This plugin is currently in beta and may contain bugs or incomplete features. It is not recommended for use in production environments until a stable release is available.
 
+## Preview
+
+<div align="left">
+<a href="https://tilto.nl">
+  <picture>
+    <img alt="preview" src="/preview.png">
+  </picture>
+</a>
+    
 ## Requirements
 
 - Laravel 11.x/12.x
