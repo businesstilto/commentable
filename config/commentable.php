@@ -21,7 +21,7 @@ return [
             'enabled' => true,
             'event' => Tilto\Commentable\Events\CommentCreatedEvent::class,
             'listener' => Tilto\Commentable\Listeners\HandleCommentCreated::class,
-        ]
+        ],
     ],
 
     /*
