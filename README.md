@@ -142,7 +142,7 @@ class Post extends Model implements Commentable
 
 ### Custom policy
 
-You can define a custom policy for the `Comment` model to control who can create, update, or delete comments. First, create a new policy class (for example, `App\Policies\CommentPolicy`) and extend the default policy:
+You can define a custom policy for the `Comment` model to control who can create, update, reply, or delete comments. First, create a new policy class (for example, `App\Policies\CommentPolicy`) and extend the default policy:
 
 ```php
 namespace App\Policies;
