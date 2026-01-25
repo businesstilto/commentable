@@ -229,7 +229,7 @@ CommentsEntry::make('comments')
 
 #### Button position
 
-You can set the position of the "Add Comment" button using the `buttonPosition` method:
+You can set the position of the form buttons using the `buttonPosition` method:
 
 ```php
 CommentsEntry::make('comments')
@@ -249,8 +249,6 @@ CommentsEntry::make('comments')
 ```
 
 The default toolbar buttons are `bold`, `italic`, `strike`, and `attachFiles`.
-
-You can leave the array empty to not show a toolbar at all:
 
 To hide the toolbar completely, simply pass an empty array:
 
