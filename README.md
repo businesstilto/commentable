@@ -10,7 +10,6 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/businesstilto/commentable.svg?style=for-the-badge)](https://packagist.org/packages/businesstilto/commentable)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=for-the-badge)](LICENSE.md)
-[![Quality Score](https://img.shields.io/scrutinizer/g/businesstilto/commentable.svg?style=for-the-badge)](https://scrutinizer-ci.com/g/businesstilto/commentable)
 [![Total Downloads](https://img.shields.io/packagist/dt/businesstilto/commentable.svg?style=for-the-badge)](https://packagist.org/packages/businesstilto/commentable)
 
 </div>
