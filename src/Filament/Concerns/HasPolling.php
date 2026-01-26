@@ -6,23 +6,23 @@ trait HasPolling
 {
     protected bool $enablePolling = false;
 
-    protected ?string $pollingInterval = null;
+    protected ?string $pollInterval = null;
 
     public function enablePolling(bool $condition = true): static
     {
         $this->enablePolling = $condition;
 
         if ($condition) {
-            $this->pollingInterval = null;
+            $this->pollInterval = null;
         }
 
         return $this;
     }
 
-    public function pollingInterval(string $interval): static
+    public function pollInterval(string $interval): static
     {
         $this->enablePolling = true;
-        $this->pollingInterval = $interval;
+        $this->pollInterval = $interval;
 
         return $this;
     }
@@ -32,8 +32,8 @@ trait HasPolling
         return $this->enablePolling;
     }
 
-    public function getPollingInterval(): ?string
+    public function getPollInterval(): ?string
     {
-        return $this->pollingInterval;
+        return $this->pollInterval;
     }
 }

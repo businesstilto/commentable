@@ -24,6 +24,8 @@ trait Create
             $this->dispatch('comment-created')->to(CommentList::class);
 
             $this->form->fill();
+
+            $this->dispatch('reset-submitting');
         } else {
             Notification::make()
                 ->title(__('commentable::translations.notifications.something_went_wrong'))

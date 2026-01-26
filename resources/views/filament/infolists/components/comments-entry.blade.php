@@ -28,7 +28,7 @@
         :file-attachments-accepted-file-types="$getFileAttachmentsAcceptedFileTypes()"
         :file-attachments-max-size="$getFileAttachmentsMaxSize()"
         :should-poll="$shouldPoll()"
-        :polling-interval="$getPollingInterval()"
+        :polling-interval="$getPollInterval()"
         :is-nestable="$isNestable()"
         :enable-mentions="$getMentionsEnabled()"
         :toolbar-buttons="$getToolbarButtons()"

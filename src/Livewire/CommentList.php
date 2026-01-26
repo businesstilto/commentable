@@ -27,7 +27,7 @@ class CommentList extends Component
 
     public bool $shouldPoll = false;
 
-    public ?string $pollingInterval = null;
+    public ?string $pollInterval = null;
 
     public bool $isNestable = false;
 

@@ -1,5 +1,5 @@
 <div>
-    <div x-data="{ submitting: false }">
+    <div x-data="{ submitting: false }" @reset-submitting.window="submitting = false">
         {{ $this->form }}
 
         <div @if($buttonPosition === 'right') class="fi-create-comment-actions" @endif>

@@ -355,7 +355,7 @@ You can enable polling to automatically refresh the comments list at a specified
 
 ```php
 CommentsEntry::make('comments')
-    ->pollingInterval('5s') // Refresh every 5 seconds
+    ->pollInterval('5s') // Refresh every 5 seconds
 ```
 
 Or by using the default interval:
