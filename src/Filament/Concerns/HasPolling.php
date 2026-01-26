@@ -6,6 +6,8 @@ trait HasPolling
 {
     protected bool $enablePolling = false;
 
+    protected ?string $pollingInterval = null;
+
     public function enablePolling(bool $condition = true): static
     {
         $this->enablePolling = $condition;
