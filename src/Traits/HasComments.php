@@ -2,9 +2,9 @@
 
 namespace Tilto\Commentable\Traits;
 
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Support\Facades\Log;
 use Tilto\Commentable\Contracts\Commenter;
 use Tilto\Commentable\Events\CommentCreatedEvent;
 use Tilto\Commentable\Models\Comment;
@@ -20,13 +20,6 @@ trait HasComments
 
     public function comment(Model $commentable, ?int $parent_id, string $body, Commenter $author): Comment
     {
-        Log::info('Creating comment', [
-            'commentable_type' => get_class($commentable),
-            'commentable_id' => $commentable->getKey(),
-            'parent_id' => $parent_id,
-            'author_id' => $author->getKey(),
-        ]);
-
         $commentModel = config('commentable.comment.model');
 
         if ($author->cannot('create', $commentModel)) {
