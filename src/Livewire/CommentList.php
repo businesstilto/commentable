@@ -2,12 +2,13 @@
 
 namespace Tilto\Commentable\Livewire;
 
+use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 use Tilto\Commentable\Contracts\Commentable;
 
 class CommentList extends Component
 {
-    public Commentable $record;
+    public Model $record;
 
     public string $buttonPosition = 'left';
 

@@ -8,8 +8,8 @@ use Filament\Actions\Contracts\HasActions;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Schemas\Schema;
+use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
-use Tilto\Commentable\Contracts\Commentable;
 use Tilto\Commentable\Facades\CommentForm;
 use Tilto\Commentable\Livewire\Actions\Delete;
 use Tilto\Commentable\Livewire\Actions\Edit;
@@ -23,7 +23,7 @@ class Comment extends Component implements HasActions, HasSchemas
     use InteractsWithSchemas;
     use Reply;
 
-    public Commentable $record;
+    public Model $record;
 
     public $comment;
 
@@ -66,11 +66,6 @@ class Comment extends Component implements HasActions, HasSchemas
         }
 
         return view('commentable::livewire.comment');
-    }
-
-    public function cancel()
-    {
-        $this->dispatch('close-modal', id: 'delete-comment');
     }
 
     public function deleteAction(): Action

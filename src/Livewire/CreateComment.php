@@ -7,8 +7,8 @@ use Filament\Actions\Contracts\HasActions;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Schemas\Schema;
+use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
-use Tilto\Commentable\Contracts\Commentable;
 use Tilto\Commentable\Facades\CommentForm;
 use Tilto\Commentable\Livewire\Actions\Create;
 
@@ -18,7 +18,7 @@ class CreateComment extends Component implements HasActions, HasSchemas
     use InteractsWithActions;
     use InteractsWithSchemas;
 
-    public Commentable $record;
+    public Model $record;
 
     public ?array $data = [];
 
