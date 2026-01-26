@@ -4,6 +4,7 @@ namespace Tilto\Commentable\Livewire\Actions;
 
 use Filament\Actions\Action;
 use Filament\Notifications\Notification;
+use Tilto\Commentable\Livewire\CommentList;
 
 trait Delete
 {
@@ -22,7 +23,7 @@ trait Delete
             ->action(function () {
                 $this->comment->delete();
 
-                $this->dispatch('comment-deleted');
+                $this->dispatch('comment-deleted')->to(CommentList::class);
 
                 Notification::make()
                     ->title(__('commentable::translations.notifications.deleted'))

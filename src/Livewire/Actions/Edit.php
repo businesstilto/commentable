@@ -4,6 +4,7 @@ namespace Tilto\Commentable\Livewire\Actions;
 
 use Filament\Actions\Action;
 use Filament\Notifications\Notification;
+use Tilto\Commentable\Livewire\CommentList;
 
 trait Edit
 {
@@ -56,7 +57,7 @@ trait Edit
 
             $this->isEditing = false;
 
-            $this->dispatch('comment-updated');
+            $this->dispatch('comment-updated')->to(CommentList::class);
         } else {
             Notification::make()
                 ->title(__('commentable::translations.notifications.something_went_wrong'))

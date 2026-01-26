@@ -3,6 +3,7 @@
 namespace Tilto\Commentable\Livewire\Actions;
 
 use Filament\Notifications\Notification;
+use Tilto\Commentable\Livewire\CommentList;
 
 trait Create
 {
@@ -20,7 +21,7 @@ trait Create
                 $user
             );
 
-            $this->dispatch('comment-created');
+            $this->dispatch('comment-created')->to(CommentList::class);
 
             $this->form->fill();
         } else {

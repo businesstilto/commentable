@@ -4,6 +4,7 @@ namespace Tilto\Commentable\Livewire\Actions;
 
 use Filament\Actions\Action;
 use Filament\Notifications\Notification;
+use Tilto\Commentable\Livewire\CommentList;
 
 trait Reply
 {
@@ -53,7 +54,7 @@ trait Reply
                 $user
             );
 
-            $this->dispatch('comment-replied');
+            $this->dispatch('comment-replied')->to(CommentList::class);
 
             $this->form->fill();
 
