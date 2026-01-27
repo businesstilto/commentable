@@ -13,8 +13,6 @@
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=for-the-badge)](LICENSE.md)
 [![Total Downloads](https://img.shields.io/packagist/dt/businesstilto/commentable.svg?style=for-the-badge)](https://packagist.org/packages/businesstilto/commentable)
 
-</div>
-
 An extensive and very customizable package that adds commenting in Filament v4.5 and newer.
 
 Inspired by and built upon code from the [Kirschbaum Commentions package](https://github.com/kirschbaum-development/commentions), but takes a different approach to commenting in Filament.
@@ -22,11 +20,12 @@ Inspired by and built upon code from the [Kirschbaum Commentions package](https:
 ## Preview
 
 <div align="left">
-<a href="https://tilto.nl">
-  <picture>
-    <img alt="preview" src="/preview.png">
-  </picture>
-</a>
+    <a href="https://tilto.nl">
+      <picture>
+        <img alt="preview" src="/preview.png">
+      </picture>
+    </a>
+</div>
     
 ## Requirements
 
