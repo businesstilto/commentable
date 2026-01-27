@@ -4,6 +4,7 @@
         <img alt="cover" src="/cover.webp">
       </picture>
     </a>
+</div>
 
 <br />
 <br />
