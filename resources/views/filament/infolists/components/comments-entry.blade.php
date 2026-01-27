@@ -3,7 +3,7 @@
     :entry="$entry"
     class="fi-commentable"
 >
-    <livewire:commentable::livewire.create-comment
+    <livewire:commentable.livewire.create-comment
         :record="$record"
         :button-position="$getButtonPosition()"
         :is-markdown-editor="$isMarkdownEditor()"
@@ -17,7 +17,7 @@
         :key="'create-comment-' . $record->id"
     />
 
-    <livewire:commentable::livewire.comment-list
+    <livewire:commentable.livewire.comment-list
         :record="$record"
         :button-position="$getButtonPosition()"
         :is-markdown-editor="$isMarkdownEditor()"

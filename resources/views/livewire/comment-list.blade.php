@@ -25,7 +25,7 @@
     <div wire:key="comments-list-{{ $record->id }}" class="fi-comment-list-items"
         @if ($shouldPoll) wire:poll @elseif ($pollInterval) wire:poll.{{ $pollInterval }} @endif>
         @foreach ($record->comments->whereNull('parent_id') as $comment)
-            <livewire:commentable::livewire.comment
+            <livewire:commentable.livewire.comment
                 :record="$record"
                 :comment="$comment"
                 :button-position="$buttonPosition"

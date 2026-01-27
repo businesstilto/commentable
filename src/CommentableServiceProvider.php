@@ -61,9 +61,9 @@ class CommentableServiceProvider extends PackageServiceProvider
     public function packageBooted(): void
     {
         // Register Livewire Components
-        Livewire::component('commentable::livewire.create-comment', CreateComment::class);
-        Livewire::component('commentable::livewire.comment-list', CommentList::class);
-        Livewire::component('commentable::livewire.comment', Comment::class);
+        Livewire::component('commentable.livewire.create-comment', CreateComment::class);
+        Livewire::component('commentable.livewire.comment-list', CommentList::class);
+        Livewire::component('commentable.livewire.comment', Comment::class);
 
         // Asset Registration
         FilamentAsset::register(

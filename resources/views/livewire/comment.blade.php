@@ -105,7 +105,7 @@
     @if ($isNestable && $depth < 2 && $comment->relationLoaded('replies') && $comment->replies->isNotEmpty())
         <div class="fi-comment-replies">
             @foreach ($comment->replies as $reply)
-                <livewire:commentable::livewire.comment :record="$record" :comment="$reply" :button-position="$buttonPosition"
+                <livewire:commentable.livewire.comment :record="$record" :comment="$reply" :button-position="$buttonPosition"
                     :is-markdown-editor="$isMarkdownEditor" :toolbar-buttons="$toolbarButtons" :file-attachments-disk="$fileAttachmentsDisk" :file-attachments-directory="$fileAttachmentsDirectory" :file-attachments-accepted-file-types="$fileAttachmentsAcceptedFileTypes"
                     :file-attachments-max-size="$fileAttachmentsMaxSize" :is-nestable="$isNestable" :enable-mentions="$enableMentions" :depth="$depth + 1" :key="'comment-' . $reply->id" />
             @endforeach
