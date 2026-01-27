@@ -377,15 +377,24 @@ CommentsEntry::make('comments')
 
 ## Styling
 
-> [!IMPORTANT] 
+> [!IMPORTANT]
 > If you are using **Filament panels without a custom theme**, make sure to first follow the official [Filament documentation](https://filamentphp.com/docs/4.x/styling/overview#creating-a-custom-theme) on creating one.
 
 Once you have a custom theme set up, add the plugin's views and CSS to your theme's CSS file:
 
 ```css
 @import '../../../../vendor/businesstilto/commentable/resources/css/plugin.css';
-@source "../../../../vendor/businesstilto/commentable/resources/views/**/*.blade.php";
 ```
+
+> [!CAUTION]
+> This package relies on [Tailwind Typography](https://github.com/tailwindlabs/tailwindcss-typography) for rendering rich text content.  
+> Ensure you have the Typography plugin installed and included in your CSS:
+>
+> Add this to your theme CSS file:
+>
+> ```css
+> @import "@tailwindcss/typography";
+> ```
 
 ### Behavior
 
