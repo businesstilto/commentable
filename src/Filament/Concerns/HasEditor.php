@@ -4,7 +4,7 @@ namespace Tilto\Commentable\Filament\Concerns;
 
 trait HasEditor
 {
-    protected array|null $toolbarButtons = null;
+    protected ?array $toolbarButtons = null;
 
     public function toolbarButtons(array $buttons): static
     {

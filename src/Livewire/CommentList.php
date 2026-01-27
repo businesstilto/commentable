@@ -33,7 +33,7 @@ class CommentList extends Component
 
     public bool $enableMentions = false;
 
-    public array|null $toolbarButtons = null;
+    public ?array $toolbarButtons = null;
 
     protected $listeners = [
         'comment-created' => '$refresh',
