@@ -115,14 +115,15 @@ To enable commenting functionality, you need to update your models as follows:
 
 #### 1. Implement the Commenter contract
 
-In your **User** model, implement the `Commenter` contract:
+In your **User** model, implement the `Commenter` contract and use the `isCommenter` trait:
 
 ```php
 use Tilto\Commentable\Contracts\Commenter;
+use Tilto\Commentable\Traits\IsCommenter;
 
 class User extends Model implements Commenter
 {
-    // ...
+    use isCommenter;
 }
 ```
 
