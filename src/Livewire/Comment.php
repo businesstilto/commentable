@@ -49,10 +49,7 @@ class Comment extends Component implements HasActions, HasSchemas
 
     public bool $enableMentions = false;
 
-    public array $toolbarButtons = [
-        ['bold', 'italic', 'strike'],
-        ['attachFiles'],
-    ];
+    public ?array $toolbarButtons = null;
 
     protected $listeners = [
         'comment-replied' => '$refresh',

@@ -4,6 +4,7 @@
         <img alt="cover" src="/cover.webp">
       </picture>
     </a>
+</div>
 
 <br />
 <br />
@@ -12,8 +13,6 @@
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=for-the-badge)](LICENSE.md)
 [![Total Downloads](https://img.shields.io/packagist/dt/businesstilto/commentable.svg?style=for-the-badge)](https://packagist.org/packages/businesstilto/commentable)
 
-</div>
-
 An extensive and very customizable package that adds commenting in Filament v4.5 and newer.
 
 Inspired by and built upon code from the [Kirschbaum Commentions package](https://github.com/kirschbaum-development/commentions), but takes a different approach to commenting in Filament.
@@ -21,11 +20,12 @@ Inspired by and built upon code from the [Kirschbaum Commentions package](https:
 ## Preview
 
 <div align="left">
-<a href="https://tilto.nl">
-  <picture>
-    <img alt="preview" src="/preview.png">
-  </picture>
-</a>
+    <a href="https://tilto.nl">
+      <picture>
+        <img alt="preview" src="/preview.png">
+      </picture>
+    </a>
+</div>
     
 ## Requirements
 
@@ -115,14 +115,15 @@ To enable commenting functionality, you need to update your models as follows:
 
 #### 1. Implement the Commenter contract
 
-In your **User** model, implement the `Commenter` contract:
+In your **User** model, implement the `Commenter` contract and use the `isCommenter` trait:
 
 ```php
 use Tilto\Commentable\Contracts\Commenter;
+use Tilto\Commentable\Traits\IsCommenter;
 
 class User extends Model implements Commenter
 {
-    // ...
+    use isCommenter;
 }
 ```
 
@@ -376,15 +377,24 @@ CommentsEntry::make('comments')
 
 ## Styling
 
-> [!IMPORTANT] 
+> [!IMPORTANT]
 > If you are using **Filament panels without a custom theme**, make sure to first follow the official [Filament documentation](https://filamentphp.com/docs/4.x/styling/overview#creating-a-custom-theme) on creating one.
 
 Once you have a custom theme set up, add the plugin's views and CSS to your theme's CSS file:
 
 ```css
 @import '../../../../vendor/businesstilto/commentable/resources/css/plugin.css';
-@source "../../../../vendor/businesstilto/commentable/resources/views/**/*.blade.php";
 ```
+
+> [!CAUTION]
+> This package relies on [Tailwind Typography](https://github.com/tailwindlabs/tailwindcss-typography) for rendering rich text content.  
+> Ensure you have the Typography plugin installed and included in your CSS:
+>
+> Add this to your theme CSS file:
+>
+> ```css
+> @import "@tailwindcss/typography";
+> ```
 
 ### Behavior
 

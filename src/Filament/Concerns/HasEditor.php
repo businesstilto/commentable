@@ -4,10 +4,7 @@ namespace Tilto\Commentable\Filament\Concerns;
 
 trait HasEditor
 {
-    protected array $toolbarButtons = [
-        ['bold', 'italic', 'strike'],
-        ['attachFiles'],
-    ];
+    protected ?array $toolbarButtons = null;
 
     public function toolbarButtons(array $buttons): static
     {
@@ -16,7 +13,7 @@ trait HasEditor
         return $this;
     }
 
-    public function getToolbarButtons(): array
+    public function getToolbarButtons(): ?array
     {
         return $this->toolbarButtons;
     }

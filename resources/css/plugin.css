@@ -31,7 +31,7 @@
 }
 
 .fi-commentable .fi-comment-replies {
-    @apply ml-8 sm:ml-12 md:ml-14 space-y-4 border-l border-gray-200 dark:border-gray-800 pl-3 sm:pl-4 md:pl-5;
+    @apply ms-8 sm:ms-12 md:ms-14 space-y-4 border-s border-gray-200 dark:border-gray-800 ps-3 sm:ps-4 md:ps-5;
 }
 
 .fi-commentable .fi-comment-avatar {

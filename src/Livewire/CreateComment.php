@@ -38,10 +38,7 @@ class CreateComment extends Component implements HasActions, HasSchemas
 
     public ?int $fileAttachmentsMaxSize = null;
 
-    public array $toolbarButtons = [
-        ['bold', 'italic', 'strike'],
-        ['attachFiles'],
-    ];
+    public ?array $toolbarButtons = null;
 
     public function mount(): void
     {

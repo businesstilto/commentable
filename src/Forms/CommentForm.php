@@ -20,8 +20,13 @@ class CommentForm
             ->required()
             ->maxLength(65535);
 
-        if ($component->toolbarButtons ?? null) {
+        if ($component->toolbarButtons !== null) {
             $editor->toolbarButtons($component->toolbarButtons);
+        } else {
+            $editor->toolbarButtons([
+                ['bold', 'italic', 'strike'],
+                ['attachFiles'],
+            ]);
         }
 
         if ($component->resizableImages) {
