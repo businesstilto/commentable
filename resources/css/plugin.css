@@ -34,67 +34,63 @@
     @apply ml-8 sm:ml-12 md:ml-14 space-y-4 border-l border-gray-200 dark:border-gray-800 pl-3 sm:pl-4 md:pl-5;
 }
 
-.fi-comment-avatar {
+.fi-commentable .fi-comment-avatar {
     @apply w-8 h-8 sm:w-10 sm:h-10 rounded-full shrink-0;
 }
 
-.fi-comment-header {
+.fi-commentable .fi-comment-header {
     @apply flex gap-3 sm:gap-4;
 }
 
-.fi-comment-content {
+.fi-commentable .fi-comment-content {
     @apply flex-1 min-w-0;
 }
 
-.fi-comment-meta {
+.fi-commentable .fi-comment-meta {
     @apply flex items-center justify-between gap-2;
 }
 
-.fi-comment-meta-author {
+.fi-commentable .fi-comment-meta-author {
     @apply min-w-0 flex-1;
 }
 
-.fi-comment-meta-author-inner {
+.fi-commentable .fi-comment-meta-author-inner {
     @apply font-semibold text-sm;
 }
 
-.fi-comment-date {
+.fi-commentable .fi-comment-date {
     @apply text-gray-500 dark:text-gray-400 text-xs ml-2;
 }
 
-.fi-comment-actions {
+.fi-commentable .fi-comment-actions {
     @apply flex gap-1 shrink-0;
 }
 
-.fi-comment-delete-actions {
+.fi-commentable .fi-comment-delete-actions {
     @apply flex w-full gap-3;
 }
 
-.fi-comment-delete-cancel {
+.fi-commentable .fi-comment-delete-cancel {
     @apply basis-1/2;
 }
 
-.fi-comment-delete-confirm {
+.fi-commentable .fi-comment-delete-confirm {
     @apply basis-1/2;
 }
 
-.fi-comment-body {
+.fi-commentable .fi-comment-body {
     @apply prose-img:rounded max-w-none dark:prose-invert prose-p:text-gray-700 dark:prose-p:text-gray-300 text-sm break-words;
 }
 
-.fi-comment-edit-form {
+.fi-commentable .fi-comment-edit-form {
     @apply mt-3;
 }
 
-.fi-comment-edit-actions-right {
+.fi-commentable .fi-comment-edit-actions-right {
     @apply flex justify-end gap-3 mt-4;
 }
 
-.fi-comment-edit-actions {
+.fi-commentable .fi-comment-edit-actions {
     @apply mt-4;
-}
-
-.fi-comment-replies {
-    @apply ml-8 sm:ml-12 md:ml-14 space-y-4 border-l border-gray-200 dark:border-gray-800 pl-3 sm:pl-4 md:pl-5;
 }
 
