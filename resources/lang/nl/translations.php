@@ -30,4 +30,5 @@ return [
         'something_went_wrong' => 'Er is iets misgegaan. Probeer het later opnieuw.',
     ],
     'reply' => 'Beantwoorden',
+    'add_reaction' => 'Voeg een reactie toe',
 ];

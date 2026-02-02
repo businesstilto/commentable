@@ -64,6 +64,7 @@ class CommentableServiceProvider extends PackageServiceProvider
         Livewire::component('commentable.livewire.create-comment', CreateComment::class);
         Livewire::component('commentable.livewire.comment-list', CommentList::class);
         Livewire::component('commentable.livewire.comment', Comment::class);
+        Livewire::component('commentable.livewire.comment-reactions', \Tilto\Commentable\Livewire\CommentReactions::class);
 
         // Asset Registration
         FilamentAsset::register(
@@ -145,6 +146,7 @@ class CommentableServiceProvider extends PackageServiceProvider
     {
         return [
             'create_comments_table',
+            'create_comment_reactions_table',
         ];
     }
 }

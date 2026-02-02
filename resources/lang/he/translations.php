@@ -3,7 +3,7 @@
 return [
     'input_placeholder' => 'כתוב את התגובה שלך...',
     'buttons' => [
-        'post' => 'פרסם',
+        'post' => 'תגובה',
         'edit' => 'שמור שינויים',
         'reply' => 'הגב',
         'cancel' => 'ביטול',
@@ -30,4 +30,5 @@ return [
         'something_went_wrong' => 'משהו השתבש. אנא נסה שוב מאוחר יותר.',
     ],
     'reply' => 'הגב',
+    'add_reaction' => 'הוסף תגובה',
 ];

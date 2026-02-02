@@ -39,6 +39,11 @@ class Comment extends Model
             ->orderBy('created_at', 'asc');
     }
 
+    public function reactions(): HasMany
+    {
+        return $this->hasMany(CommentReaction::class);
+    }
+
     public function isAuthor(Commenter $author)
     {
         return $this->author_id === $author->getKey()
@@ -56,5 +61,35 @@ class Comment extends Model
         }
 
         return $depth;
+    }
+
+    public function toggleReaction(string $reaction, ?Commenter $user = null): void
+    {
+        if (! $user) {
+            $user = auth()->user();
+        }
+
+        if (! $user || ! in_array($reaction, config('commentable.reactions.allowed', []))) {
+            return;
+        }
+
+        /** @var CommentReaction $existingReaction */
+        $existingReaction = $this->reactions()
+            ->where('reactor_id', $user->getKey())
+            ->where('reactor_type', $user->getMorphClass())
+            ->where('reaction', $reaction)
+            ->first();
+
+        if ($existingReaction) {
+            $existingReaction->delete();
+            event(new \Tilto\Commentable\Events\CommentReactionEvent($this, $existingReaction, 'removed'));
+        } else {
+            $newReaction = $this->reactions()->create([
+                'reactor_id' => $user->getKey(),
+                'reactor_type' => $user->getMorphClass(),
+                'reaction' => $reaction,
+            ]);
+            event(new \Tilto\Commentable\Events\CommentReactionEvent($this, $newReaction, 'added'));
+        }
     }
 }
