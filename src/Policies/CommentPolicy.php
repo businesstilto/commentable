@@ -22,6 +22,11 @@ class CommentPolicy
         return true;
     }
 
+    public function react(Commenter $user, Comment $comment): bool
+    {
+        return true;
+    }
+
     public function delete(Commenter $user, Comment $comment): bool
     {
         return $comment->isAuthor($user);

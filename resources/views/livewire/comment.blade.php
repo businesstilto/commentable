@@ -63,6 +63,12 @@
                             @endif
                         @endif
                     </div>
+
+                    {{-- Reactions Component --}}
+                    <livewire:commentable.livewire.comment-reactions
+                        :comment="$comment"
+                        :key="'reactions-' . $comment->id"
+                    />
                 @else
                     <form wire:submit="edit" class="fi-comment-edit-form">
                         {{ $this->form }}

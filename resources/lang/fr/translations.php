@@ -30,4 +30,5 @@ return [
         'something_went_wrong' => 'Une erreur s\'est produite. Veuillez réessayer plus tard.',
     ],
     'reply' => 'Répondre',
+    'add_reaction' => 'Ajouter un commentaire',
 ];

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Tilto\Commentable\Contracts\Commenter;
+use Tilto\Commentable\Events\CommentReactionEvent;
 
 class Comment extends Model
 {
@@ -39,6 +40,11 @@ class Comment extends Model
             ->orderBy('created_at', 'asc');
     }
 
+    public function reactions(): HasMany
+    {
+        return $this->hasMany(config('commentable.reaction.model'));
+    }
+
     public function isAuthor(Commenter $author)
     {
         return $this->author_id === $author->getKey()
@@ -56,5 +62,39 @@ class Comment extends Model
         }
 
         return $depth;
+    }
+
+    public function toggleReaction(string $reaction, ?Commenter $user = null): void
+    {
+        if (! $user) {
+            $user = auth()->user();
+        }
+
+        if (! $user || ! in_array($reaction, config('commentable.reaction.allowed', []))) {
+            return;
+        }
+
+        if (! $user->can('react', $this)) {
+            return;
+        }
+
+        /** @var CommentReaction $existingReaction */
+        $existingReaction = $this->reactions()
+            ->where('reactor_id', $user->getKey())
+            ->where('reactor_type', $user->getMorphClass())
+            ->where('reaction', $reaction)
+            ->first();
+
+        if ($existingReaction) {
+            $existingReaction->delete();
+            event(new CommentReactionEvent($this, $existingReaction, 'removed'));
+        } else {
+            $newReaction = $this->reactions()->create([
+                'reactor_id' => $user->getKey(),
+                'reactor_type' => $user->getMorphClass(),
+                'reaction' => $reaction,
+            ]);
+            event(new CommentReactionEvent($this, $newReaction, 'added'));
+        }
     }
 }

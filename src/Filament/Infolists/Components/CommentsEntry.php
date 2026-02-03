@@ -10,6 +10,7 @@ use Tilto\Commentable\Filament\Concerns\HasEditor;
 use Tilto\Commentable\Filament\Concerns\HasMarkdownEditor;
 use Tilto\Commentable\Filament\Concerns\HasMentions;
 use Tilto\Commentable\Filament\Concerns\HasPolling;
+use Tilto\Commentable\Filament\Concerns\HasReactions;
 use Tilto\Commentable\Filament\Concerns\HasReplies;
 use Tilto\Commentable\Filament\Concerns\HasResizableImages;
 
@@ -22,6 +23,7 @@ class CommentsEntry extends Entry
     use HasMarkdownEditor;
     use HasMentions;
     use HasPolling;
+    use HasReactions;
     use HasReplies;
     use HasResizableImages;
 

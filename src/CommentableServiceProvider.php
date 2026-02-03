@@ -14,6 +14,7 @@ use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Tilto\Commentable\Livewire\Comment;
 use Tilto\Commentable\Livewire\CommentList;
+use Tilto\Commentable\Livewire\CommentReactions;
 use Tilto\Commentable\Livewire\CreateComment;
 
 class CommentableServiceProvider extends PackageServiceProvider
@@ -64,6 +65,7 @@ class CommentableServiceProvider extends PackageServiceProvider
         Livewire::component('commentable.livewire.create-comment', CreateComment::class);
         Livewire::component('commentable.livewire.comment-list', CommentList::class);
         Livewire::component('commentable.livewire.comment', Comment::class);
+        Livewire::component('commentable.livewire.comment-reactions', CommentReactions::class);
 
         // Asset Registration
         FilamentAsset::register(
@@ -145,6 +147,7 @@ class CommentableServiceProvider extends PackageServiceProvider
     {
         return [
             'create_comments_table',
+            'create_comment_reactions_table',
         ];
     }
 }

@@ -30,4 +30,5 @@ return [
         'something_went_wrong' => 'Something went wrong. Please try again later.',
     ],
     'reply' => 'Reply',
+    'add_reaction' => 'Add reaction',
 ];
