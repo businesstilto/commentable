@@ -74,6 +74,10 @@ class Comment extends Model
             return;
         }
 
+        if (! $user->can('react', $this)) {
+            return;
+        }
+
         /** @var CommentReaction $existingReaction */
         $existingReaction = $this->reactions()
             ->where('reactor_id', $user->getKey())
