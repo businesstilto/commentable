@@ -16,17 +16,7 @@ class CommentReactions extends Component
     {
         $this->comment->toggleReaction($reaction);
 
-        // Refresh the comment to get updated reactions
-        $this->comment->refresh();
-        $this->comment->load('reactions.reactor');
-
-        $this->dispatch('comment:reaction:toggled', [
-            'commentId' => $this->comment->id,
-            'reaction' => $reaction,
-        ]);
-
-        // Clear the computed property cache
-        unset($this->reactionSummary);
+        $this->dispatch('$refresh')->self();
     }
 
     public function render(): View
@@ -34,12 +24,6 @@ class CommentReactions extends Component
         return view('commentable::livewire.comment-reactions', [
             'allowedReactions' => config('commentable.reaction.allowed', []),
         ]);
-    }
-
-    #[On('comment:reaction:toggled')]
-    public function refreshReactionSummary()
-    {
-        unset($this->reactionSummary);
     }
 
     #[Computed]
