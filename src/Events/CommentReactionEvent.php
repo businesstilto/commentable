@@ -4,8 +4,6 @@ namespace Tilto\Commentable\Events;
 
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use Tilto\Commentable\Models\Comment;
-use Tilto\Commentable\Models\CommentReaction;
 
 class CommentReactionEvent
 {
@@ -13,8 +11,8 @@ class CommentReactionEvent
     use SerializesModels;
 
     public function __construct(
-        public Comment $comment,
-        public CommentReaction $reaction,
+        public mixed $comment,
+        public mixed $reaction,
         public string $action, // 'added' or 'removed'
     ) {}
 }
