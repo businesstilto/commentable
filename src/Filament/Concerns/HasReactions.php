@@ -36,8 +36,8 @@ trait HasReactions
 
     public function getAllowedReactions(): array
     {
-        return empty($this->allowedReactions) 
-            ? config('commentable.reactions.allowed', []) 
+        return empty($this->allowedReactions)
+            ? config('commentable.reaction.allowed', [])
             : $this->allowedReactions;
     }
 }

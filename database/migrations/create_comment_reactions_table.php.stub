@@ -8,9 +8,9 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create(config('commentable.tables.comment_reactions', 'comment_reactions'), function (Blueprint $table) {
+        Schema::create('comment_reactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('comment_id')->constrained(config('commentable.tables.comments', 'comments'))->cascadeOnDelete();
+            $table->foreignId('comment_id')->constrained('comments')->cascadeOnDelete();
             $table->morphs('reactor');
 
             if (config('database.default') === 'mysql') {
@@ -27,6 +27,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists(config('commentable.tables.comment_reactions', 'comment_reactions'));
+        Schema::dropIfExists('comment_reactions');
     }
 };

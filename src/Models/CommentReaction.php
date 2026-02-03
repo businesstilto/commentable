@@ -20,11 +20,6 @@ class CommentReaction extends Model
         'reaction',
     ];
 
-    public function getTable()
-    {
-        return config('commentable.tables.comment_reactions', 'comment_reactions');
-    }
-
     /** @return BelongsTo<Comment> */
     public function comment(): BelongsTo
     {

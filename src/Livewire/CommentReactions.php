@@ -15,11 +15,11 @@ class CommentReactions extends Component
     public function toggleReaction(string $reaction): void
     {
         $this->comment->toggleReaction($reaction);
-        
+
         // Refresh the comment to get updated reactions
         $this->comment->refresh();
         $this->comment->load('reactions.reactor');
-        
+
         $this->dispatch('comment:reaction:toggled', [
             'commentId' => $this->comment->id,
             'reaction' => $reaction,
@@ -32,7 +32,7 @@ class CommentReactions extends Component
     public function render(): View
     {
         return view('commentable::livewire.comment-reactions', [
-            'allowedReactions' => config('commentable.reactions.allowed', []),
+            'allowedReactions' => config('commentable.reaction.allowed', []),
         ]);
     }
 
