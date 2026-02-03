@@ -49,6 +49,7 @@ Inspired by and built upon code from the [Kirschbaum Commentions package](https:
         - [Mentions](#mentions)
         - [File Attachments](#file-attachments)
         - [Polling](#polling)
+        - [Reactions](#reactions)
         - [Replies](#replies)
 - [Styling](#styling)
     - [Behavior](#behavior)
@@ -106,6 +107,9 @@ return [
     ],
 ];
 ```
+
+> [!IMPORTANT]
+> Version 0.3.0 introduces breaking changes related to reactions. Please refer to the [upgrade guide](https://github.com/businesstilto/commentable/releases/tag/v0.3.0) for detailed instructions on upgrading safely.
 
 ## Usage
 
@@ -365,6 +369,38 @@ Or by using the default interval:
 CommentsEntry::make('comments')
     ->enablePolling() // Refresh using the default interval
 ```
+
+#### Reactions
+
+You can enable and customize reactions for your comments. By default, reactions are enabled and use a set of allowed emojis.
+
+You can configure allowed reactions and the reaction model in `config/commentable.php`:
+
+```php
+'reaction' => [
+    'model' => Tilto\Commentable\Models\CommentReaction::class,
+    'allowed' => ['👍', '❤️', '😂', '😮', '😢', '🤔'],
+],
+```
+
+To enable or disable reactions in your `CommentsEntry` component:
+
+```php
+CommentsEntry::make('comments')
+    ->reactions() // Enable reactions (default)
+    ->disableReactions() // Disable reactions
+```
+
+To customize which reactions are allowed:
+
+```php
+CommentsEntry::make('comments')
+    ->allowedReactions(['👍', '👎', '🔥'])
+```
+
+If you do not set `allowedReactions`, the default set from your config will be used.
+
+Reactions are displayed below each comment, and users can add or remove their reaction. Each user can react once per reaction type per comment.
 
 #### Replies
 
