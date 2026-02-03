@@ -105,13 +105,25 @@
 }
 
 /* Existing reaction buttons */
-.fi-commentable .fi-comment-reactions span button {
+.fi-commentable .fi-comment-reaction-button {
     @apply inline-flex items-center justify-center gap-1 rounded-full border px-2 h-8 text-xs font-medium transition;
     @apply focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
 }
 
-/* Add reaction button - styled like commentions */
-.fi-commentable .fi-comment-reactions .relative > button {
+/* Reacted state */
+.fi-commentable .fi-comment-reaction-button--reacted {
+    @apply bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200;
+    @apply hover:bg-gray-200 dark:hover:bg-gray-600;
+}
+
+/* Not reacted state */
+.fi-commentable .fi-comment-reaction-button--not-reacted {
+    @apply bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200;
+    @apply hover:bg-gray-100 dark:hover:bg-gray-600;
+}
+
+/* Add reaction button */
+.fi-commentable .fi-comment-add-reaction-button {
     @apply inline-flex items-center justify-center gap-1 rounded-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 w-8 h-8 text-xs font-medium text-gray-700 dark:text-gray-200;
     @apply transition hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
 }
@@ -122,13 +134,19 @@
 }
 
 /* Reaction popup */
-.fi-commentable .fi-comment-reactions .absolute {
+.fi-commentable .fi-comment-reaction-popup {
     @apply absolute bottom-full mb-2 z-10 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600;
-    @apply rounded-lg shadow-lg p-2 w-max max-w-xs;
+    @apply rounded-lg shadow-lg p-2 w-max max-w-xs flex flex-wrap gap-1;
 }
 
 /* Reaction buttons in popup */
-.fi-commentable .fi-comment-reactions .absolute button {
+.fi-commentable .fi-comment-reaction-popup-button {
     @apply inline-flex items-center justify-center gap-1 rounded-full w-8 h-8 text-xs font-medium transition;
     @apply focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600;
+}
+
+/* Popup button reacted state */
+.fi-commentable .fi-comment-reaction-popup-button--reacted {
+    @apply hover:bg-gray-200 dark:hover:bg-gray-600;
 }
