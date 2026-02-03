@@ -4,7 +4,6 @@ namespace Tilto\Commentable\Livewire;
 
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Computed;
-use Livewire\Attributes\On;
 use Livewire\Component;
 use Tilto\Commentable\Models\Comment;
 
@@ -41,8 +40,8 @@ class CommentReactions extends Component
                 return [
                     'count' => $group->count(),
                     'reaction' => $group->first()->reaction,
-                    'reacted_by_current_user' => $user && $group->contains(fn ($reaction) => 
-                        $reaction->reactor_id == $user->getKey() && 
+                    'reacted_by_current_user' => $user && $group->contains(
+                        fn ($reaction) => $reaction->reactor_id == $user->getKey() &&
                         $reaction->reactor_type == $user->getMorphClass()
                     ),
                 ];
