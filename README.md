@@ -95,6 +95,8 @@ php artisan vendor:publish --tag="commentable-views"
 This is the contents of the published config file:
 
 ```php
+<?php
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -104,6 +106,16 @@ return [
     'comment' => [
         'model' => Tilto\Commentable\Models\Comment::class,
         'policy' => Tilto\Commentable\Policies\CommentPolicy::class,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Reaction
+    |--------------------------------------------------------------------------
+    */
+    'reaction' => [
+        'model' => Tilto\Commentable\Models\CommentReaction::class,
+        'allowed' => ['👍', '❤️', '😂', '😮', '😢', '🤔'],
     ],
 ];
 ```
