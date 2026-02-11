@@ -23,10 +23,10 @@
                     </div>
                     <div class="fi-comment-actions">
                         @if ($isNestable && !$isReplying && $depth < 2)
-                            @if (auth()->check() &&
-                                    (auth()->id() !== $comment->author->getKey() ||
-                                        get_class(auth()->user()) !== $comment->author->getMorphClass()) &&
-                                    auth()->user()->can('reply', $comment))
+                            @if (auth()->check() && (
+                                    config('commentable.reply.allow_self_reply', false) ||
+                                    (auth()->id() !== $comment->author->getKey() || get_class(auth()->user()) !== $comment->author->getMorphClass())
+                                ) && auth()->user()->can('reply', $comment))
                                 {{ $this->replyAction }}
                             @endif
                         @endif
@@ -48,7 +48,7 @@
                         @else
                             @php
                                 $renderer = RichContentRenderer::make($comment->body);
-                                
+
                                 if (isset($this->fileAttachmentsDisk)) {
                                     $renderer = $renderer->fileAttachmentsDisk($this->fileAttachmentsDisk);
                                 }
