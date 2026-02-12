@@ -64,7 +64,7 @@
 }
 
 .fi-commentable .fi-comment-date {
-    @apply text-gray-500 dark:text-gray-400 text-xs ml-2;
+    @apply text-gray-500 dark:text-gray-400 text-xs ms-2;
 }
 
 .fi-commentable .fi-comment-actions {
