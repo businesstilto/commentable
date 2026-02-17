@@ -441,7 +441,7 @@ Once you have a custom theme set up, add the plugin's views and CSS to your them
 > Add this to your theme CSS file:
 >
 > ```css
-> @import "@tailwindcss/typography";
+> @plugin "@tailwindcss/typography";
 > ```
 
 ### Behavior
