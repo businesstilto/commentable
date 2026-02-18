@@ -110,6 +110,15 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Reply
+    |--------------------------------------------------------------------------
+    */
+    'reply' => [
+        'allow_self_reply' => false,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Reaction
     |--------------------------------------------------------------------------
     */
@@ -421,6 +430,14 @@ You can enable replies to comments using the `nestable` method:
 ```php
 CommentsEntry::make('comments')
     ->nestable() // Enable replies
+```
+
+You can control whether the author of a comment may reply to their own comment using the package config. In the published `config/commentable.php` file set:
+
+```php
+'reply' => [
+    'allow_self_reply' => true, // default: false
+],
 ```
 
 ## Styling
