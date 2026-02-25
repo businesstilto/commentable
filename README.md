@@ -27,7 +27,7 @@ Inspired by and built upon code from the [Kirschbaum Commentions package](https:
     </a>
 </div>
     
-## Requirements
+## Prerequisites
 
 - Laravel 11.x/12.x
 - PHP 8.2+
