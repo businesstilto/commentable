@@ -1,7 +1,7 @@
 <div align="left">
     <a href="https://tilto.nl">
       <picture>
-        <img alt="cover" src="/cover.webp">
+        <img alt="cover" src="https://raw.githubusercontent.com/businesstilto/commentable/refs/heads/main/cover.webp">
       </picture>
     </a>
 </div>
@@ -22,7 +22,7 @@ Inspired by and built upon code from the [Kirschbaum Commentions package](https:
 <div align="left">
     <a href="https://tilto.nl">
       <picture>
-        <img alt="preview" src="/preview.png">
+        <img alt="preview" src="https://raw.githubusercontent.com/businesstilto/commentable/refs/heads/main/preview.png">
       </picture>
     </a>
 </div>
