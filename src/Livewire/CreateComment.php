@@ -58,7 +58,6 @@ class CreateComment extends Component implements HasActions, HasSchemas
             }
         }
 
-
         return $schema
             ->schema($editor)
             ->statePath('data');

@@ -18,6 +18,7 @@ class CommentList extends Component
     public bool $shouldShowCommentCount = true;
 
     public ?string $fileAttachmentsDisk = null;
+
     public ?string $fileAttachmentsVisibility = null;
 
     public ?string $fileAttachmentsDirectory = null;

@@ -1,5 +1,9 @@
 <?php
 
+use Tilto\Commentable\Models\Comment;
+use Tilto\Commentable\Models\CommentReaction;
+use Tilto\Commentable\Policies\CommentPolicy;
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -7,8 +11,8 @@ return [
     |--------------------------------------------------------------------------
     */
     'comment' => [
-        'model' => Tilto\Commentable\Models\Comment::class,
-        'policy' => Tilto\Commentable\Policies\CommentPolicy::class,
+        'model' => Comment::class,
+        'policy' => CommentPolicy::class,
     ],
 
     /*
@@ -26,7 +30,7 @@ return [
     |--------------------------------------------------------------------------
     */
     'reaction' => [
-        'model' => Tilto\Commentable\Models\CommentReaction::class,
+        'model' => CommentReaction::class,
         'allowed' => ['👍', '❤️', '😂', '😮', '😢', '🤔'],
     ],
 ];
