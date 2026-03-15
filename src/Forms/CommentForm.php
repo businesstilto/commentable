@@ -41,6 +41,10 @@ class CommentForm
             $editor->fileAttachmentsDirectory($component->fileAttachmentsDirectory);
         }
 
+        if ($component->fileAttachmentsVisibility) {
+            $editor->fileAttachmentsVisibility($component->fileAttachmentsVisibility);
+        }
+
         if ($component->fileAttachmentsAcceptedFileTypes) {
             $editor->fileAttachmentsAcceptedFileTypes($component->fileAttachmentsAcceptedFileTypes);
         }

@@ -370,6 +370,7 @@ You can customize the file attachment behavior by chaining the following methods
 ```php
 CommentsEntry::make('comments')
     ->fileAttachmentsDisk('public') // Set the storage disk for attachments
+    ->fileAttachmentsVisibility('public') // Set the storage visibility for attachments
     ->fileAttachmentsDirectory('comments') // Set the directory for attachments
     ->fileAttachmentsAcceptedFileTypes(['pdf', 'jpg', 'png']) // Set accepted file types
     ->fileAttachmentsMaxSize(5120) // Set max file size in kilobytes

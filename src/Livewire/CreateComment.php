@@ -32,6 +32,8 @@ class CreateComment extends Component implements HasActions, HasSchemas
 
     public ?string $fileAttachmentsDisk = null;
 
+    public ?string $fileAttachmentsVisibility = null;
+
     public ?string $fileAttachmentsDirectory = null;
 
     public ?array $fileAttachmentsAcceptedFileTypes = null;
@@ -55,6 +57,7 @@ class CreateComment extends Component implements HasActions, HasSchemas
                 $editor->mentions($mentions);
             }
         }
+
 
         return $schema
             ->schema($editor)
