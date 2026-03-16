@@ -37,6 +37,8 @@ class Comment extends Component implements HasActions, HasSchemas
 
     public ?string $fileAttachmentsDisk = null;
 
+    public ?string $fileAttachmentsVisibility = null;
+
     public ?string $fileAttachmentsDirectory = null;
 
     public ?array $fileAttachmentsAcceptedFileTypes = null;
