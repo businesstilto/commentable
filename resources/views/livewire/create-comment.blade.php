@@ -1,18 +1,20 @@
 <div>
-    <div x-data="{ submitting: false }" @reset-submitting.window="submitting = false">
-        {{ $this->form }}
-
-        <div @if($buttonPosition === 'right') class="fi-create-comment-actions" @endif>
-            <x-filament::button
-                wire:click="create"
-                x-on:click="submitting = true"
-                ::disabled="submitting"
-                class="fi-create-comment-submit"
-            >
-                {{ __('commentable::translations.buttons.post') }}
-            </x-filament::button>
+    @can('create', config('commentable.comment.model'))
+        <div x-data="{ submitting: false }" @reset-submitting.window="submitting = false">
+            {{ $this->form }}
+    
+            <div @if($buttonPosition === 'right') class="fi-create-comment-actions" @endif>
+                <x-filament::button
+                    wire:click="create"
+                    x-on:click="submitting = true"
+                    ::disabled="submitting"
+                    class="fi-create-comment-submit"
+                >
+                    {{ __('commentable::translations.buttons.post') }}
+                </x-filament::button>
+            </div>
         </div>
-    </div>
 
-    <x-filament-actions::modals />
+        <x-filament-actions::modals />
+    @endcan
 </div>
