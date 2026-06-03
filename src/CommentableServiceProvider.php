@@ -90,7 +90,7 @@ class CommentableServiceProvider extends PackageServiceProvider
             }
         }
 
-        Gate::policy(Comment::class, config('commentable.comment.policy'));
+        Gate::policy(config('commentable.comment.model'), config('commentable.comment.policy'));
     }
 
     protected function getAssetPackageName(): ?string
