@@ -22,7 +22,7 @@ trait HasComments
     {
         $commentModel = config('commentable.comment.model');
 
-        if ($author->cannot('create', $commentModel)) {
+        if ($author->cannot('create', [$commentModel, $commentable])) {
             throw new AuthorizationException('Cannot create comment');
         }
 

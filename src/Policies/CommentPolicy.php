@@ -2,12 +2,13 @@
 
 namespace Tilto\Commentable\Policies;
 
+use Tilto\Commentable\Contracts\Commentable;
 use Tilto\Commentable\Contracts\Commenter;
 use Tilto\Commentable\Models\Comment;
 
 class CommentPolicy
 {
-    public function create(Commenter $user): bool
+    public function create(Commenter $user, ?Commentable $commentable = null): bool
     {
         return true;
     }

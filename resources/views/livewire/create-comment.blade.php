@@ -1,8 +1,8 @@
 <div>
-    @can('create', config('commentable.comment.model'))
+    @can('create', [config('commentable.comment.model'), $record])
         <div x-data="{ submitting: false }" @reset-submitting.window="submitting = false">
             {{ $this->form }}
-    
+
             <div @if($buttonPosition === 'right') class="fi-create-comment-actions" @endif>
                 <x-filament::button
                     wire:click="create"
