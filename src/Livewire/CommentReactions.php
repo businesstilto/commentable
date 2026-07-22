@@ -34,9 +34,11 @@ class CommentReactions extends Component
 
         $user = auth()->user();
 
+        $showReactorsTooltip = config('commentable.reaction.show_reactors_tooltip', true);
+
         return $this->comment->reactions
             ->groupBy('reaction')
-            ->map(function ($group) use ($user) {
+            ->map(function ($group) use ($user, $showReactorsTooltip) {
                 $reactedByCurrentUser = $user && $group->contains(
                     fn ($reaction) => $reaction->reactor_id == $user->getKey() &&
                     $reaction->reactor_type == $user->getMorphClass()
@@ -46,7 +48,9 @@ class CommentReactions extends Component
                     'count' => $group->count(),
                     'reaction' => $group->first()->reaction,
                     'reacted_by_current_user' => $reactedByCurrentUser,
-                    'tooltip' => $this->reactorsTooltip($group, $reactedByCurrentUser, $user),
+                    'tooltip' => $showReactorsTooltip
+                        ? $this->reactorsTooltip($group, $reactedByCurrentUser, $user)
+                        : null,
                 ];
             })
             ->sortByDesc('count')

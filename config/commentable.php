@@ -32,5 +32,6 @@ return [
     'reaction' => [
         'model' => CommentReaction::class,
         'allowed' => ['👍', '❤️', '😂', '😮', '😢', '🤔'],
+        'show_reactors_tooltip' => true,
     ],
 ];

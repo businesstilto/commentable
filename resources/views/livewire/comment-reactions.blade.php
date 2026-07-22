@@ -6,8 +6,12 @@
                 <span wire:key="inline-reaction-button-{{ $reactionData['reaction'] }}-{{ $comment->id }}">
                     <button wire:click="toggleReaction('{{ $reactionData['reaction'] }}')" type="button"
                         class="fi-comment-reaction-button {{ $reactionData['reacted_by_current_user'] ? 'fi-comment-reaction-button--reacted' : 'fi-comment-reaction-button--not-reacted' }}"
-                        x-tooltip="{ content: @js($reactionData['tooltip']), theme: $store.theme }"
-                        aria-label="{{ $reactionData['tooltip'] }}">
+                        @if ($reactionData['tooltip'])
+                            x-tooltip="{ content: @js($reactionData['tooltip']), theme: $store.theme }"
+                            aria-label="{{ $reactionData['tooltip'] }}"
+                        @else
+                            title="{{ $reactionData['reaction'] }}"
+                        @endif>
                         <span>{{ $reactionData['reaction'] }}</span>
                         <span
                             wire:key="inline-reaction-count-{{ $reactionData['reaction'] }}-{{ $comment->id }}">{{ $reactionData['count'] }}</span>
