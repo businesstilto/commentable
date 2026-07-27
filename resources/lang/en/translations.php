@@ -31,4 +31,12 @@ return [
     ],
     'reply' => 'Reply',
     'add_reaction' => 'Add reaction',
+    'reactions' => [
+        'you' => 'You',
+        'and' => ' and ',
+        'unknown_user' => 'Unknown user',
+        'reacted_by_you' => 'You reacted with :emoji',
+        'reacted_by_one' => ':user reacted with :emoji',
+        'reacted_by_many' => ':users reacted with :emoji',
+    ],
 ];

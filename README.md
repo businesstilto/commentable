@@ -125,6 +125,7 @@ return [
     'reaction' => [
         'model' => Tilto\Commentable\Models\CommentReaction::class,
         'allowed' => ['👍', '❤️', '😂', '😮', '😢', '🤔'],
+        'show_reactors_tooltip' => true,
     ],
 ];
 ```
@@ -402,6 +403,7 @@ You can configure allowed reactions and the reaction model in `config/commentabl
 'reaction' => [
     'model' => Tilto\Commentable\Models\CommentReaction::class,
     'allowed' => ['👍', '❤️', '😂', '😮', '😢', '🤔'],
+    'show_reactors_tooltip' => true,
 ],
 ```
 
@@ -423,6 +425,19 @@ CommentsEntry::make('comments')
 If you do not set `allowedReactions`, the default set from your config will be used.
 
 Reactions are displayed below each comment, and users can add or remove their reaction. Each user can react once per reaction type per comment.
+
+##### Reactor tooltips
+
+Hovering a reaction shows a tooltip naming who reacted, e.g. "You reacted with 👍", "Moshe reacted with 👍" or "You and Moshe reacted with 👍". The phrasing is localized in all available languages, and the current user is always listed first as "you".
+
+The tooltip is enabled by default. To disable it and show only the emoji, set the following in your published `config/commentable.php` file:
+
+```php
+'reaction' => [
+    // ...
+    'show_reactors_tooltip' => false, // default: true
+],
+```
 
 #### Replies
 

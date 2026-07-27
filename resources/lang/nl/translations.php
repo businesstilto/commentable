@@ -31,4 +31,12 @@ return [
     ],
     'reply' => 'Beantwoorden',
     'add_reaction' => 'Voeg een reactie toe',
+    'reactions' => [
+        'you' => 'Jij',
+        'and' => ' en ',
+        'unknown_user' => 'Onbekende gebruiker',
+        'reacted_by_you' => 'Jij reageerde met :emoji',
+        'reacted_by_one' => ':user reageerde met :emoji',
+        'reacted_by_many' => ':users reageerden met :emoji',
+    ],
 ];

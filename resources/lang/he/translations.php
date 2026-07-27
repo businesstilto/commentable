@@ -31,4 +31,12 @@ return [
     ],
     'reply' => 'הגב',
     'add_reaction' => 'הוסף תגובה',
+    'reactions' => [
+        'you' => 'אתה',
+        'and' => ' ו',
+        'unknown_user' => 'משתמש לא ידוע',
+        'reacted_by_you' => 'אתה הגבת :emoji',
+        'reacted_by_one' => ':user הגיב :emoji',
+        'reacted_by_many' => ':users הגיבו :emoji',
+    ],
 ];
