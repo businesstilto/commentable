@@ -1,7 +1,7 @@
 <div align="left">
     <a href="https://tilto.nl">
       <picture>
-        <img alt="cover" src="https://raw.githubusercontent.com/businesstilto/commentable/refs/heads/main/cover.webp">
+        <img alt="cover" src="https://raw.githubusercontent.com/businesstilto/commentable/refs/heads/main/banner.webp">
       </picture>
     </a>
 </div>
