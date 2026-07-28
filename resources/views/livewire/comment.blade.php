@@ -70,7 +70,9 @@
                         :key="'reactions-' . $comment->id"
                     />
                 @else
-                    <form wire:submit="edit" class="fi-comment-edit-form">
+                    <form wire:submit="edit" class="fi-comment-edit-form"
+                        x-on:keydown.ctrl.enter.capture.prevent.stop="$el.requestSubmit()"
+                        x-on:keydown.meta.enter.capture.prevent.stop="$el.requestSubmit()">
                         {{ $this->form }}
 
                         <div
@@ -87,7 +89,9 @@
 
                 @if ($isNestable && $isReplying)
                     <div class="mt-4">
-                        <form wire:submit="reply">
+                        <form wire:submit="reply"
+                            x-on:keydown.ctrl.enter.capture.prevent.stop="$el.requestSubmit()"
+                            x-on:keydown.meta.enter.capture.prevent.stop="$el.requestSubmit()">
                             {{ $this->form }}
 
                             <div
