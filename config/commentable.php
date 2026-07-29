@@ -26,6 +26,21 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Editor
+    |--------------------------------------------------------------------------
+    |
+    | 'submit_shortcut' controls the keyboard shortcut for submitting a comment:
+    | - 'mod+enter': Ctrl + Enter (Windows/Linux) or Cmd + Enter (macOS)
+    | - 'enter': Enter submits, Shift + Enter inserts a new line
+    | - false: no keyboard shortcut
+    |
+    */
+    'editor' => [
+        'submit_shortcut' => 'mod+enter',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Reaction
     |--------------------------------------------------------------------------
     */

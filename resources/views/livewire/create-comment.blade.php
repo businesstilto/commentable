@@ -1,8 +1,7 @@
 <div>
     @can('create', [config('commentable.comment.model'), $record])
         <form wire:submit="create"
-            x-on:keydown.ctrl.enter.capture.prevent.stop="$el.requestSubmit()"
-            x-on:keydown.meta.enter.capture.prevent.stop="$el.requestSubmit()">
+            @include('commentable::partials.submit-shortcut')>
             {{ $this->form }}
 
             <div @if($buttonPosition === 'right') class="fi-create-comment-actions" @endif>

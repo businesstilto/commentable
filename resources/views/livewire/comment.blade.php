@@ -71,8 +71,7 @@
                     />
                 @else
                     <form wire:submit="edit" class="fi-comment-edit-form"
-                        x-on:keydown.ctrl.enter.capture.prevent.stop="$el.requestSubmit()"
-                        x-on:keydown.meta.enter.capture.prevent.stop="$el.requestSubmit()">
+                        @include('commentable::partials.submit-shortcut')>
                         {{ $this->form }}
 
                         <div
@@ -90,8 +89,7 @@
                 @if ($isNestable && $isReplying)
                     <div class="mt-4">
                         <form wire:submit="reply"
-                            x-on:keydown.ctrl.enter.capture.prevent.stop="$el.requestSubmit()"
-                            x-on:keydown.meta.enter.capture.prevent.stop="$el.requestSubmit()">
+                            @include('commentable::partials.submit-shortcut')>
                             {{ $this->form }}
 
                             <div
