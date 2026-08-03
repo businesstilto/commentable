@@ -51,6 +51,7 @@ Inspired by and built upon code from the [Kirschbaum Commentions package](https:
         - [Polling](#polling)
         - [Reactions](#reactions)
         - [Replies](#replies)
+        - [Submit shortcut](#submit-shortcut)
 - [Styling](#styling)
     - [Behavior](#behavior)
 - [Testing](#testing)
@@ -115,6 +116,21 @@ return [
     */
     'reply' => [
         'allow_self_reply' => false,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Editor
+    |--------------------------------------------------------------------------
+    |
+    | 'submit_shortcut' controls the keyboard shortcut for submitting a comment:
+    | - 'mod+enter': Ctrl + Enter (Windows/Linux) or Cmd + Enter (macOS)
+    | - 'enter': Enter submits, Shift + Enter inserts a new line
+    | - false: no keyboard shortcut
+    |
+    */
+    'editor' => [
+        'submit_shortcut' => 'mod+enter',
     ],
 
     /*
@@ -455,6 +471,24 @@ You can control whether the author of a comment may reply to their own comment u
     'allow_self_reply' => true, // default: false
 ],
 ```
+
+#### Submit shortcut
+
+By default, comments can be submitted with <kbd>Ctrl</kbd> + <kbd>Enter</kbd> (Windows/Linux) or <kbd>Cmd</kbd> + <kbd>Enter</kbd> (macOS). This applies to creating, editing, and replying to comments.
+
+You can customize this behavior in your published `config/commentable.php` file:
+
+```php
+'editor' => [
+    'submit_shortcut' => 'mod+enter', // default
+],
+```
+
+Supported values:
+
+- `'mod+enter'` — submit with <kbd>Ctrl</kbd> + <kbd>Enter</kbd> / <kbd>Cmd</kbd> + <kbd>Enter</kbd> (default)
+- `'enter'` — submit with <kbd>Enter</kbd>; use <kbd>Shift</kbd> + <kbd>Enter</kbd> to insert a new line
+- `false` — disable the keyboard shortcut entirely
 
 ## Styling
 

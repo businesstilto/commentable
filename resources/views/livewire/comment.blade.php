@@ -70,7 +70,8 @@
                         :key="'reactions-' . $comment->id"
                     />
                 @else
-                    <form wire:submit="edit" class="fi-comment-edit-form">
+                    <form wire:submit="edit" class="fi-comment-edit-form"
+                        @include('commentable::partials.submit-shortcut')>
                         {{ $this->form }}
 
                         <div
@@ -87,7 +88,8 @@
 
                 @if ($isNestable && $isReplying)
                     <div class="mt-4">
-                        <form wire:submit="reply">
+                        <form wire:submit="reply"
+                            @include('commentable::partials.submit-shortcut')>
                             {{ $this->form }}
 
                             <div
