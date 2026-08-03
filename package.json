@@ -3,7 +3,7 @@
     "type": "module",
     "devDependencies": {
         "@awcodes/filament-plugin-purge": "^1.1.1",
-        "@tailwindcss/cli": "^4.1.18",
+        "@tailwindcss/cli": "^4.3.3",
         "@tailwindcss/forms": "^0.5.4",
         "@tailwindcss/postcss": "^4.1.18",
         "@tailwindcss/typography": "^0.5.9",
