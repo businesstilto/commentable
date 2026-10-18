@@ -501,6 +501,12 @@ Once you have a custom theme set up, add the plugin's views and CSS to your them
 @import '../../../../vendor/businesstilto/commentable/resources/css/plugin.css';
 ```
 
+Comment styles come only from that theme import. The package does not publish a separate stylesheet.
+
+If you upgraded from a version that published `commentable-styles`, delete the old file so it cannot override other Filament components, including database notifications:
+
+`public/css/businesstilto/commentable/commentable-styles.css`
+
 > [!CAUTION]
 > This package relies on [Tailwind Typography](https://github.com/tailwindlabs/tailwindcss-typography) for rendering rich text content.  
 > Ensure you have the Typography plugin installed and included in your CSS:

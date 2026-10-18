@@ -2,9 +2,6 @@
 
 namespace Tilto\Commentable;
 
-use Filament\Support\Assets\Asset;
-use Filament\Support\Assets\Css;
-use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Gate;
@@ -67,17 +64,6 @@ class CommentableServiceProvider extends PackageServiceProvider
         Livewire::component('commentable.livewire.comment', Comment::class);
         Livewire::component('commentable.livewire.comment-reactions', CommentReactions::class);
 
-        // Asset Registration
-        FilamentAsset::register(
-            $this->getAssets(),
-            $this->getAssetPackageName()
-        );
-
-        FilamentAsset::registerScriptData(
-            $this->getScriptData(),
-            $this->getAssetPackageName()
-        );
-
         // Icon Registration
         FilamentIcon::register($this->getIcons());
 
@@ -91,21 +77,6 @@ class CommentableServiceProvider extends PackageServiceProvider
         }
 
         Gate::policy(config('commentable.comment.model'), config('commentable.comment.policy'));
-    }
-
-    protected function getAssetPackageName(): ?string
-    {
-        return 'businesstilto/commentable';
-    }
-
-    /**
-     * @return array<Asset>
-     */
-    protected function getAssets(): array
-    {
-        return [
-            Css::make('commentable-styles', __DIR__ . '/../resources/dist/commentable.css'),
-        ];
     }
 
     /**
@@ -128,14 +99,6 @@ class CommentableServiceProvider extends PackageServiceProvider
      * @return array<string>
      */
     protected function getRoutes(): array
-    {
-        return [];
-    }
-
-    /**
-     * @return array<string, mixed>
-     */
-    protected function getScriptData(): array
     {
         return [];
     }
