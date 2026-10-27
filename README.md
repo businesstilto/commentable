@@ -17,6 +17,9 @@ An extensive and very customizable package that adds commenting in Filament v4.5
 
 Inspired by and built upon code from the [Kirschbaum Commentions package](https://github.com/kirschbaum-development/commentions), but takes a different approach to commenting in Filament.
 
+> [!NOTE]
+> Prefer a more structured reading experience? You can also read the documentation at [docs.tilto.nl/commentable](https://docs.tilto.nl/commentable).
+
 ## Preview
 
 <div align="left">
