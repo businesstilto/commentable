@@ -49,4 +49,22 @@ return [
         'allowed' => ['👍', '❤️', '😂', '😮', '😢', '🤔'],
         'show_reactors_tooltip' => true,
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Date format
+    |--------------------------------------------------------------------------
+    |
+    | The date format used to display comment timestamps.
+    | Set to null to use Carbon's diffForHumans() method.
+    | Otherwise, provide a valid Carbon date format.
+    |
+    | Examples:
+    | - null        : 2 hours ago (default)
+    | - 'd/m/Y'     : 12/11/2026
+    | - 'd/m/Y H:i': 12/11/2026 15:30
+    | - 'j F Y'     : 12 novembre 2026
+    |
+    */
+    'date_format' => null,
 ];
