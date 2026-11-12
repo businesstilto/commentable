@@ -1,5 +1,12 @@
 @props(['comment', 'depth' => 0])
 @use('\Filament\Forms\Components\RichEditor\RichContentRenderer')
+@php
+    $dateFormat = config('commentable.date_format');
+
+    $commentDate = $dateFormat
+        ? $comment->created_at->translatedFormat($dateFormat)
+        : $comment->created_at->diffForHumans();
+@endphp
 
 <div class="space-y-4">
     <div class="space-y-3">
@@ -14,10 +21,10 @@
                         <span
                             class="fi-comment-meta-author-inner">{{ $comment->author ? $comment->author->getCommenterName() : 'Unknown' }}</span>
                         <span class="fi-comment-date">
-                            @if ($comment->created_at->eq($comment->updated_at))
-                                {{ $comment->created_at->diffForHumans() }}
-                            @else
-                                {{ $comment->created_at->diffForHumans() }} {{ __('commentable::translations.edited') }}
+                            {{ $commentDate }}
+
+                            @if ($comment->created_at->ne($comment->updated_at))
+                                {{ __('commentable::translations.edited') }}
                             @endif
                         </span>
                     </div>
