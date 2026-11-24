@@ -63,7 +63,7 @@ return [
     | - null        : 2 hours ago (default)
     | - 'd/m/Y'     : 12/11/2026
     | - 'd/m/Y H:i': 12/11/2026 15:30
-    | - 'j F Y'     : 12 novembre 2026
+    | - 'F j Y'     : november 12 2026
     |
     */
     'date_format' => null,
